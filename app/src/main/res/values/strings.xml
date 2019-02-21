@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SpaceTraders</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="start">START</string>
+    <string name="setup">SETUP</string>
+    <string name="name">Name:</string>
+    <string name="difficulty">Difficulty:</string>
+    <string name="skill_points">Skill Points:</string>
+    <string name="enter_name">Enter name</string>
+    <string name="pilot">Pilot</string>
+    <string name="fighter">Fighter</string>
+    <string name="trader">Trader</string>
+    <string name="engineer">Engineer</string>
+</resources>

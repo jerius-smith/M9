@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_configuration"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/player_config_scrn"
+    android:padding="20dp"
+
+    tools:context="edu.gatech.cs2340.spacetraders.views.ConfigurationActivity"
+    tools:showIn="@layout/activity_configuration">
+
+
+    <ImageButton
+        android:id="@+id/start_bttn"
+        android:layout_width="145dp"
+        android:layout_height="94dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="74dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/start_bttn"
+        />
+
+    <TextView
+        android:id="@+id/name_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/name_input"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="112dp"
+        android:fontFamily="@font/inconsolata"
+        android:text="Name: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginLeft="198dp"
+        android:layout_marginTop="130dp"
+        android:layout_marginRight="116dp"
+        android:ems="10"
+        android:fontFamily="@font/inconsolata"
+        android:hint="Enter name"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/difficulty_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/difficulty_spinner"
+        android:layout_alignBottom="@+id/name_header"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="83dp"
+        android:layout_marginBottom="-49dp"
+        android:fontFamily="@font/inconsolata"
+        android:text="Difficulty: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/difficulty_spinner"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/name_input"
+        android:layout_marginStart="200dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="-40dp" />
+
+    <TextView
+        android:id="@+id/skills_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/skill_points"
+        android:layout_alignBottom="@+id/difficulty_header"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="83dp"
+        android:layout_marginBottom="-49dp"
+        android:fontFamily="@font/inconsolata"
+        android:text="Skill Points: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/skill_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/difficulty_spinner"
+        android:layout_marginStart="245dp"
+        android:layout_marginBottom="-53dp"
+        android:fontFamily="@font/inconsolata"
+        android:text="16"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/pilot_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/pilot_skills"
+        android:layout_alignBottom="@+id/skills_header"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="151dp"
+        android:layout_marginBottom="-42dp"
+        android:fontFamily="@font/inconsolata"
+        android:text="Pilot: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/pilot_skills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/skill_points"
+        android:layout_marginStart="245dp"
+        android:layout_marginBottom="-55dp"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/fighter_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/fighter_skills"
+        android:layout_alignBottom="@+id/pilot_header"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="151dp"
+        android:layout_marginBottom="-47dp"
+        android:fontFamily="@font/inconsolata"
+        android:text="Fighter: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/fighter_skills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/pilot_skills"
+        android:layout_marginStart="245dp"
+        android:layout_marginBottom="-48dp"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/trader_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/trader_skills"
+        android:layout_alignBottom="@+id/fighter_header"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="151dp"
+        android:layout_marginBottom="-48dp"
+        android:fontFamily="@font/inconsolata"
+        android:text="Trader: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/trader_skills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/fighter_skills"
+        android:layout_marginStart="245dp"
+        android:layout_marginBottom="-48dp"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="0" />
+
+    <TextView
+        android:id="@+id/engineer_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/engineer_skills"
+        android:layout_alignBottom="@+id/trader_header"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="151dp"
+        android:layout_marginBottom="-47dp"
+        android:fontFamily="@font/inconsolata"
+        android:text="Engineer: "
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/engineer_skills"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/trader_skills"
+        android:layout_marginStart="245dp"
+        android:layout_marginBottom="-48dp"
+        android:inputType="number"
+        android:maxLength="2"
+        android:text="0" />
+
+
+</RelativeLayout>
