@@ -22,8 +22,10 @@ public class ModelFacade {
     }
 
     private Player player;
+    private Universe universe;
 
     private ModelFacade() {
+        universe = Universe.getInstance();
     }
 
     /**
@@ -42,6 +44,7 @@ public class ModelFacade {
             player.setSkills(skillPoints);
         }
         Log.d("PLAYER", "\n" + player.toString());
+        Log.d("UNIVERSE", "\n" + universe.toString());
     }
 
     /**
