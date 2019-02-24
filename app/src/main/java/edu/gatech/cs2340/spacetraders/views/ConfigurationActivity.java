@@ -2,6 +2,7 @@ package edu.gatech.cs2340.spacetraders.views;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -107,7 +108,13 @@ public class ConfigurationActivity extends AppCompatActivity {
             String name = nameInput.getText().toString();
             Difficulty difficulty = (Difficulty) difficultySpinner.getSelectedItem();
             viewModel.isValidPlayer(name, difficulty, skills);
+            transitionToNextScreen();
         });
+    }
+
+    private void transitionToNextScreen() {
+        Intent transition = new Intent(ConfigurationActivity.this, TransitionActivity.class);
+        startActivity(transition);
     }
 
     private void updatePoints() {
