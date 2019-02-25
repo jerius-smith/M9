@@ -107,15 +107,11 @@ public class ConfigurationActivity extends AppCompatActivity {
             viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
             String name = nameInput.getText().toString();
             Difficulty difficulty = (Difficulty) difficultySpinner.getSelectedItem();
-            if (viewModel.isValidPlayer(name, difficulty, skills)) {
-                transitionToNextScreen();
-            }
-        });
-    }
+            viewModel.isValidPlayer(name, difficulty, skills);
 
-    private void transitionToNextScreen() {
-        Intent transition = new Intent(ConfigurationActivity.this, TransitionActivity.class);
-        startActivity(transition);
+            Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void updatePoints() {
