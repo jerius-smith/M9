@@ -3,9 +3,17 @@ package edu.gatech.cs2340.spacetraders.model;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Universe.
+ */
 public class Universe {
     private static final Universe ourInstance = new Universe();
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     */
     public static Universe getInstance() {
         return ourInstance;
     }

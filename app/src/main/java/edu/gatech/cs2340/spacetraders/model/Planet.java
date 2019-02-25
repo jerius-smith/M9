@@ -4,6 +4,9 @@ import java.util.Random;
 
 import static java.lang.Math.floor;
 
+/**
+ * The type Planet.
+ */
 public class Planet {
 
     private String name;
@@ -13,6 +16,11 @@ public class Planet {
     private Resource resource;
     private Government politicalSystem;
 
+    /**
+     * Instantiates a new Planet.
+     *
+     * @param name the name
+     */
     public Planet(String name) {
         this.name = name;
         xLoc = floor(new Random().nextDouble() * GameLogistics.MAX_WIDTH);

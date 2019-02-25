@@ -6,6 +6,9 @@ import java.util.Set;
 
 import static java.lang.Math.floor;
 
+/**
+ * The type Solar system.
+ */
 public class SolarSystem {
 
     private String name;
@@ -15,6 +18,11 @@ public class SolarSystem {
     private Set<Mercenary> mercenaries;
     private static final int NUM_PLANETS = ((int) (Math.random() * 7)) + 4;
 
+    /**
+     * Instantiates a new Solar system.
+     *
+     * @param name the name
+     */
     public SolarSystem(String name) {
         planets = new HashSet<>();
         for (int i = 0; i < NUM_PLANETS; i++) {
@@ -32,10 +40,20 @@ public class SolarSystem {
         yLoc = floor(new Random().nextDouble() * GameLogistics.MAX_HEIGHT);
     }
 
+    /**
+     * Gets planets.
+     *
+     * @return the planets
+     */
     public Set<Planet> getPlanets() {
         return planets;
     }
 
+    /**
+     * Sets planets.
+     *
+     * @param planets the planets
+     */
     public void setPlanets(Set<Planet> planets) {
         this.planets = planets;
     }

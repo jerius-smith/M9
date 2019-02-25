@@ -34,8 +34,9 @@ public class ConfigurationViewModel extends AndroidViewModel {
      * @param name           the name
      * @param prefDifficulty the pref difficulty
      * @param skillPoints    the skill points
+     * @return true if validPlayer else it returns false
      */
-    public void isValidPlayer(String name, Difficulty prefDifficulty, Skills[] skillPoints) {
+    public boolean isValidPlayer(String name, Difficulty prefDifficulty, Skills[] skillPoints) {
         if (name == null || name.isEmpty()) {
             showToast("Player cannot be configured. Please enter a name", Toast.LENGTH_LONG);
         } else if (prefDifficulty == null) {
@@ -45,7 +46,9 @@ public class ConfigurationViewModel extends AndroidViewModel {
         } else {
             facade.createPlayer(name, prefDifficulty, skillPoints);
             showToast(facade.getPlayer().toString(), 5000);
+            return true;
         }
+        return false;
     }
 
     private void showToast(String message, int duration) {
