@@ -110,6 +110,7 @@ public class ConfigurationActivity extends AppCompatActivity {
             viewModel.isValidPlayer(name, difficulty, skills);
 
             Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
+            intent.putExtra("PLAYER_NAME", name);
             startActivity(intent);
         });
     }

@@ -3,15 +3,36 @@ package edu.gatech.cs2340.spacetraders.model;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The type Game logistics.
+ */
 public final class GameLogistics {
 
+    /**
+     * The constant MAX_WIDTH.
+     */
     public static final int MAX_WIDTH = 500;
+    /**
+     * The constant MAX_HEIGHT.
+     */
     public static final int MAX_HEIGHT = 500;
+    /**
+     * The constant MAX_MERCENARIES.
+     */
     public static final int MAX_MERCENARIES = 1;
+    /**
+     * The constant MAX_SOLAR_SYSTEMS.
+     */
     public static final int MAX_SOLAR_SYSTEMS = 3;
+    /**
+     * The constant SOLAR_SYSTEM_NAMES.
+     */
     public static final String[] SOLAR_SYSTEM_NAMES =
             new String[]{"Sombrero", "Cygnus", "Andromeda"};
 
+    /**
+     * The constant PLANET_NAMES.
+     */
     public static final String[] PLANET_NAMES = new String[]{"Acamar", "Adahn",
             // The alternate personality for The Nameless One in "Planescape: Torment"
             "Aldea", "Andevian", "Antedi", "Balosnee", "Baratas", "Brax",
