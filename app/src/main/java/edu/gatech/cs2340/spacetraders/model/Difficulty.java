@@ -1,7 +1,7 @@
 package edu.gatech.cs2340.spacetraders.model;
 
 /**
- * The enum Difficulty.
+ * The enum Difficulty .
  */
 public enum Difficulty {
     /**
