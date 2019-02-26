@@ -107,11 +107,11 @@ public class ConfigurationActivity extends AppCompatActivity {
             viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
             String name = nameInput.getText().toString();
             Difficulty difficulty = (Difficulty) difficultySpinner.getSelectedItem();
-            viewModel.isValidPlayer(name, difficulty, skills);
-
-            Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
-            intent.putExtra("PLAYER_NAME", name);
-            startActivity(intent);
+            if (viewModel.isValidPlayer(name, difficulty, skills)) {
+                Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
+                intent.putExtra("PLAYER_NAME", name);
+                startActivity(intent);
+            }
         });
     }
 
