@@ -2,10 +2,11 @@ package edu.gatech.cs2340.spacetraders.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
-import java.util.Arrays;
+import java.io.FileOutputStream;
 
 import edu.gatech.cs2340.spacetraders.model.Difficulty;
 import edu.gatech.cs2340.spacetraders.model.ModelFacade;
@@ -49,6 +50,36 @@ public class ConfigurationViewModel extends AndroidViewModel {
             return true;
         }
         return false;
+    }
+
+    public void jsonifyUniverse(Context context) {
+        String name = facade.getPlayer().getName().toLowerCase();
+        String filename = name + "_universe.json";
+        String fileContents = facade.getUniverse().toJSONString();
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public  void jsonifyPlayer(Context context) {
+        String name = facade.getPlayer().getName().toLowerCase();
+        String filename = name + "_player.json";
+        String fileContents = facade.getPlayer().toJSONString();
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void showToast(String message, int duration) {

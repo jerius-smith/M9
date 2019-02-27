@@ -1,5 +1,7 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+import com.google.gson.Gson;
+
 import java.util.Random;
 
 import static java.lang.Math.floor;
@@ -52,6 +54,12 @@ public class Planet {
                 append("\n\t\t\tResource: " + resource);
         return stringBuilder.toString();
     }
+
+    public String toJSONString() {
+        String json = new Gson().toJson(this);
+        return json;
+    }
+
 
 
 }
