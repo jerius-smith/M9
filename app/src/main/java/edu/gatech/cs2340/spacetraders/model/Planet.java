@@ -60,6 +60,7 @@ public class Planet {
         return json;
     }
 
-
-
+    public TechLevel getTechLevel() {
+        return techLevel;
+    }
 }

@@ -1,12 +1,7 @@
 package edu.gatech.cs2340.spacetraders.views;
 
-import android.content.Intent;
+import processing.core.*;
 
-import java.util.Set;
-
-import edu.gatech.cs2340.spacetraders.model.SolarSystem;
-import processing.core.PApplet;
-import processing.core.PImage;
 
 public class UniverseSketch extends PApplet {
 
@@ -21,10 +16,9 @@ public class UniverseSketch extends PApplet {
     }
 
     public void setup() {
-
     }
 
     public void draw() {
-
+        background(0, 255, 0);
     }
 }

@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ImageButton startNewButton = findViewById(R.id.istart_new_button);
         startNewButton.setOnClickListener(new View.OnClickListener() {
             @Override

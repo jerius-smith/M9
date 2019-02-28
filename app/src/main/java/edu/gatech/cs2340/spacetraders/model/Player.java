@@ -2,6 +2,10 @@ package edu.gatech.cs2340.spacetraders.model;
 
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * The type Player.
  */
@@ -12,6 +16,8 @@ public class Player {
     private Difficulty preferredDifficulty;
     private int credits;
     private Ship ship;
+    private Inventory inventory;
+
 
     /**
      * Instantiates a new Player.
@@ -33,6 +39,16 @@ public class Player {
         this.skills = skillPoints;
         this.ship = new Gnat();
         this.credits = 1000;
+        this.inventory = new Inventory();
+    }
+
+    public void updateStock(Good toUpdate) {
+        inventory.setStock(toUpdate, inventory.getStock(toUpdate) + 1);
+    }
+
+
+    public Inventory getInventory() {
+        return inventory;
     }
 
     /**
@@ -129,13 +145,12 @@ public class Player {
     public String toString() {
         StringBuilder playerInfo = new StringBuilder();
         playerInfo.append("\t\nPlayer: " + name)
-                  .append("\nSelected Difficulty: " + preferredDifficulty)
-                  .append("\nPilot points: " + skills[0].getPoints())
-                  .append("\nFighter points: " + skills[1].getPoints())
-                  .append("\nTrader points: " + skills[2].getPoints())
-                  .append("\nEngineer points: " + skills[3].getPoints())
-                  .append("\nCredits : " + credits)
-                  .append("\nShip type: " + ship);
+                .append("\nSelected Difficulty: " + preferredDifficulty)
+                .append("\nPilot points: " + skills[0].getPoints())
+                .append("\nFighter points: " + skills[1].getPoints())
+                .append("\nTrader points: " + skills[2].getPoints())
+                .append("\nEngineer points: " + skills[3].getPoints())
+                .append("\nCredits : " + credits).append("\nShip type: " + ship);
         return playerInfo.toString();
     }
 
