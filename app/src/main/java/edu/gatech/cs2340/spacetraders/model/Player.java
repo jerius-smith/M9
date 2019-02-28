@@ -1,5 +1,7 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+import com.google.gson.Gson;
+
 /**
  * The type Player.
  */
@@ -136,5 +138,11 @@ public class Player {
                   .append("\nShip type: " + ship);
         return playerInfo.toString();
     }
+
+    public String toJSONString() {
+        String json = new Gson().toJson(this);
+        return json;
+    }
+
 
 }

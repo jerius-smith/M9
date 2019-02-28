@@ -1,5 +1,7 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+import com.google.gson.Gson;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -35,4 +37,10 @@ public class Universe {
         }
         return stringBuilder.toString();
     }
+
+    public String toJSONString() {
+        String json = new Gson().toJson(this);
+        return json;
+    }
+
 }

@@ -1,10 +1,14 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
+import java.io.FileOutputStream;
+
 import edu.gatech.cs2340.spacetraders.viewmodel.ConfigurationViewModel;
+import edu.gatech.cs2340.spacetraders.views.ConfigurationActivity;
 
 /**
  * The type Model facade.
@@ -47,6 +51,7 @@ public class ModelFacade {
         Log.d("UNIVERSE", "\n" + universe.toString());
     }
 
+
     /**
      * Gets player.
      *
@@ -55,4 +60,7 @@ public class ModelFacade {
     public Player getPlayer() {
         return player;
     }
+
+    public Universe getUniverse() { return universe; }
+
 }
