@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/star032"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="edu.gatech.cs2340.spacetraders.views.MarketActivity"
+    tools:showIn="@layout/activity_market">
+
+    <TextView
+        android:id="@+id/credits_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/screen_percentage_10"
+        android:layout_marginRight="@dimen/screen_percentage_10"
+        android:fontFamily="@font/inconsolata"
+        android:text="Credits: 1000"
+        android:textColor="@color/tan"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/screen_percentage_10"
+        android:layout_marginTop="@dimen/screen_percentage_10"
+        android:fontFamily="@font/inconsolata"
+        android:text="Location: Vandor"
+        android:textColor="@color/tan"
+        android:textSize="20sp" />
+
+    <ImageButton
+        android:id="@+id/sell_button"
+        android:layout_width="164dp"
+        android:layout_height="61dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/sell_bttn" />
+
+    <ImageButton
+        android:id="@+id/buy_button"
+        android:layout_width="164dp"
+        android:layout_height="61dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/buy_bttn" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/market_inventory_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbar="vertical"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="90dp" >
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

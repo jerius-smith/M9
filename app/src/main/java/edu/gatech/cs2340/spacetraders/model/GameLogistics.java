@@ -1,5 +1,6 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +30,15 @@ public final class GameLogistics {
      */
     public static final String[] SOLAR_SYSTEM_NAMES =
             new String[]{"Sombrero", "Cygnus", "Andromeda"};
+
+    // index 0 : weapons, 1 : gadget, 2 : cargo
+    public static final HashMap<String, Integer[]> MAX_CAPACITIES =
+            new HashMap<String, Integer[]>() {
+                {
+                    put("Gnat", new Integer[]{1, 1, 15});
+                }
+            };
+
 
     /**
      * The constant PLANET_NAMES.

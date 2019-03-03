@@ -1,5 +1,11 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+import com.google.gson.Gson;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * The type Player.
  */
@@ -10,12 +16,15 @@ public class Player {
     private Difficulty preferredDifficulty;
     private int credits;
     private Ship ship;
+    private Inventory inventory;
+    private Planet location;
+
 
     /**
      * Instantiates a new Player.
      */
     public Player() {
-        this("", Difficulty.BEGINNER, Skills.values());
+        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
     }
 
     /**
@@ -25,12 +34,23 @@ public class Player {
      * @param preferredDifficulty the preferred difficulty
      * @param skillPoints         the skill points
      */
-    public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints) {
+    public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints, Planet location) {
         this.name = name;
         this.preferredDifficulty = preferredDifficulty;
         this.skills = skillPoints;
         this.ship = new Gnat();
         this.credits = 1000;
+        this.inventory = new Inventory();
+        this.location = location;
+    }
+
+    public void updateStock(Good toUpdate) {
+        inventory.setStock(toUpdate, inventory.getStock(toUpdate) + 1);
+    }
+
+
+    public Inventory getInventory() {
+        return inventory;
     }
 
     /**
@@ -123,18 +143,31 @@ public class Player {
         this.ship = ship;
     }
 
+    public void setLocation(Planet planet) {
+        location = planet;
+    }
+
+    public Planet getLocation() {
+        return location;
+    }
+
     @Override
     public String toString() {
         StringBuilder playerInfo = new StringBuilder();
         playerInfo.append("\t\nPlayer: " + name)
-                  .append("\nSelected Difficulty: " + preferredDifficulty)
-                  .append("\nPilot points: " + skills[0].getPoints())
-                  .append("\nFighter points: " + skills[1].getPoints())
-                  .append("\nTrader points: " + skills[2].getPoints())
-                  .append("\nEngineer points: " + skills[3].getPoints())
-                  .append("\nCredits : " + credits)
-                  .append("\nShip type: " + ship);
+                .append("\nSelected Difficulty: " + preferredDifficulty)
+                .append("\nPilot points: " + skills[0].getPoints())
+                .append("\nFighter points: " + skills[1].getPoints())
+                .append("\nTrader points: " + skills[2].getPoints())
+                .append("\nEngineer points: " + skills[3].getPoints())
+                .append("\nCredits : " + credits).append("\nShip type: " + ship);
         return playerInfo.toString();
     }
+
+    public String toJSONString() {
+        String json = new Gson().toJson(this);
+        return json;
+    }
+
 
 }

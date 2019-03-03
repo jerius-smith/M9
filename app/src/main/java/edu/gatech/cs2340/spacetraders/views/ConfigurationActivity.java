@@ -13,6 +13,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+
 import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.model.Difficulty;
 import edu.gatech.cs2340.spacetraders.model.Skills;
@@ -107,11 +112,17 @@ public class ConfigurationActivity extends AppCompatActivity {
             viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
             String name = nameInput.getText().toString();
             Difficulty difficulty = (Difficulty) difficultySpinner.getSelectedItem();
-            if (viewModel.isValidPlayer(name, difficulty, skills)) {
+            Boolean isValid = viewModel.isValidPlayer(name, difficulty, skills);
+
+            if(isValid) {
+                viewModel.jsonifyUniverse(ConfigurationActivity.this);
+                viewModel.jsonifyPlayer(ConfigurationActivity.this);
+
                 Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
                 intent.putExtra("PLAYER_NAME", name);
                 startActivity(intent);
             }
+
         });
     }
 
