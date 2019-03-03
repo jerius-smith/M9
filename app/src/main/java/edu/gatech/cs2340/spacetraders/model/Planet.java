@@ -63,4 +63,8 @@ public class Planet {
     public TechLevel getTechLevel() {
         return techLevel;
     }
+
+    public String getName() {
+        return name;
+    }
 }

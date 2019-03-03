@@ -17,13 +17,14 @@ public class Player {
     private int credits;
     private Ship ship;
     private Inventory inventory;
+    private Planet location;
 
 
     /**
      * Instantiates a new Player.
      */
     public Player() {
-        this("", Difficulty.BEGINNER, Skills.values());
+        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
     }
 
     /**
@@ -33,13 +34,14 @@ public class Player {
      * @param preferredDifficulty the preferred difficulty
      * @param skillPoints         the skill points
      */
-    public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints) {
+    public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints, Planet location) {
         this.name = name;
         this.preferredDifficulty = preferredDifficulty;
         this.skills = skillPoints;
         this.ship = new Gnat();
         this.credits = 1000;
         this.inventory = new Inventory();
+        this.location = location;
     }
 
     public void updateStock(Good toUpdate) {
@@ -139,6 +141,14 @@ public class Player {
      */
     public void setShip(Ship ship) {
         this.ship = ship;
+    }
+
+    public void setLocation(Planet planet) {
+        location = planet;
+    }
+
+    public Planet getLocation() {
+        return location;
     }
 
     @Override

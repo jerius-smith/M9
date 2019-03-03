@@ -39,13 +39,14 @@ public class ModelFacade {
      * @param prefDifficulty the pref difficulty
      * @param skillPoints    the skill points
      */
-    public void createPlayer(String name, Difficulty prefDifficulty, Skills[] skillPoints) {
+    public void createPlayer(String name, Difficulty prefDifficulty, Skills[] skillPoints, Planet location) {
         if (player == null) {
-            player = new Player(name, prefDifficulty, skillPoints);
+            player = new Player(name, prefDifficulty, skillPoints, location);
         } else {
             player.setName(name);
             player.setPreferredDifficulty(prefDifficulty);
             player.setSkills(skillPoints);
+            player.setLocation(location);
         }
         Log.d("PLAYER", "\n" + player.toString());
         Log.d("UNIVERSE", "\n" + universe.toString());

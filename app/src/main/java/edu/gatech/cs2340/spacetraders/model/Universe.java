@@ -29,6 +29,10 @@ public class Universe {
         }
     }
 
+    public Set<SolarSystem> getSolarSystems() {
+        return solarSystems;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

@@ -60,4 +60,8 @@ public class Inventory {
     public void setInventory(Map<Good, GoodAttributes> inventory) {
         this.inventory = inventory;
     }
+
+    public GoodAttributes getGoodAttribute(Good good) {
+        return inventory.get(good);
+    }
 }
