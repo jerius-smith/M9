@@ -1,11 +1,16 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+import java.util.Collection;
+
 /**
  * The type Ship.
  */
 public abstract class Ship {
 
     private String name;
+    private final int cargoCapacity;
+    private final int gadgetCapacity;
+    private Collection<Weapons> weapons;
 
     /**
      * Instantiates a new Ship.
@@ -14,6 +19,14 @@ public abstract class Ship {
      */
     public Ship(String name) {
         this.name = name;
+        this.cargoCapacity = GameLogistics.MAX_CAPACITIES.get(name)[2];
+        this.gadgetCapacity = GameLogistics.MAX_CAPACITIES.get(name)[1];
+    }
+
+    public void addWeapon (Weapons weapon) {
+        if (weapons.size() < cargoCapacity) {
+            weapons.add(weapon);
+        }
     }
 
     /**
