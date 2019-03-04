@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 import edu.gatech.cs2340.spacetraders.model.DataStore;
@@ -31,8 +32,12 @@ public class MarketViewModel extends AndroidViewModel {
      */
     public MarketViewModel(@NonNull Application application) {
         super(application);
-//        player = DataStore.getCurrentPLayer();
-//        market = player.getLocation().getPlanetsMarket();
+        try {
+            player = DataStore.getCurrentPlayer();
+            market = player.getLocation().getPlanetsMarket();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public Inventory getMarketInventory() {
