@@ -40,29 +40,10 @@ public class DataStore {
         return universe;
     }
 
-    public static Inventory jsonToInventory(String fileName) throws FileNotFoundException {
-        Gson gson = new Gson();
-        Scanner sc = new Scanner(new File(fileName));
-        String jsonFile = "";
-
-        while (sc.hasNext()) {
-            jsonFile += sc.next();
-        }
-
-        Inventory inventory = gson.fromJson(jsonFile, Inventory.class);
-
-        return inventory;
-    }
-
-    public static void universeToJson(Context context, ModelFacade facade) {
-        Date currDate = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-        DateFormat timeFormat = new SimpleDateFormat("HHmm");
-        String name = facade.getPlayer().getName().toLowerCase()
-                + "_" + dateFormat.format(currDate)
-                + "_" + timeFormat.format(currDate);
-        String fileName = name + "_universe.json";
-        String fileContents = facade.getUniverse().toJSONString();
+    public static void universeToJson(Context context, Universe universe)
+            throws FileNotFoundException {
+        String fileName = getCurrentPlayerTxt() + "_universe.json";
+        String fileContents = new Gson().toJson(universe);
         FileOutputStream outputStream;
 
         try {
@@ -74,41 +55,49 @@ public class DataStore {
         }
     }
 
-    public static void playerToJson(Context context, ModelFacade facade) {
-        Date currDate = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-        DateFormat timeFormat = new SimpleDateFormat("HHmm");
-        String name = facade.getPlayer().getName().toLowerCase();
-        String fileName = name + "_" + dateFormat.format(currDate)
-                + "_" + timeFormat.format(currDate) + "_player.json";
+    public static void playerToJson(Context context, Player player) {
+        String fileName = createHeader(player.getName().toLowerCase()) + "_player.json";
+        String fileContents = new Gson().toJson(player);
         FileOutputStream outputStream;
 
         try {
             outputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
-            outputStream.write(fileName.getBytes());
+            outputStream.write(fileContents.getBytes());
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//    public static void inventoryToJson(Context context, ModelFacade facade) {
-//        Date currDate = new Date();
-//        DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
-//        DateFormat timeFormat = new SimpleDateFormat("HHmm");
-//        String name = facade.getPlayer().getName().toLowerCase()
-//                + "_" + dateFormat.format(currDate)
-//                + "_" + timeFormat.format(currDate);
-//        String filename = name + "_inventory.json";
-//        //String fileContents = facade.getInventory().toJSONString();
-//        FileOutputStream outputStream;
-//
-//        try {
-//            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
-//            outputStream.write(fileContents.getBytes());
-//            outputStream.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+    public static void createCurrentPlayerTxt(Context context, Player player) {
+        String name = createHeader(player.getName().toLowerCase());
+        String fileName = "current_player.txt";
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream.write(name.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String createHeader(String name) {
+        Date currDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("ddMMyyyy");
+        DateFormat timeFormat = new SimpleDateFormat("HHmm");
+
+        return name + "_" + dateFormat.format(currDate) + "_" + timeFormat.format(currDate);
+    }
+
+    public static String getCurrentPlayerTxt() throws FileNotFoundException {
+        Scanner sc = new Scanner(new File("current_player.txt"));
+
+        return sc.next();
+    }
+
+    public static Player getCurrentPlayer() throws FileNotFoundException {
+        return jsonToPlayer(getCurrentPlayerTxt() + "_player.json");
+    }
 }
