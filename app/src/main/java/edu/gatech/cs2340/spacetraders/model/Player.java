@@ -21,7 +21,7 @@ public class Player {
      * Instantiates a new Player.
      */
     public Player() {
-        this("", Difficulty.BEGINNER, Skills.values());
+        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
     }
 
     public Planet getLocation() {
@@ -47,7 +47,8 @@ public class Player {
      * @param preferredDifficulty the preferred difficulty
      * @param skillPoints         the skill points
      */
-    public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints) {
+    public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints,
+                  Planet location) {
         this.name = name;
         this.preferredDifficulty = preferredDifficulty;
         this.skills = skillPoints;
@@ -57,7 +58,7 @@ public class Player {
 
 
         this.solarSystemCurrentlyIn = new SolarSystem(GameLogistics.SOLAR_SYSTEM_NAMES[0]);
-        this.location = solarSystemCurrentlyIn.getPlanets().get(0);
+        this.location = location;
     }
 
     public void updateStock(Good toUpdate) {
