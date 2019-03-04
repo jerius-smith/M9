@@ -2,10 +2,6 @@ package edu.gatech.cs2340.spacetraders.model;
 
 import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * The type Player.
  */
@@ -14,9 +10,11 @@ public class Player {
     private String name;
     private Skills[] skills;
     private Difficulty preferredDifficulty;
-    private int credits;
+    private double credits;
     private Ship ship;
     private Inventory inventory;
+    private Planet location;
+    private SolarSystem solarSystemCurrentlyIn;
 
 
     /**
@@ -24,6 +22,22 @@ public class Player {
      */
     public Player() {
         this("", Difficulty.BEGINNER, Skills.values());
+    }
+
+    public Planet getLocation() {
+        return location;
+    }
+
+    public void setLocation(Planet location) {
+        this.location = location;
+    }
+
+    public SolarSystem getSolarSystemCurrentlyIn() {
+        return solarSystemCurrentlyIn;
+    }
+
+    public void setSolarSystemCurrentlyIn(SolarSystem solarSystemCurrentlyIn) {
+        this.solarSystemCurrentlyIn = solarSystemCurrentlyIn;
     }
 
     /**
@@ -40,6 +54,10 @@ public class Player {
         this.ship = new Gnat();
         this.credits = 1000;
         this.inventory = new Inventory();
+
+
+        this.solarSystemCurrentlyIn = new SolarSystem(GameLogistics.SOLAR_SYSTEM_NAMES[0]);
+        this.location = solarSystemCurrentlyIn.getPlanets().get(0);
     }
 
     public void updateStock(Good toUpdate) {
@@ -110,7 +128,7 @@ public class Player {
      *
      * @return the credits
      */
-    public int getCredits() {
+    public double getCredits() {
         return credits;
     }
 
@@ -119,7 +137,7 @@ public class Player {
      *
      * @param credits the credits
      */
-    public void setCredits(int credits) {
+    public void setCredits(double credits) {
         this.credits = credits;
     }
 

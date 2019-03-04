@@ -60,4 +60,16 @@ public class Inventory {
     public void setInventory(Map<Good, GoodAttributes> inventory) {
         this.inventory = inventory;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append("Total stock: " + totalStock + "\n").
+            append("This inventory has: \n");
+        for (Good curr : inventory.keySet()) {
+                GoodAttributes attribute = inventory.get(curr);
+            str.append(attribute.stock + " units of " + curr + " priced at $" + attribute.price + " each\n");
+        }
+        return str.toString();
+    }
 }

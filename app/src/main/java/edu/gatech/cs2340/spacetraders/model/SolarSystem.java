@@ -2,7 +2,10 @@ package edu.gatech.cs2340.spacetraders.model;
 
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -16,7 +19,7 @@ public class SolarSystem {
     private String name;
     private double xLoc;
     private double yLoc;
-    private Set<Planet> planets;
+    private List<Planet> planets;
     private Set<Mercenary> mercenaries;
     private static final int NUM_PLANETS = ((int) (Math.random() * 7)) + 4;
 
@@ -26,7 +29,7 @@ public class SolarSystem {
      * @param name the name
      */
     public SolarSystem(String name) {
-        planets = new HashSet<>();
+        planets = new ArrayList<>();
         for (int i = 0; i < NUM_PLANETS; i++) {
             planets.add(new Planet(GameLogistics.PLANET_NAMES[new Random()
                     .nextInt(GameLogistics.PLANET_NAMES.length)]));
@@ -47,7 +50,7 @@ public class SolarSystem {
      *
      * @return the planets
      */
-    public Set<Planet> getPlanets() {
+    public List<Planet> getPlanets() {
         return planets;
     }
 
@@ -56,7 +59,7 @@ public class SolarSystem {
      *
      * @param planets the planets
      */
-    public void setPlanets(Set<Planet> planets) {
+    public void setPlanets(List<Planet> planets) {
         this.planets = planets;
     }
 

@@ -17,6 +17,7 @@ public class Planet {
     private TechLevel techLevel;
     private Resource resource;
     private Government politicalSystem;
+    private Market market;
 
     /**
      * Instantiates a new Planet.
@@ -30,6 +31,7 @@ public class Planet {
         techLevel = TechLevel.values()[new Random().nextInt(TechLevel.numElements())];
         resource = Resource.values()[new Random().nextInt(Resource.numElements())];
         politicalSystem = null;
+        market = new Market(this);
     }
 
     @Override
@@ -62,5 +64,9 @@ public class Planet {
 
     public TechLevel getTechLevel() {
         return techLevel;
+    }
+
+    public Market getPlanetsMarket() {
+        return market;
     }
 }
