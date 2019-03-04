@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import java.io.FileOutputStream;
 
+import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Difficulty;
 import edu.gatech.cs2340.spacetraders.model.Inventory;
 import edu.gatech.cs2340.spacetraders.model.Market;
@@ -30,8 +31,8 @@ public class MarketViewModel extends AndroidViewModel {
      */
     public MarketViewModel(@NonNull Application application) {
         super(application);
-        //player = DataStore.getCurrentPLayer();
-        market = new Market(player.getLocation());
+//        player = DataStore.getCurrentPLayer();
+//        market = player.getLocation().getPlanetsMarket();
     }
 
     public Inventory getMarketInventory() {
