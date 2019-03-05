@@ -2,10 +2,6 @@ package edu.gatech.cs2340.spacetraders.model;
 
 import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * The type Player.
  */
@@ -14,7 +10,7 @@ public class Player {
     private String name;
     private Skills[] skills;
     private Difficulty preferredDifficulty;
-    private int credits;
+    private double credits;
     private Ship ship;
     private Inventory inventory;
     private Planet location;
@@ -24,7 +20,7 @@ public class Player {
      * Instantiates a new Player.
      */
     public Player() {
-        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
+        this("", Difficulty.BEGINNER, Skills.values());
     }
 
     /**
@@ -112,7 +108,7 @@ public class Player {
      *
      * @return the credits
      */
-    public int getCredits() {
+    public double getCredits() {
         return credits;
     }
 
@@ -121,7 +117,7 @@ public class Player {
      *
      * @param credits the credits
      */
-    public void setCredits(int credits) {
+    public void setCredits(double credits) {
         this.credits = credits;
     }
 
