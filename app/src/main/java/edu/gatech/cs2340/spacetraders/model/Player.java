@@ -20,7 +20,7 @@ public class Player {
      * Instantiates a new Player.
      */
     public Player() {
-        this("", Difficulty.BEGINNER, Skills.values());
+        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
     }
 
     /**
