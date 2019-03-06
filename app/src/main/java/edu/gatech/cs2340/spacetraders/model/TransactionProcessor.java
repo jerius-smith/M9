@@ -50,8 +50,8 @@ public class TransactionProcessor {
     }
 
     public static boolean sellItem(Player player, Good toSell, Market market) {
-        boolean result = validateSellingGoods(player) && validateSellingSpecificGood(player,
-                                                                                     toSell);
+        boolean result =
+                validateSellingGoods(player) && validateSellingSpecificGood(player, toSell);
         if (result == false) {
             return false;
         } else {
