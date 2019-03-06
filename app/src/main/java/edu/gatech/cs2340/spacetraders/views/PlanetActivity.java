@@ -43,4 +43,12 @@ public class PlanetActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(MarketViewModel.class);
         playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }

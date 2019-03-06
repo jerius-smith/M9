@@ -21,11 +21,18 @@ public class TransactionProcessor {
         return player.getInventory().getStock(toSell) > 0;
     }
 
+    // Checks whether the market has enough of a good the player is trying to
+    // buy or sell
+    public static boolean validateMarketCapacity(Market market, Good toCheck) {
+        return market.getMarketInventory().getStock(toCheck) > 0;
+    }
+
     public static boolean buyItem(Player player, Good toBuy, Market market) {
         double goodPrice = market.getPriceOfGood(toBuy);
         boolean result =
                 validateCargoCapacity(player, player.getShip()) && validatePlayerMoney(player,
-                                                                                       goodPrice);
+                                                                                       goodPrice)
+                && validateMarketCapacity(market, toBuy);
         if (result == false) {
             return false;
         } else {
@@ -36,13 +43,15 @@ public class TransactionProcessor {
 
             int currMarketStockOfGood = market.getMarketInventory().getStock(toBuy);
             market.getMarketInventory().setStock(toBuy, currMarketStockOfGood - 1);
-            market.getMarketInventory().adjustTotalStock(market.getMarketInventory().getTotalStock() + 1);
+            market.getMarketInventory()
+                    .adjustTotalStock(market.getMarketInventory().getTotalStock() + 1);
             return true;
         }
     }
 
     public static boolean sellItem(Player player, Good toSell, Market market) {
-        boolean result = validateSellingGoods(player) && validateSellingSpecificGood(player, toSell);
+        boolean result = validateSellingGoods(player) && validateSellingSpecificGood(player, toSell)
+                         && validateMarketCapacity(market, toSell);
         if (result == false) {
             return false;
         } else {
@@ -54,7 +63,8 @@ public class TransactionProcessor {
 
             int currMarketStockOfGood = market.getMarketInventory().getStock(toSell);
             market.getMarketInventory().setStock(toSell, currMarketStockOfGood + 1);
-            market.getMarketInventory().adjustTotalStock(market.getMarketInventory().getTotalStock() - 1);
+            market.getMarketInventory()
+                    .adjustTotalStock(market.getMarketInventory().getTotalStock() - 1);
             return true;
         }
     }
