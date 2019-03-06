@@ -34,6 +34,10 @@ public class Planet {
         market = new Market(this);
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
