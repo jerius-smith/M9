@@ -6,9 +6,11 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.Set;
 
+import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Difficulty;
 import edu.gatech.cs2340.spacetraders.model.ModelFacade;
 import edu.gatech.cs2340.spacetraders.model.Planet;
@@ -50,6 +52,13 @@ public class ConfigurationViewModel extends AndroidViewModel {
         } else {
             facade.createPlayer(name, prefDifficulty, skillPoints, getDefaultPlanet());
             showToast(facade.getPlayer().toString(), 5000);
+            DataStore.createCurrentPlayerTxt(getApplication(), facade.getPlayer());
+            DataStore.newPlayerToJson(getApplication(), facade.getPlayer());
+            try {
+                DataStore.universeToJson(getApplication(), facade.getUniverse());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
             return true;
         }
         return false;

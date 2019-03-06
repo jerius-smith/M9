@@ -69,4 +69,8 @@ public class Planet {
     public Market getPlanetsMarket() {
         return market;
     }
+
+    public String getName() {
+        return name;
+    }
 }

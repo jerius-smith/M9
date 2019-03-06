@@ -6,7 +6,7 @@ import java.util.Objects;
 /**
  * The type Ship.
  */
-public abstract class Ship {
+public class Ship {
 
     private String name;
     private final int cargoCapacity;

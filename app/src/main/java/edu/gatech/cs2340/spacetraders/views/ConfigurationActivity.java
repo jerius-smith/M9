@@ -115,9 +115,6 @@ public class ConfigurationActivity extends AppCompatActivity {
             Boolean isValid = viewModel.isValidPlayer(name, difficulty, skills);
 
             if(isValid) {
-                viewModel.jsonifyUniverse(ConfigurationActivity.this);
-                viewModel.jsonifyPlayer(ConfigurationActivity.this);
-
                 Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
                 intent.putExtra("PLAYER_NAME", name);
                 startActivity(intent);

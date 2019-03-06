@@ -20,7 +20,7 @@ public class Player {
      * Instantiates a new Player.
      */
     public Player() {
-        this("", Difficulty.BEGINNER, Skills.values());
+        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
     }
 
     /**
@@ -156,7 +156,8 @@ public class Player {
                 .append("\nFighter points: " + skills[1].getPoints())
                 .append("\nTrader points: " + skills[2].getPoints())
                 .append("\nEngineer points: " + skills[3].getPoints())
-                .append("\nCredits : " + credits).append("\nShip type: " + ship);
+                .append("\nCredits : " + credits).append("\nShip type: " + ship)
+                .append("\nLocation : " + location);
         return playerInfo.toString();
     }
 

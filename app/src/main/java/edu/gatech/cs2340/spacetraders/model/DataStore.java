@@ -1,5 +1,6 @@
 package edu.gatech.cs2340.spacetraders.model;
 import android.content.Context;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,9 +13,9 @@ import com.google.gson.Gson;
 import java.util.Scanner;
 
 public class DataStore {
-    public static Player jsonToPlayer(String fileName) throws FileNotFoundException {
+    public static Player jsonToPlayer(Context context, String fileName) throws FileNotFoundException {
         Gson gson = new Gson();
-        Scanner sc = new Scanner(new File(fileName));
+        Scanner sc = new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/" + fileName));
         String jsonFile = "";
 
         while (sc.hasNext()) {
@@ -26,9 +27,9 @@ public class DataStore {
         return player;
     }
 
-    public static Universe jsonToUniverse(String fileName) throws FileNotFoundException {
+    public static Universe jsonToUniverse(Context context, String fileName) throws FileNotFoundException {
         Gson gson = new Gson();
-        Scanner sc = new Scanner(new File(fileName));
+        Scanner sc = new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/" +fileName));
         String jsonFile = "";
 
         while (sc.hasNext()) {
@@ -42,7 +43,7 @@ public class DataStore {
 
     public static void universeToJson(Context context, Universe universe)
             throws FileNotFoundException {
-        String fileName = getCurrentPlayerTxt() + "_universe.json";
+        String fileName = getCurrentPlayerTxt(context) + "_universe.json";
         String fileContents = new Gson().toJson(universe);
         FileOutputStream outputStream;
 
@@ -55,8 +56,22 @@ public class DataStore {
         }
     }
 
-    public static void playerToJson(Context context, Player player) {
-        String fileName = createHeader(player.getName().toLowerCase()) + "_player.json";
+    public static void playerToJson(Context context, Player player) throws FileNotFoundException {
+        String fileName = getCurrentPlayerTxt(context) + "_player.json";
+        String fileContents = new Gson().toJson(player);
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            outputStream.write(fileContents.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void newPlayerToJson(Context context, Player player) {
+        String fileName = createHeader(player.getName().toLowerCase())+ "_player.json";
         String fileContents = new Gson().toJson(player);
         FileOutputStream outputStream;
 
@@ -91,13 +106,13 @@ public class DataStore {
         return name + "_" + dateFormat.format(currDate) + "_" + timeFormat.format(currDate);
     }
 
-    public static String getCurrentPlayerTxt() throws FileNotFoundException {
-        Scanner sc = new Scanner(new File("current_player.txt"));
+    public static String getCurrentPlayerTxt(Context context) throws FileNotFoundException {
+        Scanner sc = new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/current_player.txt"));
 
         return sc.next();
     }
 
-    public static Player getCurrentPlayer() throws FileNotFoundException {
-        return jsonToPlayer(getCurrentPlayerTxt() + "_player.json");
+    public static Player getCurrentPlayer(Context context) throws FileNotFoundException {
+        return jsonToPlayer(context, getCurrentPlayerTxt(context) + "_player.json");
     }
 }
