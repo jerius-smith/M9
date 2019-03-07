@@ -74,7 +74,4 @@ public class Planet {
         return market;
     }
 
-    public String getName() {
-        return name;
-    }
 }

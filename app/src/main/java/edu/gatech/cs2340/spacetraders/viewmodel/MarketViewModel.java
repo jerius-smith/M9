@@ -2,24 +2,18 @@ package edu.gatech.cs2340.spacetraders.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 
+import edu.gatech.cs2340.spacetraders.entities.MarketActivityException;
 import edu.gatech.cs2340.spacetraders.model.DataStore;
-import edu.gatech.cs2340.spacetraders.model.Difficulty;
 import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.model.Inventory;
 import edu.gatech.cs2340.spacetraders.model.Market;
-import edu.gatech.cs2340.spacetraders.model.ModelFacade;
 import edu.gatech.cs2340.spacetraders.model.Player;
-import edu.gatech.cs2340.spacetraders.model.Skills;
-import edu.gatech.cs2340.spacetraders.model.TransactionProcessor;
-import processing.core.PApplet;
+import edu.gatech.cs2340.spacetraders.entities.TransactionProcessor;
 
 /**
  * The type Configuration view model.
@@ -53,12 +47,20 @@ public class MarketViewModel extends AndroidViewModel {
     }
 
     public double sellItem(Good good) {
-        TransactionProcessor.sellItem(player, good, market);
+        try {
+            TransactionProcessor.sellItem(player, good, market);
+        } catch (MarketActivityException e) {
+            Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
         return player.getCredits();
     }
 
     public double buyItem(Good good) {
-        TransactionProcessor.buyItem(player, good, market);
+        try {
+            TransactionProcessor.buyItem(player, good, market);
+        } catch (MarketActivityException e) {
+            Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
         return player.getCredits();
     }
 
