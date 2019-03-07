@@ -2,10 +2,6 @@ package edu.gatech.cs2340.spacetraders.model;
 
 import com.google.gson.Gson;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 /**
  * The type Player.
  */
@@ -14,7 +10,7 @@ public class Player {
     private String name;
     private Skills[] skills;
     private Difficulty preferredDifficulty;
-    private int credits;
+    private double credits;
     private Ship ship;
     private Inventory inventory;
     private Planet location;
@@ -112,7 +108,7 @@ public class Player {
      *
      * @return the credits
      */
-    public int getCredits() {
+    public double getCredits() {
         return credits;
     }
 
@@ -121,7 +117,7 @@ public class Player {
      *
      * @param credits the credits
      */
-    public void setCredits(int credits) {
+    public void setCredits(double credits) {
         this.credits = credits;
     }
 
@@ -160,7 +156,8 @@ public class Player {
                 .append("\nFighter points: " + skills[1].getPoints())
                 .append("\nTrader points: " + skills[2].getPoints())
                 .append("\nEngineer points: " + skills[3].getPoints())
-                .append("\nCredits : " + credits).append("\nShip type: " + ship);
+                .append("\nCredits : " + credits).append("\nShip type: " + ship)
+                .append("\nLocation : " + location);
         return playerInfo.toString();
     }
 

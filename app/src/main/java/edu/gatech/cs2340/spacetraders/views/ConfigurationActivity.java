@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -13,14 +14,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
-
 import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.model.Difficulty;
+import edu.gatech.cs2340.spacetraders.model.Good;
+import edu.gatech.cs2340.spacetraders.model.ModelFacade;
+import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Skills;
+import edu.gatech.cs2340.spacetraders.entities.TransactionProcessor;
 import edu.gatech.cs2340.spacetraders.viewmodel.ConfigurationViewModel;
 
 /**
@@ -112,12 +112,9 @@ public class ConfigurationActivity extends AppCompatActivity {
             viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
             String name = nameInput.getText().toString();
             Difficulty difficulty = (Difficulty) difficultySpinner.getSelectedItem();
-            Boolean isValid = viewModel.isValidPlayer(name, difficulty, skills);
+            boolean isValid = viewModel.isValidPlayer(name, difficulty, skills);
 
             if(isValid) {
-                viewModel.jsonifyUniverse(ConfigurationActivity.this);
-                viewModel.jsonifyPlayer(ConfigurationActivity.this);
-
                 Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
                 intent.putExtra("PLAYER_NAME", name);
                 startActivity(intent);

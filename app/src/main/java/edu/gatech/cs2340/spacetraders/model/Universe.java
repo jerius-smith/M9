@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
+
 /**
  * The type Universe.
  */

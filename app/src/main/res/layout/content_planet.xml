@@ -26,7 +26,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
-        app:srcCompat="@drawable/Gnat" />
+        app:srcCompat="@drawable/gnat" />
 
     <ImageButton
         android:id="@+id/market_button"

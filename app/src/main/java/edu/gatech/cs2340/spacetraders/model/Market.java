@@ -15,22 +15,29 @@ public class Market {
     private Inventory createInventory(Planet planet) {
         Inventory inventory = new Inventory();
         for (Good currentGood : Good.values()) {
-            inventory.setStock(currentGood, randomStock(currentGood, planet));
-            inventory.setPrice(currentGood, priceModel(currentGood, planet));
+            int randStock = randomStock(currentGood, planet);
+            double computedPrice = priceModel(currentGood, planet);
+            if (computedPrice < 0) {
+                computedPrice = priceModel(currentGood, planet);
+            }
+            inventory.setStock(currentGood, randStock);
+            inventory.setPrice(currentGood, computedPrice);
+            inventory.adjustTotalStock(inventory.getTotalStock() + randStock);
         }
         return inventory;
     }
 
+
     private int randomStock(Good good, Planet planet) {
         if (validateGood(good, planet)) {
-            return new Random().nextInt(10) * 5;
+            return new Random().nextInt(50);
         }
         return 0;
     }
 
     private double priceModel(Good good, Planet planet) {
         if (validateGood(good, planet)) {
-            return good.getBASE_PRICE() + (good.getIPL() * (planet.getTechLevel().ordinal() - good
+            return good.getBASE_PRICE() + (Math.abs(good.getIPL()) * (planet.getTechLevel().ordinal() - good
                     .getMTLP())) + computeVarianceFactor(good);
         }
         return 0;
@@ -49,6 +56,10 @@ public class Market {
 
     public Inventory getMarketInventory() {
         return marketInventory;
+    }
+
+    public double getPriceOfGood(Good toGetPrice) {
+        return marketInventory.getPrice(toGetPrice);
     }
 
 }
