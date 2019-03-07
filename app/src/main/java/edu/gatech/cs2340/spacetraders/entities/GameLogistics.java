@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.spacetraders.model;
+package edu.gatech.cs2340.spacetraders.entities;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,6 +17,9 @@ public final class GameLogistics {
      * The constant MAX_HEIGHT.
      */
     public static final int MAX_HEIGHT = 500;
+
+    public static final int MAX_DISTANCE =
+            (int) Math.sqrt(MAX_WIDTH * MAX_WIDTH + MAX_HEIGHT * MAX_HEIGHT);
     /**
      * The constant MAX_MERCENARIES.
      */
@@ -31,11 +34,12 @@ public final class GameLogistics {
     public static final String[] SOLAR_SYSTEM_NAMES =
             new String[]{"Sombrero", "Cygnus", "Andromeda"};
 
-    // index 0 : weapons, 1 : gadget, 2 : cargo
+
+    // index 0 : weapons, 1 : gadget, 2 : cargo, 3 : fuel capacity
     public static final HashMap<String, Integer[]> MAX_CAPACITIES =
             new HashMap<String, Integer[]>() {
                 {
-                    put("Gnat", new Integer[]{1, 1, 15});
+                    put("Gnat", new Integer[]{1, 1, 15, 80});
                 }
             };
 

@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 
 import java.util.Random;
 
+import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
+
 import static java.lang.Math.floor;
 
 /**
@@ -18,6 +20,31 @@ public class Planet {
     private Resource resource;
     private Government politicalSystem;
     private Market market;
+    private SolarSystem solarSystemCurrentlyIn;
+
+    public double getxLoc() {
+        return xLoc;
+    }
+
+    public void setxLoc(double xLoc) {
+        this.xLoc = xLoc;
+    }
+
+    public double getyLoc() {
+        return yLoc;
+    }
+
+    public void setyLoc(double yLoc) {
+        this.yLoc = yLoc;
+    }
+
+    public SolarSystem getSolarSystemCurrentlyIn() {
+        return solarSystemCurrentlyIn;
+    }
+
+    public void setSolarSystemCurrentlyIn(SolarSystem solarSystemCurrentlyIn) {
+        this.solarSystemCurrentlyIn = solarSystemCurrentlyIn;
+    }
 
     /**
      * Instantiates a new Planet.
