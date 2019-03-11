@@ -35,6 +35,14 @@ public class Universe {
         return solarSystems;
     }
 
+    public SolarSystem getSolarSystemByName(String name) {
+        for (SolarSystem curr : solarSystems) {
+            if (name.equals(curr.getName()))
+                return curr;
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

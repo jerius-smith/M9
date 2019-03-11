@@ -96,6 +96,14 @@ public class SolarSystem {
                && Objects.equals(mercenaries, that.mercenaries);
     }
 
+    public static int getNumPlanets() {
+        return NUM_PLANETS;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name, xLoc, yLoc, planets, mercenaries);

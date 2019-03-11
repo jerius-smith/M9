@@ -9,14 +9,13 @@ import edu.gatech.cs2340.spacetraders.model.Ship;
 
 public class TravelProcessor {
 
-    private static void validateTraveling(Player player, Planet travelTo) throws TravelException {
+    public static void validateTraveling(Player player, Planet travelTo) throws TravelException {
         int remainingFuel = getRemainingFuel(player, travelTo);
         if (remainingFuel < 0) {
             throw new TravelException("Not enough fuel");
         } else {
             player.getShip().setFuelCapacity(remainingFuel);
             player.setLocation(travelTo);
-
         }
     }
 

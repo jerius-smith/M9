@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -26,6 +27,7 @@ public class MarketActivity extends AppCompatActivity {
     private ImageButton sellButton;
     private ImageButton buyButton;
     private TextView playerCredits;
+    private TextView playerPlanet;
 
 
     @Override
@@ -46,7 +48,8 @@ public class MarketActivity extends AppCompatActivity {
         marketInventoryView.setAdapter(mAdapter);
 
         playerCredits = findViewById(R.id.credits_text);
-        playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
+        playerPlanet = findViewById(R.id.location_text);
+        updatePlayerInfo();
 
         sellButton = findViewById(R.id.sell_button);
         buyButton = findViewById(R.id.buy_button);
@@ -57,7 +60,7 @@ public class MarketActivity extends AppCompatActivity {
                 int pos = adapter.getSelectedPosition();
                 viewModel.sellItem(Good.values()[pos]);
                 adapter.notifyDataSetChanged();
-                playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
+                updatePlayerInfo();
                 viewModel.savePlayer();
             }
         });
@@ -68,10 +71,15 @@ public class MarketActivity extends AppCompatActivity {
                 int pos = adapter.getSelectedPosition();
                 viewModel.buyItem(Good.values()[pos]);
                 adapter.notifyDataSetChanged();
-                playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
+                updatePlayerInfo();
                 viewModel.savePlayer();
             }
         });
+    }
+
+    private void updatePlayerInfo() {
+        playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
+        playerPlanet.setText(String.format("Location: %s", viewModel.getPlayerLocation()));
     }
 
     @Override

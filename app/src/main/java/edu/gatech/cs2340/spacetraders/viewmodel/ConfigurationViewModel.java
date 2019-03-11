@@ -48,7 +48,8 @@ public class ConfigurationViewModel extends AndroidViewModel {
         } else if (prefDifficulty == null) {
             showToast("Player cannot be configured. Please select difficulty", Toast.LENGTH_LONG);
         } else if (Skills.totalPoints() != Skills.MAX_POINTS) {
-            showToast("Player cannot be configured. Please allocate all the points: " + Skills.totalPoints(), Toast.LENGTH_LONG);
+            showToast("Player cannot be configured. Please allocate all the points: " + Skills
+                    .totalPoints(), Toast.LENGTH_LONG);
         } else {
             facade.createPlayer(name, prefDifficulty, skillPoints, getDefaultPlanet());
             showToast(facade.getPlayer().toString(), 5000);
@@ -66,19 +67,12 @@ public class ConfigurationViewModel extends AndroidViewModel {
 
     private Planet getDefaultPlanet() {
         Set<SolarSystem> solarSystems = facade.getUniverse().getSolarSystems();
-        Set<Planet> planets;
-        for (SolarSystem system : solarSystems) {
-            planets = system.getPlanets();
-            for (Planet planet : planets) {
-                String name = planet.getName();
-
-                if (name.equals("Vandor")) {
-                    return planet;
-                }
+        for (SolarSystem solarSystem : solarSystems) {
+            for (Planet planet : solarSystem.getPlanets()) {
+                return planet;
             }
         }
-
-        return new Planet("Vandor");
+        return null;
     }
 
 
@@ -97,7 +91,7 @@ public class ConfigurationViewModel extends AndroidViewModel {
         }
     }
 
-    public  void jsonifyPlayer(Context context) {
+    public void jsonifyPlayer(Context context) {
         String name = facade.getPlayer().getName().toLowerCase();
         String filename = name + "_player.json";
         String fileContents = facade.getPlayer().toJSONString();

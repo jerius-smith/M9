@@ -66,6 +66,10 @@ public class MarketViewModel extends AndroidViewModel {
 
     public double getPlayerCredits() { return player.getCredits(); }
 
+    public String getPlayerLocation() {
+        return player.getLocation().getName();
+    }
+
     public void savePlayer() {
         try {
             DataStore.playerToJson(getApplication(), player);

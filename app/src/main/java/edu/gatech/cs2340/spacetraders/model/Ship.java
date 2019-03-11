@@ -68,6 +68,6 @@ public class Ship {
 
     @Override
     public String toString() {
-        return name + " spaceship";
+        return String.format("%s with %d fuel left", name, fuelCapacity);
     }
 }

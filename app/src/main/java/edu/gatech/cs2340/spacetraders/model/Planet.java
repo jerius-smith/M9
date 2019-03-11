@@ -84,7 +84,8 @@ public class Planet {
                 append("\n\t\t\tPlanet: " + name).
                 append(String.format("\n\t\t\tLocation: (%.0f, %.0f)", xLoc, yLoc)).
                 append("\n\t\t\tTech level: " + techLevel).
-                append("\n\t\t\tResource: " + resource);
+                append("\n\t\t\tResource: " + resource).
+                append("\n\t\t\tSolar System: " + solarSystemCurrentlyIn);
         return stringBuilder.toString();
     }
 

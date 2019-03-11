@@ -41,13 +41,13 @@
         app:srcCompat="@drawable/market_bttn" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/travel_button"
         android:layout_width="91dp"
         android:layout_height="123dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="150dp"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="150dp"
         android:background="@null"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/travel_bttn" />
