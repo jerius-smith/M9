@@ -34,7 +34,7 @@ public class SolarSystem {
         for (int i = 0; i < NUM_PLANETS; i++) {
             Planet planet = new Planet(GameLogistics.PLANET_NAMES[new Random()
                     .nextInt(GameLogistics.PLANET_NAMES.length)]);
-            planet.setSolarSystemCurrentlyIn(this);
+            planet.setSolarSystemCurrentlyIn(name);
             planets.add(planet);
         }
 

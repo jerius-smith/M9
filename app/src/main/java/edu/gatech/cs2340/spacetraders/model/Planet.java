@@ -20,7 +20,7 @@ public class Planet {
     private Resource resource;
     private Government politicalSystem;
     private Market market;
-    private SolarSystem solarSystemCurrentlyIn;
+    private String solarSystemCurrentlyIn;
 
     public double getxLoc() {
         return xLoc;
@@ -38,11 +38,11 @@ public class Planet {
         this.yLoc = yLoc;
     }
 
-    public SolarSystem getSolarSystemCurrentlyIn() {
+    public String getSolarSystemCurrentlyIn() {
         return solarSystemCurrentlyIn;
     }
 
-    public void setSolarSystemCurrentlyIn(SolarSystem solarSystemCurrentlyIn) {
+    public void setSolarSystemCurrentlyIn(String solarSystemCurrentlyIn) {
         this.solarSystemCurrentlyIn = solarSystemCurrentlyIn;
     }
 
