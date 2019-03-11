@@ -37,7 +37,7 @@ public class TravelProcessor {
     private static double computeDistance(Planet from, Planet to) {
         double distanceX = from.getxLoc() - to.getxLoc();
         double distanceY = from.getyLoc() - to.getyLoc();
-        return Math.sqrt((distanceX * distanceX) - (distanceY * distanceY));
+        return Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
     }
 
     private static double mapValues(double original, double omin, double omax, double nmin,

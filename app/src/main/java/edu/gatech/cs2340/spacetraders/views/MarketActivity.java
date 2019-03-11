@@ -61,7 +61,6 @@ public class MarketActivity extends AppCompatActivity {
                 viewModel.sellItem(Good.values()[pos]);
                 adapter.notifyDataSetChanged();
                 updatePlayerInfo();
-                viewModel.savePlayer();
             }
         });
 
@@ -72,7 +71,6 @@ public class MarketActivity extends AppCompatActivity {
                 viewModel.buyItem(Good.values()[pos]);
                 adapter.notifyDataSetChanged();
                 updatePlayerInfo();
-                viewModel.savePlayer();
             }
         });
         Log.d("TRAVEL", "On create: " + playerPlanet.getText().toString());
@@ -81,6 +79,7 @@ public class MarketActivity extends AppCompatActivity {
     private void updatePlayerInfo() {
         playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
         playerPlanet.setText(String.format("Location: %s", viewModel.getPlayerLocation()));
+        viewModel.savePlayer();
     }
 
     @Override

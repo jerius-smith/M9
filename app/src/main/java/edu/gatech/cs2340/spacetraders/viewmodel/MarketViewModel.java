@@ -30,6 +30,10 @@ public class MarketViewModel extends AndroidViewModel {
      */
     public MarketViewModel(@NonNull Application application) {
         super(application);
+        reloadData();
+    }
+
+    private void reloadData() {
         try {
             player = DataStore.getCurrentPlayer(getApplication());
             market = player.getLocation().getPlanetsMarket();
@@ -39,14 +43,17 @@ public class MarketViewModel extends AndroidViewModel {
     }
 
     public Inventory getMarketInventory() {
+        reloadData();
         return market.getMarketInventory();
     }
 
     public Inventory getPlayerInventory() {
+        reloadData();
         return player.getInventory();
     }
 
     public double sellItem(Good good) {
+        reloadData();
         try {
             TransactionProcessor.sellItem(player, good, market);
         } catch (MarketActivityException e) {
@@ -56,6 +63,7 @@ public class MarketViewModel extends AndroidViewModel {
     }
 
     public double buyItem(Good good) {
+        reloadData();
         try {
             TransactionProcessor.buyItem(player, good, market);
         } catch (MarketActivityException e) {
@@ -64,9 +72,13 @@ public class MarketViewModel extends AndroidViewModel {
         return player.getCredits();
     }
 
-    public double getPlayerCredits() { return player.getCredits(); }
+    public double getPlayerCredits() {
+        reloadData();
+        return player.getCredits();
+    }
 
     public String getPlayerLocation() {
+        reloadData();
         return player.getLocation().getName();
     }
 

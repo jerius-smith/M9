@@ -80,14 +80,16 @@ public class PlanetActivity extends AppCompatActivity {
             Ship ship = currPlayer.getShip();
             System.out.println(ship);
             Log.d(travelTag, "After attempted traveling: " + currPlayer.getShip().toString());
+            Log.d(travelTag,
+                  "After attempted traveling, player is now in: " + currPlayer.getLocation().getName());
         }
     }
 
     private void updatePlayerStatus() {
         viewModel = ViewModelProviders.of(this).get(MarketViewModel.class);
-
         playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
         location.setText(String.format("Location: %s", viewModel.getPlayerLocation()));
+        viewModel.savePlayer();
     }
 
     @Override
