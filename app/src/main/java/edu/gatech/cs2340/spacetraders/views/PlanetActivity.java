@@ -9,9 +9,12 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.io.FileNotFoundException;
+
 import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.entities.TravelException;
 import edu.gatech.cs2340.spacetraders.entities.TravelProcessor;
+import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.ModelFacade;
 import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
@@ -19,6 +22,7 @@ import edu.gatech.cs2340.spacetraders.model.Ship;
 import edu.gatech.cs2340.spacetraders.model.SolarSystem;
 import edu.gatech.cs2340.spacetraders.model.Universe;
 import edu.gatech.cs2340.spacetraders.viewmodel.MarketViewModel;
+import edu.gatech.cs2340.spacetraders.viewmodel.TravelViewModel;
 
 public class PlanetActivity extends AppCompatActivity {
 
@@ -28,6 +32,7 @@ public class PlanetActivity extends AppCompatActivity {
     private TextView location;
 
     private MarketViewModel viewModel;
+    private TravelViewModel travelViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class PlanetActivity extends AppCompatActivity {
         location = findViewById(R.id.location_text);
 
         updatePlayerStatus();
+        updateTravelStatus();
 
         marketBttn.setOnClickListener(view -> {
             Intent intent = new Intent(PlanetActivity.this, MarketActivity.class);
@@ -48,48 +54,29 @@ public class PlanetActivity extends AppCompatActivity {
 
         travelBtn.setOnClickListener(view -> {
             testTraveling();
-            updatePlayerStatus();
         });
     }
 
     public void testTraveling() {
         String travelTag = "TRAVEL";
-        Player currPlayer = ModelFacade.getInstance().getPlayer();
-        //Log.d(travelTag, currPlayer.toString());
         Universe universe = Universe.getInstance();
-
-        String solarSystemCurrentlyIn = currPlayer.getLocation().getSolarSystemCurrentlyIn();
-        Log.d(travelTag, currPlayer.getLocation().toString());
-        SolarSystem playerIn =
-                universe.getSolarSystemByName(currPlayer.getLocation().getSolarSystemCurrentlyIn());
-        Planet destination = null;
-        for (Planet random : playerIn.getPlanets()) {
-            if (!random.equals(currPlayer.getLocation())) {
-                destination = random;
-                break;
-            }
-        }
-        Log.d(travelTag, String.format("Traveling to %s from %s", destination.getName(),
-                                       currPlayer.getLocation().getName()));
-        try {
-            Log.d(travelTag, "Before traveling: " + currPlayer.getShip().toString());
-            TravelProcessor.validateTraveling(currPlayer, destination);
-        } catch (TravelException e) {
-            Log.d(travelTag, e.getMessage());
-        } finally {
-            Ship ship = currPlayer.getShip();
-            System.out.println(ship);
-            Log.d(travelTag, "After attempted traveling: " + currPlayer.getShip().toString());
-            Log.d(travelTag,
-                  "After attempted traveling, player is now in: " + currPlayer.getLocation().getName());
-        }
+        SolarSystem rand = universe.getRandomSolarSystem();
+        Planet toTravelTo = (Planet) rand.getPlanets().toArray()[0];
+        Log.d(travelTag, "Traveling to: " + toTravelTo.getName());
+        travelViewModel.travelTo(toTravelTo);
+        updateTravelStatus();
     }
 
     private void updatePlayerStatus() {
         viewModel = ViewModelProviders.of(this).get(MarketViewModel.class);
         playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
-        location.setText(String.format("Location: %s", viewModel.getPlayerLocation()));
         viewModel.savePlayer();
+    }
+
+    private void updateTravelStatus() {
+        travelViewModel = ViewModelProviders.of(this).get(TravelViewModel.class);
+        location.setText(String.format("Location: %s", travelViewModel.getPlayerLocation()));
+        travelViewModel.savePlayer();
     }
 
     @Override

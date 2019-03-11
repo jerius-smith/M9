@@ -8,67 +8,58 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 
 import edu.gatech.cs2340.spacetraders.entities.MarketActivityException;
+import edu.gatech.cs2340.spacetraders.entities.TravelException;
+import edu.gatech.cs2340.spacetraders.entities.TravelProcessor;
 import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.model.Inventory;
 import edu.gatech.cs2340.spacetraders.model.Market;
+import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.entities.TransactionProcessor;
+import edu.gatech.cs2340.spacetraders.model.Ship;
 
 /**
- * The type Configuration view model.
+ * The type Travel view model.
  */
-public class MarketViewModel extends AndroidViewModel {
+public class TravelViewModel extends AndroidViewModel {
 
     private Player player;
     private Market market;
+    private Ship playerShip;
 
     /**
-     * Instantiates a new Configuration view model.
+     * Instantiates a new Travel view model.
      *
      * @param application the application
      */
-    public MarketViewModel(@NonNull Application application) {
+    public TravelViewModel(@NonNull Application application) {
         super(application);
         try {
             player = DataStore.getCurrentPlayer(getApplication());
             market = player.getLocation().getPlanetsMarket();
+            playerShip = player.getShip();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public Inventory getMarketInventory() {
-        return market.getMarketInventory();
-    }
-
-    public Inventory getPlayerInventory() {
-        return player.getInventory();
-    }
-
-    public double sellItem(Good good) {
-        try {
-            TransactionProcessor.sellItem(player, good, market);
-        } catch (MarketActivityException e) {
-            Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        return player.getCredits();
-    }
-
-    public double buyItem(Good good) {
-        try {
-            TransactionProcessor.buyItem(player, good, market);
-        } catch (MarketActivityException e) {
-            Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
-        }
-        return player.getCredits();
-    }
-
-    public double getPlayerCredits() { return player.getCredits(); }
-
     public String getPlayerLocation() {
         return player.getLocation().getName();
     }
+
+    public Ship getPlayerShip() {
+        return playerShip;
+    }
+
+    public void travelTo(Planet toTravelTo) {
+        try {
+            TravelProcessor.validateTraveling(player, toTravelTo);
+        } catch (TravelException e) {
+            Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
 
     public void savePlayer() {
         try {

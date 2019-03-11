@@ -71,8 +71,6 @@ public class MarketActivity extends AppCompatActivity {
                 viewModel.buyItem(Good.values()[pos]);
                 adapter.notifyDataSetChanged();
                 updatePlayerInfo();
-                Log.d("TRAVEL", "On create: " + playerPlanet.getText().toString());
-                Log.d("TRAVEL", "On create: " + viewModel.getPlayerCredits());
             }
         });
         Log.d("TRAVEL", "On create: " + playerPlanet.getText().toString());
@@ -83,13 +81,6 @@ public class MarketActivity extends AppCompatActivity {
         playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
         playerPlanet.setText(String.format("Location: %s", viewModel.getPlayerLocation()));
         viewModel.savePlayer();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updatePlayerInfo();
-        Log.d("TRAVEL", "On resume: " + playerPlanet.getText().toString());
     }
 
     @Override

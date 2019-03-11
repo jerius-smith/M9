@@ -57,4 +57,13 @@ public class Universe {
         return json;
     }
 
+    public SolarSystem getRandomSolarSystem() {
+        SolarSystem toReturn = null;
+        for (SolarSystem curr : solarSystems) {
+            if (Math.random() < .9)
+                toReturn = curr;
+        }
+        return toReturn;
+    }
+
 }
