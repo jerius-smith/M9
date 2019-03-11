@@ -71,9 +71,12 @@ public class MarketActivity extends AppCompatActivity {
                 viewModel.buyItem(Good.values()[pos]);
                 adapter.notifyDataSetChanged();
                 updatePlayerInfo();
+                Log.d("TRAVEL", "On create: " + playerPlanet.getText().toString());
+                Log.d("TRAVEL", "On create: " + viewModel.getPlayerCredits());
             }
         });
         Log.d("TRAVEL", "On create: " + playerPlanet.getText().toString());
+        Log.d("TRAVEL", "On create: " + viewModel.getPlayerCredits());
     }
 
     private void updatePlayerInfo() {

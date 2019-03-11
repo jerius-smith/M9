@@ -24,6 +24,13 @@ public class DataStore {
 
         Player player = gson.fromJson(jsonFile, Player.class);
 
+        Player fromFacade = ModelFacade.getInstance().getPlayer();
+        if (fromFacade.equals(player)) {
+            ModelFacade.getInstance().setUpdatedPlayer(player);
+        }
+
+        //Log.d("TRAVEL", "Gson==Facade player: " + (fromFacade==player));
+
         return player;
     }
 

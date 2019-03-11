@@ -2,6 +2,7 @@ package edu.gatech.cs2340.spacetraders.model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Inventory {
     private Map<Good, GoodAttributes> inventory;
@@ -19,6 +20,23 @@ public class Inventory {
             this.stock = stock;
             this.price = price;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            GoodAttributes that = (GoodAttributes) o;
+            return stock == that.stock && Double.compare(that.price, price) == 0;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(stock, price);
+        }
     }
 
     public Inventory() {
@@ -27,6 +45,24 @@ public class Inventory {
             inventory.put(currentGood, new GoodAttributes());
         }
         totalStock = 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Inventory inventory1 = (Inventory) o;
+        return totalStock == inventory1.totalStock && Objects
+                .equals(inventory, inventory1.inventory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(inventory, totalStock);
     }
 
     public int getTotalStock() {

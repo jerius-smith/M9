@@ -48,8 +48,12 @@ public class ModelFacade {
             player.setSkills(skillPoints);
             player.setLocation(location);
         }
-        Log.d("PLAYER", "\n" + player.toString());
-        Log.d("UNIVERSE", "\n" + universe.toString());
+//        Log.d("PLAYER", "\n" + player.toString());
+//        Log.d("UNIVERSE", "\n" + universe.toString());
+    }
+
+    public void setUpdatedPlayer(Player player) {
+        this.player = player;
     }
 
 

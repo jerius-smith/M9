@@ -70,4 +70,22 @@ public class Ship {
     public String toString() {
         return String.format("%s with %d fuel left", name, fuelCapacity);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Ship)) {
+            return false;
+        }
+        Ship ship = (Ship) o;
+        return cargoCapacity == ship.cargoCapacity && gadgetCapacity == ship.gadgetCapacity
+               && fuelCapacity == ship.fuelCapacity && Objects.equals(name, ship.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, cargoCapacity, gadgetCapacity, fuelCapacity);
+    }
 }

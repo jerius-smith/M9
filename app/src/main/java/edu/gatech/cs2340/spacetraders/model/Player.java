@@ -2,6 +2,9 @@ package edu.gatech.cs2340.spacetraders.model;
 
 import com.google.gson.Gson;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * The type Player.
  */
@@ -159,6 +162,29 @@ public class Player {
                 .append("\nCredits : " + credits).append("\nShip type: " + ship)
                 .append("\nLocation : " + location);
         return playerInfo.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Player player = (Player) o;
+        return Double.compare(player.credits, credits) == 0 && Objects.equals(name, player.name)
+               && Arrays.equals(skills, player.skills)
+               && preferredDifficulty == player.preferredDifficulty && Objects
+                       .equals(ship, player.ship) && Objects.equals(inventory, player.inventory)
+               && Objects.equals(location, player.location);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, preferredDifficulty, credits, ship, inventory, location);
+        result = 31 * result + Arrays.hashCode(skills);
+        return result;
     }
 
     public String toJSONString() {

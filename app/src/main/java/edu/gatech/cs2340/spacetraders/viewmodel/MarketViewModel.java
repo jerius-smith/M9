@@ -84,6 +84,7 @@ public class MarketViewModel extends AndroidViewModel {
 
     public void savePlayer() {
         try {
+            reloadData();
             DataStore.playerToJson(getApplication(), player);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
