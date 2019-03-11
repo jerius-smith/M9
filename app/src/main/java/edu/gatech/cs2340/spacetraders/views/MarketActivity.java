@@ -75,11 +75,19 @@ public class MarketActivity extends AppCompatActivity {
                 viewModel.savePlayer();
             }
         });
+        Log.d("TRAVEL", "On create: " + playerPlanet.getText().toString());
     }
 
     private void updatePlayerInfo() {
         playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
         playerPlanet.setText(String.format("Location: %s", viewModel.getPlayerLocation()));
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updatePlayerInfo();
+        Log.d("TRAVEL", "On resume: " + playerPlanet.getText().toString());
     }
 
     @Override
