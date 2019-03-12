@@ -3,6 +3,7 @@ package edu.gatech.cs2340.spacetraders.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
@@ -52,10 +53,15 @@ public class TravelViewModel extends AndroidViewModel {
         return playerShip;
     }
 
+    public int getShipFuel() {
+        return playerShip.getFuelCapacity();
+    }
+
     public void travelTo(Planet toTravelTo) {
         try {
             TravelProcessor.validateTraveling(player, toTravelTo);
         } catch (TravelException e) {
+            Log.d("TRAVEL", "Exception: " + e.getMessage());
             Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }

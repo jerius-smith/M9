@@ -61,10 +61,11 @@ public class PlanetActivity extends AppCompatActivity {
         String travelTag = "TRAVEL";
         Universe universe = Universe.getInstance();
         SolarSystem rand = universe.getRandomSolarSystem();
-        Planet toTravelTo = (Planet) rand.getPlanets().toArray()[0];
-        Log.d(travelTag, "Traveling to: " + toTravelTo.getName());
+        Planet toTravelTo = rand.getRandomPlanet();
         travelViewModel.travelTo(toTravelTo);
         updateTravelStatus();
+        Log.d(travelTag, "Traveling to: " + travelViewModel.getPlayerLocation());
+        Log.d(travelTag, "Ship fuel: " + travelViewModel.getShipFuel());
     }
 
     private void updatePlayerStatus() {

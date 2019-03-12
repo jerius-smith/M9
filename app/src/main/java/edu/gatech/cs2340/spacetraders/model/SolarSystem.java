@@ -56,6 +56,11 @@ public class SolarSystem {
         return planets;
     }
 
+    public Planet getRandomPlanet() {
+        int randIndex = new Random().nextInt(planets.size());
+        return (Planet) planets.toArray()[randIndex];
+    }
+
     /**
      * Sets planets.
      *
