@@ -30,6 +30,7 @@ public class PlanetActivity extends AppCompatActivity {
     private ImageButton travelBtn;
     private TextView playerCredits;
     private TextView location;
+    private TextView fuel;
 
     private MarketViewModel viewModel;
     private TravelViewModel travelViewModel;
@@ -43,6 +44,7 @@ public class PlanetActivity extends AppCompatActivity {
         travelBtn = findViewById(R.id.travel_button);
         playerCredits = findViewById(R.id.credits_text);
         location = findViewById(R.id.location_text);
+        fuel = findViewById(R.id.fuel_text);
 
         updatePlayerStatus();
         updateTravelStatus();
@@ -77,6 +79,7 @@ public class PlanetActivity extends AppCompatActivity {
     private void updateTravelStatus() {
         travelViewModel = ViewModelProviders.of(this).get(TravelViewModel.class);
         location.setText(String.format("Location: %s", travelViewModel.getPlayerLocation()));
+        fuel.setText(String.valueOf(travelViewModel.getShipFuel()));
         travelViewModel.savePlayer();
     }
 
@@ -84,6 +87,7 @@ public class PlanetActivity extends AppCompatActivity {
     public void onResume() {  // After a pause OR at startup
         super.onResume();
         updatePlayerStatus();
+        updateTravelStatus();
     }
 
     @Override

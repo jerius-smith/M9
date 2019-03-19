@@ -60,6 +60,7 @@ public class TravelViewModel extends AndroidViewModel {
     public void travelTo(Planet toTravelTo) {
         try {
             TravelProcessor.validateTraveling(player, toTravelTo);
+
         } catch (TravelException e) {
             Log.d("TRAVEL", "Exception: " + e.getMessage());
             Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();

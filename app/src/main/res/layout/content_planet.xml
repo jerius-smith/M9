@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/star032"
-
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
     tools:context="edu.gatech.cs2340.spacetraders.views.PlanetActivity"
     tools:showIn="@layout/activity_planet">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/star"
+        android:background="@drawable/star"
+        />
 
     <ImageView
         android:id="@+id/imageView"
@@ -78,5 +83,16 @@
         android:text="Location: Vandor"
         android:textColor="@color/tan"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/fuel_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/inconsolata"
+        android:paddingBottom="15dp"
+        android:text="100"
+        android:textColor="@color/tan"
+        android:textSize="25sp" />
 
 </RelativeLayout>
