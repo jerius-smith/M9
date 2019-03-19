@@ -25,7 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
     /**
      * The Stars animation.
      */
-    AnimationDrawable starsAnimation;
+   // AnimationDrawable starsAnimation;
     /**
      * The Welcome text.
      */
@@ -40,7 +40,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.content_welcome);
 
-        starsAnimation = (AnimationDrawable) relativeLayout.getBackground();
+        //starsAnimation = (AnimationDrawable) relativeLayout.getBackground();
         welcomeText = (TextView) findViewById(R.id.welcome_text);
         continueBttn = findViewById(R.id.continue_button);
 
@@ -49,7 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 + " journey through the Space " + "Trader Universe!\"", playerName);
         welcomeText.setText(welcomeMessage);
 
-        starsAnimation.start();
+        //starsAnimation.start();
 
         continueBttn.setOnClickListener(view -> {
             Intent intent = new Intent(WelcomeActivity.this, PlanetActivity.class);
