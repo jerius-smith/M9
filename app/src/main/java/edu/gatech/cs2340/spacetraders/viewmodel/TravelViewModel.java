@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 
+import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
 import edu.gatech.cs2340.spacetraders.entities.MarketActivityException;
 import edu.gatech.cs2340.spacetraders.entities.TravelException;
 import edu.gatech.cs2340.spacetraders.entities.TravelProcessor;
@@ -54,7 +55,9 @@ public class TravelViewModel extends AndroidViewModel {
     }
 
     public int getShipFuel() {
-        return playerShip.getFuelCapacity();
+        int actualFuel = playerShip.getFuelCapacity();
+        int mappedFuel = (int) GameLogistics.mapValues(actualFuel, 0, 80, 0, 100);
+        return mappedFuel;
     }
 
     public void travelTo(Planet toTravelTo) {
@@ -64,7 +67,12 @@ public class TravelViewModel extends AndroidViewModel {
         } catch (TravelException e) {
             Log.d("TRAVEL", "Exception: " + e.getMessage());
             Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
+            playerShip.setFuelTooLow(true);
         }
+    }
+
+    public boolean isFuelTooLow() {
+        return playerShip.isFuelTooLow();
     }
 
 

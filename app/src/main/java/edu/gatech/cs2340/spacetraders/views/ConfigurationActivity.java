@@ -2,19 +2,30 @@ package edu.gatech.cs2340.spacetraders.views;
 
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.crowdfire.cfalertdialog.CFAlertDialog;
+
+import java.util.Arrays;
+
 import edu.gatech.cs2340.spacetraders.R;
+import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Difficulty;
 import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.model.ModelFacade;
@@ -36,6 +47,8 @@ public class ConfigurationActivity extends AppCompatActivity {
     private ImageButton setupPlayer;
     private EditText[] skillsArr = new EditText[4];
     private Skills[] skills;
+
+    private Button load;
 
     /**
      * The View model.
@@ -59,12 +72,14 @@ public class ConfigurationActivity extends AppCompatActivity {
         skillsArr[2] = findViewById(R.id.trader_skills);
         skillsArr[3] = findViewById(R.id.engineer_skills);
 
+        load = findViewById(R.id.load_game);
+
         skills = Skills.values();
 
 
-        ArrayAdapter<Difficulty> adapter = new ArrayAdapter<Difficulty>(this,
-                                                           android.R.layout.simple_spinner_item,
-                                                           Difficulty.values());
+        ArrayAdapter<Difficulty> adapter =
+                new ArrayAdapter<Difficulty>(this, android.R.layout.simple_spinner_item,
+                                             Difficulty.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(adapter);
         difficultySpinner.setSelection(0);
@@ -73,7 +88,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         skillsArr[0].setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
+                if (!hasFocus) {
                     updatePoints();
                 }
             }
@@ -82,7 +97,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         skillsArr[1].setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
+                if (!hasFocus) {
                     updatePoints();
                 }
             }
@@ -91,7 +106,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         skillsArr[2].setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
+                if (!hasFocus) {
                     updatePoints();
                 }
             }
@@ -100,7 +115,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         skillsArr[3].setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus) {
+                if (!hasFocus) {
                     updatePoints();
                 }
             }
@@ -114,13 +129,47 @@ public class ConfigurationActivity extends AppCompatActivity {
             Difficulty difficulty = (Difficulty) difficultySpinner.getSelectedItem();
             boolean isValid = viewModel.isValidPlayer(name, difficulty, skills);
 
-            if(isValid) {
-                Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
-                intent.putExtra("PLAYER_NAME", name);
-                startActivity(intent);
+            if (isValid) {
+                launchWelcomeScreen(name);
             }
 
         });
+
+        load.setOnClickListener(view -> {
+            loadGameDialog(getApplicationContext());
+        });
+    }
+
+    private void launchWelcomeScreen(String name) {
+        Intent intent = new Intent(ConfigurationActivity.this, WelcomeActivity.class);
+        intent.putExtra("PLAYER_NAME", name);
+        startActivity(intent);
+    }
+
+    private void loadGameDialog(Context context) {
+        String[] selectFrom = DataStore.getSavedPlayerNames(context);
+        CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
+        if (selectFrom.length > 0) {
+            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                    .setTitle("Load Game")
+                    .setMessage("Select the game state").setItems(selectFrom, (dialog, index) -> {
+                    dialog.dismiss();
+                    DataStore.setCurrentPlayerText(context, selectFrom[index]);
+                    launchWelcomeScreen(selectFrom[index]);
+                    }).setTextGravity(Gravity.CENTER_HORIZONTAL).setIcon(R.drawable.gnat)
+                    .setCancelable(false);
+        } else {
+            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
+                    .setTitle("Error Loading Save Data")
+                    .setMessage("No previous game saves to load.")
+                    .addButton("OK", Color.WHITE,
+                               ContextCompat.getColor(context, R.color.light_turq),
+                               CFAlertDialog.CFAlertActionStyle.NEGATIVE,
+                               CFAlertDialog.CFAlertActionAlignment.CENTER,
+                               (dialog, index) -> dialog.dismiss())
+                    .setCancelable(true)
+                    .setAutoDismissAfter(5000);
+        } builder.show();
     }
 
     private void updatePoints() {
@@ -142,7 +191,7 @@ public class ConfigurationActivity extends AppCompatActivity {
         } else {
             points.setText(Integer.toString(16 - sum));
             Toast.makeText(getApplicationContext(), "You've used more points than available.",
-                    Toast.LENGTH_LONG).show();
+                           Toast.LENGTH_LONG).show();
         }
 
     }

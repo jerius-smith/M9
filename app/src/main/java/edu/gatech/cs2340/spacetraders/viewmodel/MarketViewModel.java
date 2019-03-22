@@ -12,8 +12,10 @@ import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.model.Inventory;
 import edu.gatech.cs2340.spacetraders.model.Market;
+import edu.gatech.cs2340.spacetraders.model.ModelFacade;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.entities.TransactionProcessor;
+import edu.gatech.cs2340.spacetraders.model.Universe;
 
 /**
  * The type Configuration view model.
@@ -73,6 +75,7 @@ public class MarketViewModel extends AndroidViewModel {
     public void savePlayer() {
         try {
             DataStore.playerToJson(getApplication(), player);
+//            DataStore.universeToJson(getApplication(), ModelFacade.getInstance().getUniverse());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

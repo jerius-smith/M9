@@ -3,11 +3,14 @@ package edu.gatech.cs2340.spacetraders.views;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
 
 import java.io.FileNotFoundException;
 
@@ -31,6 +34,7 @@ public class PlanetActivity extends AppCompatActivity {
     private TextView playerCredits;
     private TextView location;
     private TextView fuel;
+    private CircularFillableLoaders fuel_level;
 
     private MarketViewModel viewModel;
     private TravelViewModel travelViewModel;
@@ -45,6 +49,7 @@ public class PlanetActivity extends AppCompatActivity {
         playerCredits = findViewById(R.id.credits_text);
         location = findViewById(R.id.location_text);
         fuel = findViewById(R.id.fuel_text);
+        fuel_level = findViewById(R.id.fuel_level);
 
         updatePlayerStatus();
         updateTravelStatus();
@@ -79,7 +84,19 @@ public class PlanetActivity extends AppCompatActivity {
     private void updateTravelStatus() {
         travelViewModel = ViewModelProviders.of(this).get(TravelViewModel.class);
         location.setText(String.format("Location: %s", travelViewModel.getPlayerLocation()));
-        fuel.setText(String.valueOf(travelViewModel.getShipFuel()));
+        int mappedFuelLevel = travelViewModel.getShipFuel();
+        fuel.setText(String.valueOf(mappedFuelLevel));
+        fuel_level.setProgress(100 - travelViewModel.getShipFuel());
+        if (mappedFuelLevel >= 60) {
+            fuel.setTextColor(Color.GREEN);
+        } else if (travelViewModel.isFuelTooLow()) {
+            fuel.setTextColor(Color.RED);
+        } else {
+            fuel.setTextColor(Color.YELLOW);
+        }
+        Log.d("TRAVEL", String.valueOf(100 - travelViewModel.getShipFuel()));
+        fuel_level.setProgress(100 - travelViewModel.getShipFuel(), 800);
+        fuel.bringToFront();
         travelViewModel.savePlayer();
     }
 

@@ -15,6 +15,15 @@ public class Ship {
     private final int gadgetCapacity;
     private Collection<Weapons> weapons;
     private int fuelCapacity;
+    private boolean fuelTooLow;
+
+    public boolean isFuelTooLow() {
+        return fuelTooLow;
+    }
+
+    public void setFuelTooLow(boolean fuelTooLow) {
+        this.fuelTooLow = fuelTooLow;
+    }
 
     /**
      * Instantiates a new Ship.
@@ -26,6 +35,7 @@ public class Ship {
         this.cargoCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get(name))[2];
         this.gadgetCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get(name))[1];
         this.fuelCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get(name))[3];
+        this.fuelTooLow = false;
     }
 
     public void addWeapon (Weapons weapon) {

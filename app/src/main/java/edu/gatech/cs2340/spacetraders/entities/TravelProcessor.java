@@ -27,7 +27,7 @@ public class TravelProcessor {
     private static int computeFuelCost(Player player, Planet travelTo) {
         int maxDecrease = player.getShip().getFuelCapacity();
         double distance = computeDistance(player.getLocation(), travelTo);
-        return (int) mapValues(distance,
+        return (int) GameLogistics.mapValues(distance,
                                0,
                                GameLogistics.MAX_DISTANCE,
                                0,
@@ -40,10 +40,7 @@ public class TravelProcessor {
         return Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
     }
 
-    private static double mapValues(double original, double omin, double omax, double nmin,
-                               double nmax) {
-        return nmin + (nmax - nmin) * ((original - omin) / (omax - omin));
-    }
+
 
 
 }

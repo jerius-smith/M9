@@ -1,21 +1,37 @@
 package edu.gatech.cs2340.spacetraders.model;
+
 import android.content.Context;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import com.google.gson.Gson;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
+import processing.opengl.PGraphics2D;
+
 public class DataStore {
-    public static Player jsonToPlayer(Context context, String fileName) throws FileNotFoundException {
+
+    private static FilenameFilter createFilter(String toMatch) {
+        return ((dir, name) -> name.endsWith(toMatch));
+    }
+
+    public static Map<String, SavedPlayer> savedPlayerMap;
+
+    public static Player jsonToPlayer(Context context, String fileName)
+            throws FileNotFoundException {
         Gson gson = new Gson();
-        Scanner sc = new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/" + fileName));
+        Scanner sc =
+                new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/" + fileName));
         String jsonFile = "";
 
         while (sc.hasNext()) {
@@ -27,9 +43,11 @@ public class DataStore {
         return player;
     }
 
-    public static Universe jsonToUniverse(Context context, String fileName) throws FileNotFoundException {
+    public static Universe jsonToUniverse(Context context, String fileName)
+            throws FileNotFoundException {
         Gson gson = new Gson();
-        Scanner sc = new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/" +fileName));
+        Scanner sc =
+                new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/" + fileName));
         String jsonFile = "";
 
         while (sc.hasNext()) {
@@ -71,7 +89,7 @@ public class DataStore {
     }
 
     public static void newPlayerToJson(Context context, Player player) {
-        String fileName = createHeader(player.getName().toLowerCase())+ "_player.json";
+        String fileName = createHeader(player.getName().toLowerCase()) + "_player.json";
         String fileContents = new Gson().toJson(player);
         FileOutputStream outputStream;
 
@@ -107,9 +125,57 @@ public class DataStore {
     }
 
     public static String getCurrentPlayerTxt(Context context) throws FileNotFoundException {
-        Scanner sc = new Scanner(new File(context.getFilesDir().getAbsolutePath() + "/current_player.txt"));
+        Scanner sc = new Scanner(
+                new File(context.getFilesDir().getAbsolutePath() + "/current_player.txt"));
 
         return sc.next();
+    }
+
+    public static Map<String, SavedPlayer> getSavedPlayers(Context context) {
+        savedPlayerMap = new HashMap<>();
+        File directory = context.getFilesDir();
+        File[] savedPlayers = directory.listFiles(createFilter("_player.json"));
+        for (File currentFile : savedPlayers) {
+            String fileName = currentFile.getName();
+            String playerName = fileName.substring(0, fileName.indexOf("_"));
+            SavedPlayer playerToAdd = new SavedPlayer(playerName);
+            playerToAdd.setPlayerJsonName(fileName);
+            String keyName = fileName.substring(0, fileName.indexOf("_player.json"));
+            playerToAdd.setCurrentPlayerText(keyName);
+            savedPlayerMap.put(keyName, playerToAdd);
+        }
+
+        File[] savedUniverses = directory.listFiles(createFilter("_universe.json"));
+        for (File currentFile : savedUniverses) {
+            String fileName = currentFile.getName();
+            String keyName = fileName.substring(0, fileName.indexOf("_universe.json"));
+            SavedPlayer playerToEdit = savedPlayerMap.get(keyName);
+            playerToEdit.setUniverseJsonName(fileName);
+        }
+        return savedPlayerMap;
+    }
+
+    public static String[] getSavedPlayerNames(Context context) {
+        return getSavedPlayers(context).values().stream().map(SavedPlayer::getName)
+                .toArray(String[]::new);
+    }
+
+    private static String getKeyFromPlayerName(String name) {
+        return savedPlayerMap.values().stream().filter(savedPlayer -> savedPlayer.getName().equals(name)).findFirst().get().getCurrentPlayerText();
+    }
+
+    public static void setCurrentPlayerText(Context context, String name) {
+        File currentPlayerFile = new File(context.getFilesDir().getAbsolutePath() +
+                                          "/current_player.txt");
+        String newContent = getKeyFromPlayerName(name);
+        try {
+            FileOutputStream overWriteCurrentPlayerText = new FileOutputStream(currentPlayerFile);
+            overWriteCurrentPlayerText.write(newContent.getBytes());
+            overWriteCurrentPlayerText.flush();
+            overWriteCurrentPlayerText.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static Player getCurrentPlayer(Context context) throws FileNotFoundException {

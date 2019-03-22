@@ -111,4 +111,9 @@ public final class GameLogistics {
             "Zalkon", "Zuul"            // From the first Ghostbusters movie
     };
 
+    public static double mapValues(double original, double omin, double omax, double nmin,
+                                    double nmax) {
+        return nmin + (nmax - nmin) * ((original - omin) / (omax - omin));
+    }
+
 }
