@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
+import com.crowdfire.cfalertdialog.views.CFPushButton;
 
 import java.util.Arrays;
 
@@ -157,7 +158,18 @@ public class ConfigurationActivity extends AppCompatActivity {
                     DataStore.setCurrentPlayerText(context, selectFrom[index]);
                     launchWelcomeScreen(selectFrom[index]);
                     }).setTextGravity(Gravity.CENTER_HORIZONTAL).setIcon(R.drawable.gnat)
-                    .setCancelable(false);
+                    .setCancelable(false)
+                    .addButton("Cancel", Color.WHITE, Color.RED,
+                               CFAlertDialog.CFAlertActionStyle.NEGATIVE,
+                               CFAlertDialog.CFAlertActionAlignment.CENTER,
+                               (dialog, which) -> dialog.dismiss())
+                    .addButton("Delete All", Color.WHITE, Color.RED,
+                               CFAlertDialog.CFAlertActionStyle.POSITIVE,
+                               CFAlertDialog.CFAlertActionAlignment.CENTER,
+                               (dialog, which) -> {
+                                DataStore.deletePlayerAndUniverse(getApplicationContext());
+                                dialog.dismiss();
+                               });
         } else {
             builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
                     .setTitle("Error Loading Save Data")
@@ -169,7 +181,8 @@ public class ConfigurationActivity extends AppCompatActivity {
                                (dialog, index) -> dialog.dismiss())
                     .setCancelable(true)
                     .setAutoDismissAfter(5000);
-        } builder.show();
+        }
+        builder.show();
     }
 
     private void updatePoints() {

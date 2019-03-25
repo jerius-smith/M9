@@ -155,6 +155,16 @@ public class DataStore {
         return savedPlayerMap;
     }
 
+    public static void deletePlayerAndUniverse(Context context) {
+        File directory = context.getFilesDir();
+        for (File currentFile : directory.listFiles(createFilter("_player.json"))) {
+            currentFile.delete();
+        }
+        for (File currentFile : directory.listFiles(createFilter("_universe.json"))) {
+            currentFile.delete();
+        }
+    }
+
     public static String[] getSavedPlayerNames(Context context) {
         return getSavedPlayers(context).values().stream().map(SavedPlayer::getName)
                 .toArray(String[]::new);

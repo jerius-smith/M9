@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
 
 import java.io.FileNotFoundException;
+import java.util.Set;
 
 import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.entities.TravelException;
@@ -39,6 +41,8 @@ public class PlanetActivity extends AppCompatActivity {
     private MarketViewModel viewModel;
     private TravelViewModel travelViewModel;
 
+    public static final int PLANET_REQUEST = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,20 +64,33 @@ public class PlanetActivity extends AppCompatActivity {
         });
 
         travelBtn.setOnClickListener(view -> {
-            testTraveling();
+            startActivityForResult(new Intent(getApplicationContext(), TravelActivity.class), PLANET_REQUEST);
+            //testTraveling();
         });
     }
 
-    public void testTraveling() {
+    public void travelTo(String planet, String solarSystem) {
         String travelTag = "TRAVEL";
-        Universe universe = Universe.getInstance();
-        SolarSystem rand = universe.getRandomSolarSystem();
-        Planet toTravelTo = rand.getRandomPlanet();
+//        Universe universe = Universe.getInstance();
+//        SolarSystem rand = universe.getRandomSolarSystem();
+        Planet toTravelTo = Universe.getInstance().getSolarSystemByName(solarSystem).getPlanetByName(planet);
         travelViewModel.travelTo(toTravelTo);
         updateTravelStatus();
         Log.d(travelTag, "Traveling to: " + travelViewModel.getPlayerLocation());
         Log.d(travelTag, "Ship fuel: " + travelViewModel.getShipFuel());
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PLANET_REQUEST) {
+            String selectedPlanet = data.getStringExtra(TravelActivity.CHOSEN_PLANET);
+            String selectedSolarSystem = data.getStringExtra(TravelActivity.CHOSEN_SOLAR_SYSTEM);
+            travelTo(selectedPlanet, selectedSolarSystem);
+        }
+    }
+
+
 
     private void updatePlayerStatus() {
         viewModel = ViewModelProviders.of(this).get(MarketViewModel.class);
@@ -91,12 +108,12 @@ public class PlanetActivity extends AppCompatActivity {
             fuel.setTextColor(Color.GREEN);
         } else if (travelViewModel.isFuelTooLow()) {
             fuel.setTextColor(Color.RED);
+            fuel.bringToFront();
         } else {
             fuel.setTextColor(Color.YELLOW);
         }
         Log.d("TRAVEL", String.valueOf(100 - travelViewModel.getShipFuel()));
         fuel_level.setProgress(100 - travelViewModel.getShipFuel(), 800);
-        fuel.bringToFront();
         travelViewModel.savePlayer();
     }
 

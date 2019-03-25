@@ -61,6 +61,14 @@ public class SolarSystem {
         return (Planet) planets.toArray()[randIndex];
     }
 
+    public Planet getPlanetByName(String planetName) {
+        for (Planet current : planets) {
+            if (planetName.equals(current.getName()))
+                return current;
+        }
+        return null;
+    }
+
     /**
      * Sets planets.
      *
