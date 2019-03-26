@@ -64,7 +64,9 @@ public class PlanetActivity extends AppCompatActivity {
         });
 
         travelBtn.setOnClickListener(view -> {
-            startActivityForResult(new Intent(getApplicationContext(), TravelActivity.class), PLANET_REQUEST);
+            startActivityForResult(new Intent(getApplicationContext(), TravelActivity.class),
+                                   PLANET_REQUEST);
+            //startActivity(new Intent(PlanetActivity.this, MiniGameActivity.class));
             //testTraveling();
         });
     }
@@ -73,7 +75,8 @@ public class PlanetActivity extends AppCompatActivity {
         String travelTag = "TRAVEL";
 //        Universe universe = Universe.getInstance();
 //        SolarSystem rand = universe.getRandomSolarSystem();
-        Planet toTravelTo = Universe.getInstance().getSolarSystemByName(solarSystem).getPlanetByName(planet);
+        Planet toTravelTo =
+                Universe.getInstance().getSolarSystemByName(solarSystem).getPlanetByName(planet);
         travelViewModel.travelTo(toTravelTo);
         updateTravelStatus();
         Log.d(travelTag, "Traveling to: " + travelViewModel.getPlayerLocation());
@@ -83,13 +86,16 @@ public class PlanetActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PLANET_REQUEST) {
-            String selectedPlanet = data.getStringExtra(TravelActivity.CHOSEN_PLANET);
-            String selectedSolarSystem = data.getStringExtra(TravelActivity.CHOSEN_SOLAR_SYSTEM);
-            travelTo(selectedPlanet, selectedSolarSystem);
+        if (requestCode == PLANET_REQUEST && data != null) {
+            if (data.hasExtra(TravelActivity.CHOSEN_PLANET) && data
+                    .hasExtra(TravelActivity.CHOSEN_SOLAR_SYSTEM)) {
+                String selectedPlanet = data.getStringExtra(TravelActivity.CHOSEN_PLANET);
+                String selectedSolarSystem =
+                        data.getStringExtra(TravelActivity.CHOSEN_SOLAR_SYSTEM);
+                travelTo(selectedPlanet, selectedSolarSystem);
+            }
         }
     }
-
 
 
     private void updatePlayerStatus() {
@@ -105,15 +111,15 @@ public class PlanetActivity extends AppCompatActivity {
         fuel.setText(String.valueOf(mappedFuelLevel));
         fuel_level.setProgress(100 - travelViewModel.getShipFuel());
         if (mappedFuelLevel >= 60) {
-            fuel.setTextColor(Color.GREEN);
+            fuel.setTextColor(Color.BLACK);
         } else if (travelViewModel.isFuelTooLow()) {
             fuel.setTextColor(Color.RED);
-            fuel.bringToFront();
         } else {
             fuel.setTextColor(Color.YELLOW);
         }
         Log.d("TRAVEL", String.valueOf(100 - travelViewModel.getShipFuel()));
         fuel_level.setProgress(100 - travelViewModel.getShipFuel(), 800);
+        fuel.bringToFront();
         travelViewModel.savePlayer();
     }
 

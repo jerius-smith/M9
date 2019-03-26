@@ -89,7 +89,7 @@ public class DataStore {
     }
 
     public static void newPlayerToJson(Context context, Player player) {
-        String fileName = createHeader(player.getName().toLowerCase()) + "_player.json";
+        String fileName = createHeader(player.getName()) + "_player.json";
         String fileContents = new Gson().toJson(player);
         FileOutputStream outputStream;
 
@@ -103,7 +103,7 @@ public class DataStore {
     }
 
     public static void createCurrentPlayerTxt(Context context, Player player) {
-        String name = createHeader(player.getName().toLowerCase());
+        String name = createHeader(player.getName());
         String fileName = "current_player.txt";
         FileOutputStream outputStream;
 

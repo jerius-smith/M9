@@ -15,6 +15,7 @@
         <activity android:name=".views.UniverseActivity" />
         <activity android:name=".views.WelcomeActivity" />
         <activity android:name=".views.ConfigurationActivity" />
+        <activity android:name=".views.MiniGameActivity" />
         <activity
             android:name=".views.MainActivity"
             android:exported="true"
