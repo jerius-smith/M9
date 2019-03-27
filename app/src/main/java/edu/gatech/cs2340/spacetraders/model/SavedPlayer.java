@@ -6,6 +6,27 @@ public class SavedPlayer {
     private String currentPlayerText;
     private String playerJsonName;
     private String universeJsonName;
+    private String playerJsonContent;
+    private String universeJsonContent;
+
+    public String getPlayerJsonContent() {
+        return playerJsonContent;
+    }
+
+    public void setPlayerJsonContent(String playerJsonContent) {
+        this.playerJsonContent = playerJsonContent;
+    }
+
+    public String getUniverseJsonContent() {
+        return universeJsonContent;
+    }
+
+    public void setUniverseJsonContent(String universeJsonContent) {
+        this.universeJsonContent = universeJsonContent;
+    }
+
+    public SavedPlayer() {
+    }
 
     public SavedPlayer(String name) {
         this.name = name;

@@ -37,6 +37,17 @@ public enum TechLevel {
      */
     HI_TECH("Hi-Tech");
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    TechLevel() {
+    }
+
     private String name;
 
     TechLevel(String name) {

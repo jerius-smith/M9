@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.support.v7.app.AppCompatActivity;
 
-import edu.gatech.cs2340.spacetraders.model.Asteriods;
+import edu.gatech.cs2340.spacetraders.model.Asteroids;
 import processing.android.PFragment;
 import processing.android.CompatUtils;
 import processing.core.PApplet;
@@ -21,8 +21,7 @@ public class MiniGameActivity extends AppCompatActivity {
         frame.setId(CompatUtils.getUniqueViewId());
         setContentView(frame, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                                          ViewGroup.LayoutParams.MATCH_PARENT));
-
-        sketch = new Asteriods();
+        sketch = new Asteroids();
         sketch.setExternal(true);
         PFragment fragment = new PFragment(sketch);
         fragment.setView(frame, this);

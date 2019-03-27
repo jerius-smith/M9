@@ -8,15 +8,31 @@ public class Inventory {
     private Map<Good, GoodAttributes> inventory;
     private int totalStock;
 
-    private class GoodAttributes {
+    public class GoodAttributes {
         private int stock;
         private double price;
 
-        private GoodAttributes() {
+        public int getStock() {
+            return stock;
+        }
+
+        public void setStock(int stock) {
+            this.stock = stock;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public GoodAttributes() {
             this(0, 0);
         }
 
-        private GoodAttributes(int stock, double price) {
+        public GoodAttributes(int stock, double price) {
             this.stock = stock;
             this.price = price;
         }

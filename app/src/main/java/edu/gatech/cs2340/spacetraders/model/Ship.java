@@ -11,14 +11,33 @@ import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
 public class Ship {
 
     private String name;
-    private final int cargoCapacity;
-    private final int gadgetCapacity;
+    private int cargoCapacity;
+    private int gadgetCapacity;
     private Collection<Weapons> weapons;
     private int fuelCapacity;
     private boolean fuelTooLow;
 
     public boolean isFuelTooLow() {
         return fuelTooLow;
+    }
+
+    public Collection<Weapons> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(Collection<Weapons> weapons) {
+        this.weapons = weapons;
+    }
+
+    public void setCargoCapacity(int cargoCapacity) {
+        this.cargoCapacity = cargoCapacity;
+    }
+
+    public void setGadgetCapacity(int gadgetCapacity) {
+        this.gadgetCapacity = gadgetCapacity;
+    }
+
+    public Ship() {
     }
 
     public void setFuelTooLow(boolean fuelTooLow) {
@@ -38,7 +57,7 @@ public class Ship {
         this.fuelTooLow = false;
     }
 
-    public void addWeapon (Weapons weapon) {
+    public void addWeapon(Weapons weapon) {
         if (weapons.size() < cargoCapacity) {
             weapons.add(weapon);
         }
@@ -70,7 +89,9 @@ public class Ship {
         return gadgetCapacity;
     }
 
-    public int getFuelCapacity() { return fuelCapacity; }
+    public int getFuelCapacity() {
+        return fuelCapacity;
+    }
 
     public void setFuelCapacity(int newFuelCapacity) {
         this.fuelCapacity = newFuelCapacity;

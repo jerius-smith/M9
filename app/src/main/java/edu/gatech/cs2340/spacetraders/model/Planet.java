@@ -22,6 +22,41 @@ public class Planet {
     private Market market;
     private String solarSystemCurrentlyIn;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTechLevel(TechLevel techLevel) {
+        this.techLevel = techLevel;
+    }
+
+    public Resource getResource() {
+        return resource;
+    }
+
+    public void setResource(Resource resource) {
+        this.resource = resource;
+    }
+
+    public Government getPoliticalSystem() {
+        return politicalSystem;
+    }
+
+    public void setPoliticalSystem(Government politicalSystem) {
+        this.politicalSystem = politicalSystem;
+    }
+
+    public Market getMarket() {
+        return market;
+    }
+
+    public void setMarket(Market market) {
+        this.market = market;
+    }
+
+    public Planet() {
+    }
+
     public double getxLoc() {
         return xLoc;
     }

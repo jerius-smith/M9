@@ -2,11 +2,15 @@ package edu.gatech.cs2340.spacetraders.model;
 
 import android.content.Context;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,6 +20,7 @@ import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import processing.opengl.PGraphics2D;
 
@@ -141,6 +146,8 @@ public class DataStore {
             SavedPlayer playerToAdd = new SavedPlayer(playerName);
             playerToAdd.setPlayerJsonName(fileName);
             String keyName = fileName.substring(0, fileName.indexOf("_player.json"));
+            String playerJsonContent = readJson(context, currentFile.getName());
+            playerToAdd.setPlayerJsonContent(playerJsonContent);
             playerToAdd.setCurrentPlayerText(keyName);
             savedPlayerMap.put(keyName, playerToAdd);
         }
@@ -150,10 +157,28 @@ public class DataStore {
             String fileName = currentFile.getName();
             String keyName = fileName.substring(0, fileName.indexOf("_universe.json"));
             SavedPlayer playerToEdit = savedPlayerMap.get(keyName);
+            String universeJsonContent = readJson(context, currentFile.getName());
+            playerToEdit.setUniverseJsonContent(universeJsonContent);
             playerToEdit.setUniverseJsonName(fileName);
         }
         return savedPlayerMap;
     }
+
+    private static String readJson(Context context, String filename) {
+        File[] savedPlayers = context.getFilesDir().listFiles(createFilter(filename));
+        String toReturn = "";
+        for (File currentFile : savedPlayers) {
+            try (InputStream inputStream = new FileInputStream(currentFile);
+                 BufferedReader bufferedReader =
+                    new BufferedReader(new InputStreamReader(inputStream))) {
+                toReturn = bufferedReader.lines().collect(Collectors.joining());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return toReturn;
+    }
+
 
     public static void deletePlayerAndUniverse(Context context) {
         File directory = context.getFilesDir();
@@ -171,12 +196,14 @@ public class DataStore {
     }
 
     private static String getKeyFromPlayerName(String name) {
-        return savedPlayerMap.values().stream().filter(savedPlayer -> savedPlayer.getName().equals(name)).findFirst().get().getCurrentPlayerText();
+        return savedPlayerMap.values().stream()
+                .filter(savedPlayer -> savedPlayer.getName().equals(name)).findFirst().get()
+                .getCurrentPlayerText();
     }
 
     public static void setCurrentPlayerText(Context context, String name) {
-        File currentPlayerFile = new File(context.getFilesDir().getAbsolutePath() +
-                                          "/current_player.txt");
+        File currentPlayerFile =
+                new File(context.getFilesDir().getAbsolutePath() + "/current_player.txt");
         String newContent = getKeyFromPlayerName(name);
         try {
             FileOutputStream overWriteCurrentPlayerText = new FileOutputStream(currentPlayerFile);

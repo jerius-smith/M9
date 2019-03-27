@@ -1,26 +1,16 @@
 package edu.gatech.cs2340.spacetraders.model;
 
 import processing.core.*;
-import processing.data.*;
-import processing.event.*;
-import processing.opengl.*;
 
 //import gifAnimation.*;
 
-import java.util.HashMap;
 import java.util.ArrayList;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.PrintWriter;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
 
-public class Asteriods extends PApplet {
+public class Asteroids extends PApplet {
 
 
 
-    ArrayList<Asteriod> asteriods;
+    ArrayList<Asteroid> asteroids;
     Ship ship;
     boolean isShooting;
 //    Gif explode;
@@ -29,15 +19,15 @@ public class Asteriods extends PApplet {
     public void setup() {
 
         //fullScreen();
-        asteriods = new ArrayList<Asteriod>();
+        asteroids = new ArrayList<Asteroid>();
 //        explosions = new ArrayList<Explosions>();
         ship = new Ship(null);
-        addAsteriods(1, "in");
+        addAsteroids(1, "in");
 //  explode = new Gif(this, "explosion.gif");
 //  explode.play();
     }
 
-    public void addAsteriods(int num, String inOut) {
+    public void addAsteroids(int num, String inOut) {
         for (int n = 0; n < num; n++) {
             PVector loc;
             if (inOut.equals("in"))
@@ -47,7 +37,7 @@ public class Asteriods extends PApplet {
             while (loc.dist(ship.pos) < 50) {
                 loc = new PVector(random(width), random(height));
             }
-            asteriods.add(new Asteriod(loc, 0));
+            asteroids.add(new Asteroid(loc, 0));
         }
     }
 
@@ -55,9 +45,9 @@ public class Asteriods extends PApplet {
         background(0);
 
 
-        if (asteriodDeficiency()) addAsteriods(PApplet.parseInt(random(5)), "out");
+        if (asteriodDeficiency()) addAsteroids(PApplet.parseInt(random(5)), "out");
 
-        for (Asteriod curr : asteriods) {
+        for (Asteroid curr : asteroids) {
             curr.edges();
             curr.update();
             curr.show();
@@ -81,7 +71,7 @@ public class Asteriods extends PApplet {
     }
 
     public boolean asteriodDeficiency() {
-        return (asteriods.size() <= 1);
+        return (asteroids.size() <= 1);
     }
 
     public void shipStuff() {
@@ -124,17 +114,17 @@ public class Asteriods extends PApplet {
 
 
     public void mousePressed() {
-        // a.add(new Asteriod(new PVector(mouseX, mouseY)));
+        // a.add(new Asteroid(new PVector(mouseX, mouseY)));
         // explode.noLoop();
     }
-    class Asteriod {
+    class Asteroid {
         PVector pos, vel;
         int numVertices;
         float[] radii;
-        PShape asteriod;
+        PShape asteroid;
         float offset, inc, rotateAng, angVel, maxRadius, avgRadius, threshold;
 
-        Asteriod(PVector loc, float r) {
+        Asteroid(PVector loc, float r) {
             pos = loc;
             numVertices = PApplet.parseInt(random(5, 13));
             maxRadius = (r==0) ? (random(125, 175)) : r;
@@ -158,12 +148,12 @@ public class Asteriods extends PApplet {
             }
             avgRadius = avgRadius / radii.length;
 
-            createAsteriod();
+            createAsteroid();
         }
 
         public void update() {
             pos.add(vel);
-            createAsteriod();
+            createAsteroid();
             rotateAng+=angVel;
         }
 
@@ -178,24 +168,24 @@ public class Asteriods extends PApplet {
             pushMatrix();
             translate(pos.x, pos.y);
             rotate(rotateAng);
-            shape(asteriod);
+            shape(asteroid);
             popMatrix();
         }
 
-        public void createAsteriod() {
+        public void createAsteroid() {
             pushStyle();
-            asteriod = createShape();
-            asteriod.beginShape();
-            asteriod.noFill();
-            asteriod.stroke(255);
-            asteriod.strokeWeight(2);
+            asteroid = createShape();
+            asteroid.beginShape();
+            asteroid.noFill();
+            asteroid.stroke(255);
+            asteroid.strokeWeight(2);
             for (int i = 0; i < numVertices; i++) {
                 float x, y, angle = map(i, 0, numVertices, 0, TWO_PI);
                 x = radii[i] * cos(angle);
                 y = radii[i] * sin(angle);
-                asteriod.vertex(x, y);
+                asteroid.vertex(x, y);
             }
-            asteriod.endShape(CLOSE);
+            asteroid.endShape(CLOSE);
             popStyle();
         }
     }
@@ -226,7 +216,7 @@ public class Asteriods extends PApplet {
             return (pos.x < 0 || pos.x > width || pos.y < 0 || pos.y > height);
         }
 
-        public boolean collideWithAsteriod(Asteriod a) {
+        public boolean collideWithAsteriod(Asteroid a) {
             return (dist(pos.x, pos.y, a.pos.x, a.pos.y) < a.avgRadius);
         }
 
@@ -331,12 +321,13 @@ public class Asteriods extends PApplet {
         }
 
         public void shipAsteriodCollision() {
-            for (int a = 0; a < asteriods.size(); a++) {
-                Asteriod curr = asteriods.get(a);
+            for (int a = 0; a < asteroids.size(); a++) {
+                Asteroid curr = asteroids.get(a);
                 if (hit(curr)) {
-                    asteriods.remove(curr);
-                    reset(null);
-                    break;
+                    exit();
+//                    asteroids.remove(curr);
+//                    reset(null);
+//                    break;
                 }
             }
         }
@@ -344,11 +335,11 @@ public class Asteriods extends PApplet {
         public void bulletAsteriodCollision() {
             for (int i = 0; i < bullets.size(); i++) {
                 Bullet curr = bullets.get(i);
-                for (int j = 0; j < asteriods.size(); j++) {
-                    Asteriod a = asteriods.get(j);
+                for (int j = 0; j < asteroids.size(); j++) {
+                    Asteroid a = asteroids.get(j);
                     if (curr.collideWithAsteriod(a)) {
                         duplicateAsteroids(a);
-                        asteriods.remove(a);
+                        asteroids.remove(a);
                         j--;
                         bullets.remove(curr);
                         i--;
@@ -359,12 +350,12 @@ public class Asteriods extends PApplet {
             }
         }
 
-        public void duplicateAsteroids(Asteriod parent) {
+        public void duplicateAsteroids(Asteroid parent) {
             if (parent.maxRadius > parent.threshold) {
                 float per = random(.4f, .6f);
                 float r1 = parent.maxRadius*per, r2 = parent.maxRadius*(1-per);
-                if (r1 > parent.threshold)  asteriods.add(new Asteriod(parent.pos.copy(), r1));
-                if (r2 > parent.threshold)  asteriods.add(new Asteriod(parent.pos.copy(), r2));
+                if (r1 > parent.threshold)  asteroids.add(new Asteroid(parent.pos.copy(), r1));
+                if (r2 > parent.threshold)  asteroids.add(new Asteroid(parent.pos.copy(), r2));
             }
         }
 
@@ -391,7 +382,7 @@ public class Asteriods extends PApplet {
             popMatrix();
         }
 
-        public boolean hit(Asteriod a) {
+        public boolean hit(Asteroid a) {
             return (dist(pos.x, pos.y, a.pos.x, a.pos.y) <= a.avgRadius+radius);
         }
 

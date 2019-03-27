@@ -12,6 +12,13 @@ public class Market {
         marketInventory = createInventory(planet);
     }
 
+    public void setMarketInventory(Inventory marketInventory) {
+        this.marketInventory = marketInventory;
+    }
+
+    public Market() {
+    }
+
     private Inventory createInventory(Planet planet) {
         Inventory inventory = new Inventory();
         for (Good currentGood : Good.values()) {

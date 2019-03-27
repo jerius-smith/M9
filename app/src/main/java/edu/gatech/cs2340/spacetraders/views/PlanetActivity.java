@@ -9,11 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import edu.gatech.cs2340.spacetraders.R;
@@ -23,6 +30,7 @@ import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.ModelFacade;
 import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
+import edu.gatech.cs2340.spacetraders.model.SavedPlayer;
 import edu.gatech.cs2340.spacetraders.model.Ship;
 import edu.gatech.cs2340.spacetraders.model.SolarSystem;
 import edu.gatech.cs2340.spacetraders.model.Universe;
@@ -33,6 +41,7 @@ public class PlanetActivity extends AppCompatActivity {
 
     private ImageButton marketBttn;
     private ImageButton travelBtn;
+    private ImageView shipImage;
     private TextView playerCredits;
     private TextView location;
     private TextView fuel;
@@ -43,10 +52,14 @@ public class PlanetActivity extends AppCompatActivity {
 
     public static final int PLANET_REQUEST = 1;
 
+    FirebaseDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planet);
+        FirebaseApp.initializeApp(this);
+        database = FirebaseDatabase.getInstance();
 
         marketBttn = findViewById(R.id.market_button);
         travelBtn = findViewById(R.id.travel_button);
@@ -54,6 +67,7 @@ public class PlanetActivity extends AppCompatActivity {
         location = findViewById(R.id.location_text);
         fuel = findViewById(R.id.fuel_text);
         fuel_level = findViewById(R.id.fuel_level);
+        shipImage = findViewById(R.id.shipImage);
 
         updatePlayerStatus();
         updateTravelStatus();
@@ -68,6 +82,20 @@ public class PlanetActivity extends AppCompatActivity {
                                    PLANET_REQUEST);
             //startActivity(new Intent(PlanetActivity.this, MiniGameActivity.class));
             //testTraveling();
+        });
+
+        shipImage.setOnClickListener(view -> {
+            try {
+                Map<String, SavedPlayer> data = DataStore.getSavedPlayers(getApplicationContext());
+                DatabaseReference myRef = database.getReference("players");
+                for (String currentPlayer : data.keySet()) {
+                    SavedPlayer player = data.get(currentPlayer);
+                    myRef.child(player.getName()).setValue(player);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            startActivity(new Intent(PlanetActivity.this, MiniGameActivity.class));
         });
     }
 

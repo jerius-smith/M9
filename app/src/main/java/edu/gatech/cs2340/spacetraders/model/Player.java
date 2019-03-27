@@ -18,12 +18,18 @@ public class Player {
     private Inventory inventory;
     private Planet location;
 
-
     /**
      * Instantiates a new Player.
      */
+//    public Player() {
+//        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
+//    }
     public Player() {
-        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
+
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     /**

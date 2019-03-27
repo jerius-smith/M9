@@ -57,6 +57,17 @@ public enum Resource {
      */
     WARLIKE("Warlike");
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    Resource() {
+    }
+
     private String name;
 
     Resource(String name) {

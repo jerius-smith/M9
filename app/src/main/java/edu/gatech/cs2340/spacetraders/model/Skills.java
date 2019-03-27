@@ -34,6 +34,21 @@ public enum Skills {
         this.points = points;
     }
 
+    public static int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public static void setTotalPoints(int totalPoints) {
+        Skills.totalPoints = totalPoints;
+    }
+
+    public static int getMaxPoints() {
+        return MAX_POINTS;
+    }
+
+    Skills() {
+    }
+
     /**
      * Total points int.
      *
