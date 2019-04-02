@@ -1,7 +1,6 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import com.google.gson.Gson;
-
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Random;
@@ -16,11 +15,11 @@ import static java.lang.Math.floor;
  */
 public class SolarSystem {
 
-    private String name;
-    private double xLoc;
-    private double yLoc;
+    private final String name;
+    private final double xLoc;
+    private final double yLoc;
     private Set<Planet> planets;
-    private Set<Mercenary> mercenaries;
+    private final Set<Mercenary> mercenaries;
     private static final int NUM_PLANETS = ((int) (Math.random() * 7)) + 4;
 
     /**
@@ -53,18 +52,19 @@ public class SolarSystem {
      * @return the planets
      */
     public Set<Planet> getPlanets() {
-        return planets;
+        return Collections.unmodifiableSet(planets);
     }
 
     public Planet getRandomPlanet() {
         int randIndex = new Random().nextInt(planets.size());
-        return (Planet) planets.toArray()[randIndex];
+        return (Planet) Objects.requireNonNull(planets.toArray())[randIndex];
     }
 
     public Planet getPlanetByName(String planetName) {
         for (Planet current : planets) {
-            if (planetName.equals(current.getName()))
+            if (planetName.equals(current.getName())) {
                 return current;
+            }
         }
         return null;
     }
@@ -80,31 +80,23 @@ public class SolarSystem {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder().
-                append("\nSolar System: " + name).
+        StringBuilder stringBuilder = new StringBuilder().append("\nSolar System: ").append(name).
                 append(String.format("\nLocation: (%.0f, %.0f)", xLoc, yLoc));
         for (Planet curr : planets) {
-            stringBuilder.append("\n\t" + curr.toString());
+            stringBuilder.append("\n\t").append(curr.toString());
         }
         return stringBuilder.toString();
     }
-
-    public String toJSONString() {
-
-        String json = new Gson().toJson(this);
-        return json;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if ((o == null) || (getClass() != o.getClass())) {
             return false;
         }
         SolarSystem that = (SolarSystem) o;
-        return Double.compare(that.xLoc, xLoc) == 0 && Double.compare(that.yLoc, yLoc) == 0
+        return (Double.compare(that.xLoc, xLoc) == 0) && (Double.compare(that.yLoc, yLoc) == 0)
                && Objects.equals(name, that.name) && Objects.equals(planets, that.planets)
                && Objects.equals(mercenaries, that.mercenaries);
     }

@@ -22,9 +22,13 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import processing.opengl.PGraphics2D;
-
+@SuppressWarnings("ALL")
 public class DataStore {
+    private static final DataStore instance = new DataStore();
+
+    public static DataStore getInstance() {
+        return instance;
+    }
 
     private static FilenameFilter createFilter(String toMatch) {
         return ((dir, name) -> name.endsWith(toMatch));

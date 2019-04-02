@@ -16,13 +16,13 @@
         />
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-300dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/red_planet" />
+        app:srcCompat="@drawable/red_planet"
+        android:contentDescription="TODO" />
 
     <ImageView
         android:id="@+id/shipImage"
@@ -31,7 +31,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
-        app:srcCompat="@drawable/gnat" />
+        app:srcCompat="@drawable/gnat"
+        tools:ignore="ContentDescription"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/market_button"
@@ -43,7 +45,8 @@
         android:layout_marginRight="30dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/market_bttn" />
+        app:srcCompat="@drawable/market_bttn"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/travel_button"
@@ -55,7 +58,8 @@
         android:layout_marginTop="150dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/travel_bttn" />
+        app:srcCompat="@drawable/travel_bttn"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/credits_text"

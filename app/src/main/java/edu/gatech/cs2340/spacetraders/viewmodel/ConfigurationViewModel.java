@@ -2,27 +2,27 @@ package edu.gatech.cs2340.spacetraders.viewmodel;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.util.Set;
 
 import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Difficulty;
 import edu.gatech.cs2340.spacetraders.model.ModelFacade;
 import edu.gatech.cs2340.spacetraders.model.Planet;
+import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Skills;
 import edu.gatech.cs2340.spacetraders.model.SolarSystem;
+import edu.gatech.cs2340.spacetraders.model.Universe;
 
 /**
  * The type Configuration view model.
  */
+@SuppressWarnings("FeatureEnvy")
 public class ConfigurationViewModel extends AndroidViewModel {
 
-    private ModelFacade facade;
+    private final ModelFacade facade;
 
     /**
      * Instantiates a new Configuration view model.
@@ -43,18 +43,19 @@ public class ConfigurationViewModel extends AndroidViewModel {
      * @return true if validPlayer else it returns false
      */
     public boolean isValidPlayer(String name, Difficulty prefDifficulty, Skills[] skillPoints) {
-        if (name == null || name.isEmpty()) {
-            showToast("Player cannot be configured. Please enter a name", Toast.LENGTH_LONG);
+        if ((name == null) || name.isEmpty()) {
+            showToast("Player cannot be configured. Please enter a name");
         } else if (prefDifficulty == null) {
-            showToast("Player cannot be configured. Please select difficulty", Toast.LENGTH_LONG);
+            showToast("Player cannot be configured. Please select difficulty");
         } else if (Skills.totalPoints() != Skills.MAX_POINTS) {
             showToast("Player cannot be configured. Please allocate all the points: " + Skills
-                    .totalPoints(), Toast.LENGTH_LONG);
+                    .totalPoints());
         } else {
             facade.createPlayer(name, prefDifficulty, skillPoints, getDefaultPlanet());
-            showToast(facade.getPlayer().toString(), 5000);
-            DataStore.createCurrentPlayerTxt(getApplication(), facade.getPlayer());
-            DataStore.newPlayerToJson(getApplication(), facade.getPlayer());
+            Player player = facade.getPlayer();
+            DataStore dataStore = DataStore.getInstance();
+            DataStore.createCurrentPlayerTxt(getApplication(), player);
+            DataStore.newPlayerToJson(getApplication(), player);
             try {
                 DataStore.universeToJson(getApplication(), facade.getUniverse());
             } catch (FileNotFoundException e) {
@@ -66,47 +67,13 @@ public class ConfigurationViewModel extends AndroidViewModel {
     }
 
     private Planet getDefaultPlanet() {
-        Set<SolarSystem> solarSystems = facade.getUniverse().getSolarSystems();
-        for (SolarSystem solarSystem : solarSystems) {
-            for (Planet planet : solarSystem.getPlanets()) {
-                return planet;
-            }
-        }
-        return null;
+        Universe universe = facade.getUniverse();
+        SolarSystem rand = universe.getRandomSolarSystem();
+        return rand.getRandomPlanet();
     }
 
 
-    public void jsonifyUniverse(Context context) {
-        String name = facade.getPlayer().getName().toLowerCase();
-        String filename = name + "_universe.json";
-        String fileContents = facade.getUniverse().toJSONString();
-        FileOutputStream outputStream;
-
-        try {
-            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(fileContents.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void jsonifyPlayer(Context context) {
-        String name = facade.getPlayer().getName().toLowerCase();
-        String filename = name + "_player.json";
-        String fileContents = facade.getPlayer().toJSONString();
-        FileOutputStream outputStream;
-
-        try {
-            outputStream = context.openFileOutput(filename, Context.MODE_PRIVATE);
-            outputStream.write(fileContents.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void showToast(String message, int duration) {
-        Toast.makeText(getApplication(), message, duration).show();
+    private void showToast(CharSequence message) {
+        Toast.makeText(getApplication(), message, Toast.LENGTH_LONG).show();
     }
 }

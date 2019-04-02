@@ -28,7 +28,8 @@ public class MiniGameActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[],
+                                           int[] grantResults) {
         if (sketch != null) {
             sketch.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }

@@ -2,7 +2,6 @@ package edu.gatech.cs2340.spacetraders.entities;
 
 import java.util.Objects;
 
-import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Ship;
@@ -25,7 +24,6 @@ public class TravelProcessor {
     }
 
     private static int computeFuelCost(Player player, Planet travelTo) {
-        int maxDecrease = player.getShip().getFuelCapacity();
         double distance = computeDistance(player.getLocation(), travelTo);
         return (int) GameLogistics.mapValues(distance,
                                0,

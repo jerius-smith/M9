@@ -3,13 +3,11 @@ package edu.gatech.cs2340.spacetraders.views;
 import android.annotation.SuppressLint;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,23 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
-import com.crowdfire.cfalertdialog.views.CFPushButton;
-
-import java.util.Arrays;
 
 import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Difficulty;
-import edu.gatech.cs2340.spacetraders.model.Good;
-import edu.gatech.cs2340.spacetraders.model.ModelFacade;
-import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Skills;
-import edu.gatech.cs2340.spacetraders.entities.TransactionProcessor;
 import edu.gatech.cs2340.spacetraders.viewmodel.ConfigurationViewModel;
 
 /**
  * The type Configuration activity.
  */
+@SuppressWarnings("FeatureEnvy")
 public class ConfigurationActivity extends AppCompatActivity {
 
 
@@ -45,16 +37,13 @@ public class ConfigurationActivity extends AppCompatActivity {
     private EditText nameInput;
 
     private Spinner difficultySpinner;
-    private ImageButton setupPlayer;
-    private EditText[] skillsArr = new EditText[4];
+    private final EditText[] skillsArr = new EditText[4];
     private Skills[] skills;
-
-    private Button load;
 
     /**
      * The View model.
      */
-    ConfigurationViewModel viewModel;
+    private ConfigurationViewModel viewModel;
 
     @SuppressLint("DefaultLocale")
     @Override
@@ -62,63 +51,50 @@ public class ConfigurationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
 
-        points = (TextView) findViewById(R.id.skill_points);
-        nameInput = (EditText) findViewById(R.id.name_input);
+        points = findViewById(R.id.skill_points);
+        nameInput = findViewById(R.id.name_input);
 
-        difficultySpinner = (Spinner) findViewById(R.id.difficulty_spinner);
-        setupPlayer = findViewById(R.id.start_bttn);
+        difficultySpinner = findViewById(R.id.difficulty_spinner);
+        ImageButton setupPlayer = findViewById(R.id.start_bttn);
 
         skillsArr[0] = findViewById(R.id.pilot_skills);
         skillsArr[1] = findViewById(R.id.fighter_skills);
         skillsArr[2] = findViewById(R.id.trader_skills);
         skillsArr[3] = findViewById(R.id.engineer_skills);
 
-        load = findViewById(R.id.load_game);
+        Button load = findViewById(R.id.load_game);
 
         skills = Skills.values();
 
 
         ArrayAdapter<Difficulty> adapter =
-                new ArrayAdapter<Difficulty>(this, android.R.layout.simple_spinner_item,
-                                             Difficulty.values());
+                new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, Difficulty.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(adapter);
         difficultySpinner.setSelection(0);
 
 
-        skillsArr[0].setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    updatePoints();
-                }
+        skillsArr[0].setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                updatePoints();
             }
         });
 
-        skillsArr[1].setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    updatePoints();
-                }
+        skillsArr[1].setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                updatePoints();
             }
         });
 
-        skillsArr[2].setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    updatePoints();
-                }
+        skillsArr[2].setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                updatePoints();
             }
         });
 
-        skillsArr[3].setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus) {
-                    updatePoints();
-                }
+        skillsArr[3].setOnFocusChangeListener((v, hasFocus) -> {
+            if (!hasFocus) {
+                updatePoints();
             }
         });
 
@@ -136,9 +112,7 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         });
 
-        load.setOnClickListener(view -> {
-            loadGameDialog(getApplicationContext());
-        });
+        load.setOnClickListener(view -> loadGameDialog(getApplicationContext()));
     }
 
     private void launchWelcomeScreen(String name) {
@@ -199,10 +173,10 @@ public class ConfigurationActivity extends AppCompatActivity {
             sum += skills[i].getPoints();
         }
 
-        if (sum <= 16) {
-            points.setText(Integer.toString(16 - sum));
+        if (sum <= Skills.MAX_POINTS) {
+            points.setText(Integer.toString(Skills.MAX_POINTS - sum));
         } else {
-            points.setText(Integer.toString(16 - sum));
+            points.setText(Integer.toString(Skills.MAX_POINTS - sum));
             Toast.makeText(getApplicationContext(), "You've used more points than available.",
                            Toast.LENGTH_LONG).show();
         }

@@ -1,6 +1,7 @@
 package edu.gatech.cs2340.spacetraders.model;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
@@ -22,7 +23,7 @@ public class Ship {
     }
 
     public Collection<Weapons> getWeapons() {
-        return weapons;
+        return Collections.unmodifiableCollection(weapons);
     }
 
     public void setWeapons(Collection<Weapons> weapons) {
@@ -37,7 +38,7 @@ public class Ship {
         this.gadgetCapacity = gadgetCapacity;
     }
 
-    public Ship() {
+    Ship() {
     }
 
     public void setFuelTooLow(boolean fuelTooLow) {
@@ -49,7 +50,7 @@ public class Ship {
      *
      * @param name the name
      */
-    public Ship(String name) {
+    Ship(String name) {
         this.name = name;
         this.cargoCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get(name))[2];
         this.gadgetCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get(name))[1];
@@ -111,8 +112,8 @@ public class Ship {
             return false;
         }
         Ship ship = (Ship) o;
-        return cargoCapacity == ship.cargoCapacity && gadgetCapacity == ship.gadgetCapacity
-               && fuelCapacity == ship.fuelCapacity && Objects.equals(name, ship.name);
+        return (cargoCapacity == ship.cargoCapacity) && (gadgetCapacity == ship.gadgetCapacity) && (
+                fuelCapacity == ship.fuelCapacity) && Objects.equals(name, ship.name);
     }
 
     @Override

@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.google.firebase.FirebaseApp;
-
 import edu.gatech.cs2340.spacetraders.R;
 
 /**
@@ -20,12 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageButton startNewButton = findViewById(R.id.istart_new_button);
-        startNewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ConfigurationActivity.class);
-                startActivity(intent);
-            }
+        startNewButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ConfigurationActivity.class);
+            startActivity(intent);
         });
     }
 

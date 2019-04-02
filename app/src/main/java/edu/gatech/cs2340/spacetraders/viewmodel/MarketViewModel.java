@@ -12,10 +12,9 @@ import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.model.Inventory;
 import edu.gatech.cs2340.spacetraders.model.Market;
-import edu.gatech.cs2340.spacetraders.model.ModelFacade;
+import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.entities.TransactionProcessor;
-import edu.gatech.cs2340.spacetraders.model.Universe;
 
 /**
  * The type Configuration view model.
@@ -34,7 +33,8 @@ public class MarketViewModel extends AndroidViewModel {
         super(application);
         try {
             player = DataStore.getCurrentPlayer(getApplication());
-            market = player.getLocation().getPlanetsMarket();
+            Planet planet = player.getLocation();
+            market = planet.getPlanetsMarket();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -48,28 +48,27 @@ public class MarketViewModel extends AndroidViewModel {
         return player.getInventory();
     }
 
-    public double sellItem(Good good) {
+    public void sellItem(Good good) {
         try {
             TransactionProcessor.sellItem(player, good, market);
         } catch (MarketActivityException e) {
             Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        return player.getCredits();
     }
 
-    public double buyItem(Good good) {
+    public void buyItem(Good good) {
         try {
             TransactionProcessor.buyItem(player, good, market);
         } catch (MarketActivityException e) {
             Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        return player.getCredits();
     }
 
     public double getPlayerCredits() { return player.getCredits(); }
 
     public String getPlayerLocation() {
-        return player.getLocation().getName();
+        Planet planet = player.getLocation();
+        return planet.getName();
     }
 
     public void savePlayer() {

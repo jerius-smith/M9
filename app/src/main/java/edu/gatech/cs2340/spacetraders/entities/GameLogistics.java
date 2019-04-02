@@ -1,12 +1,11 @@
 package edu.gatech.cs2340.spacetraders.entities;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The type Game logistics.
  */
+@SuppressWarnings("ALL")
 public final class GameLogistics {
 
     /**

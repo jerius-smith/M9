@@ -6,34 +6,53 @@ import processing.core.*;
 
 import java.util.ArrayList;
 
+/**
+ * The type Asteroids.
+ */
 public class Asteroids extends PApplet {
 
 
-
-    ArrayList<Asteroid> asteroids;
-    Ship ship;
-    boolean isShooting;
+    /**
+     * The Asteroids.
+     */
+    private ArrayList<Asteroid> asteroids;
+    /**
+     * The Ship.
+     */
+    private Ship ship;
+    /**
+     * The Is shooting.
+     */
+    private boolean isShooting;
 //    Gif explode;
 //    ArrayList<Explosions> explosions;
 
+    @Override
     public void setup() {
 
         //fullScreen();
-        asteroids = new ArrayList<Asteroid>();
+        asteroids = new ArrayList<>();
 //        explosions = new ArrayList<Explosions>();
-        ship = new Ship(null);
+        ship = new Ship();
         addAsteroids(1, "in");
 //  explode = new Gif(this, "explosion.gif");
 //  explode.play();
     }
 
-    public void addAsteroids(int num, String inOut) {
+    /**
+     * Add asteroids.
+     *
+     * @param num   the num
+     * @param inOut the in out
+     */
+    private void addAsteroids(int num, String inOut) {
         for (int n = 0; n < num; n++) {
             PVector loc;
-            if (inOut.equals("in"))
+            if ("in".equals(inOut)) {
                 loc = new PVector(random(-100, width+100), random(-100, height+100));
-            else
+            } else {
                 loc = (new PVector(random(-120, 0), random(height, height+120)));
+            }
             while (loc.dist(ship.pos) < 50) {
                 loc = new PVector(random(width), random(height));
             }
@@ -41,11 +60,14 @@ public class Asteroids extends PApplet {
         }
     }
 
+    @Override
     public void draw() {
         background(0);
 
 
-        if (asteriodDeficiency()) addAsteroids(PApplet.parseInt(random(5)), "out");
+        if (asteriodDeficiency()) {
+            addAsteroids(PApplet.parseInt(random(5)), "out");
+        }
 
         for (Asteroid curr : asteroids) {
             curr.edges();
@@ -70,11 +92,19 @@ public class Asteroids extends PApplet {
         shipStuff();
     }
 
-    public boolean asteriodDeficiency() {
+    /**
+     * Asteriod deficiency boolean.
+     *
+     * @return the boolean
+     */
+    private boolean asteriodDeficiency() {
         return (asteroids.size() <= 1);
     }
 
-    public void shipStuff() {
+    /**
+     * Ship stuff.
+     */
+    private void shipStuff() {
         ship.thrust();
         ship.slowDown();
         ship.edges();
@@ -83,6 +113,7 @@ public class Asteroids extends PApplet {
         ship.show();
     }
 
+    @Override
     public void keyPressed() {
         if (keyCode == UP) {
             ship.slowDown = false;
@@ -100,30 +131,87 @@ public class Asteroids extends PApplet {
         }
     }
 
+    @Override
     public void keyReleased() {
         if (keyCode == UP) {
             ship.slowDown = true;
             ship.thrust = false;
         }
 
-        if (key == ' ')
+        if (key == ' ') {
             isShooting = false;
+        }
 
         ship.setTurnAngle(0);
     }
 
 
+    @Override
     public void mousePressed() {
         // a.add(new Asteroid(new PVector(mouseX, mouseY)));
         // explode.noLoop();
     }
-    class Asteroid {
-        PVector pos, vel;
-        int numVertices;
-        float[] radii;
-        PShape asteroid;
-        float offset, inc, rotateAng, angVel, maxRadius, avgRadius, threshold;
 
+    /**
+     * The type Asteroid.
+     */
+    @SuppressWarnings("MagicNumber")
+    class Asteroid {
+        /**
+         * The Pos.
+         */
+        final PVector pos;
+        /**
+         * The Vel.
+         */
+        final PVector vel;
+        /**
+         * The Num vertices.
+         */
+        final int numVertices;
+        /**
+         * The Radii.
+         */
+        final float[] radii;
+        /**
+         * The Asteroid.
+         */
+        PShape asteroid;
+        /**
+         * The Offset.
+         */
+        float offset;
+        /**
+         * The Inc.
+         */
+        final float inc;
+        /**
+         * The Rotate ang.
+         */
+        float rotateAng;
+        /**
+         * The Ang vel.
+         */
+        final float angVel;
+        /**
+         * The Max radius.
+         */
+        final float maxRadius;
+        /**
+         * The Avg radius.
+         */
+        float avgRadius;
+        /**
+         * The Threshold.
+         */
+        final float threshold;
+
+        /**
+         * Instantiates a new Asteroid.
+         *
+         * @param loc the loc
+         * @param r   the r
+         */
         Asteroid(PVector loc, float r) {
             pos = loc;
             numVertices = PApplet.parseInt(random(5, 13));
@@ -151,20 +239,37 @@ public class Asteroids extends PApplet {
             createAsteroid();
         }
 
-        public void update() {
+        /**
+         * Update.
+         */
+        void update() {
             pos.add(vel);
             createAsteroid();
             rotateAng+=angVel;
         }
 
-        public void edges() {
-            if (pos.x > width+avgRadius) pos.x = -avgRadius;
-            if (pos.x < -avgRadius) pos.x = width+avgRadius;
-            if (pos.y < -avgRadius) pos.y = height+avgRadius;
-            if (pos.y > height+avgRadius) pos.y = -avgRadius;
+        /**
+         * Edges.
+         */
+        void edges() {
+            if (pos.x > (width + avgRadius)) {
+                pos.x = -avgRadius;
+            }
+            if (pos.x < -avgRadius) {
+                pos.x = width+avgRadius;
+            }
+            if (pos.y < -avgRadius) {
+                pos.y = height+avgRadius;
+            }
+            if (pos.y > (height + avgRadius)) {
+                pos.y = -avgRadius;
+            }
         }
 
-        public void show() {
+        /**
+         * Show.
+         */
+        void show() {
             pushMatrix();
             translate(pos.x, pos.y);
             rotate(rotateAng);
@@ -172,7 +277,10 @@ public class Asteroids extends PApplet {
             popMatrix();
         }
 
-        public void createAsteroid() {
+        /**
+         * Create asteroid.
+         */
+        void createAsteroid() {
             pushStyle();
             asteroid = createShape();
             asteroid.beginShape();
@@ -180,7 +288,9 @@ public class Asteroids extends PApplet {
             asteroid.stroke(255);
             asteroid.strokeWeight(2);
             for (int i = 0; i < numVertices; i++) {
-                float x, y, angle = map(i, 0, numVertices, 0, TWO_PI);
+                float x;
+                float y;
+                float angle = map(i, 0, numVertices, 0, TWO_PI);
                 x = radii[i] * cos(angle);
                 y = radii[i] * sin(angle);
                 asteroid.vertex(x, y);
@@ -189,42 +299,104 @@ public class Asteroids extends PApplet {
             popStyle();
         }
     }
+
+    /**
+     * The type Bullet.
+     */
     class Bullet {
-        PVector pos, vel;
-        float size, angle;
-        int col;
+        /**
+         * The Pos.
+         */
+        PVector pos;
+        /**
+         * The Vel.
+         */
+        final PVector vel;
+        /**
+         * The Size.
+         */
+        final float size;
+        /**
+         * The Angle.
+         */
+        final float angle;
+        /**
+         * The Col.
+         */
+        final int col;
+
+        /**
+         * Instantiates a new Bullet.
+         *
+         * @param loc the loc
+         * @param ang the ang
+         */
         Bullet(PVector loc, float ang) {
             pos = loc;
-            vel = PVector.fromAngle(ang-PI/2).mult(18);
+            vel = PVector.fromAngle(ang - (PI / 2));
+            vel.mult(18);
             size = ship.space/8;
             col = color(0, 255, 0);
             angle = ang;
         }
 
+        /**
+         * Sets pos.
+         *
+         * @param pos the pos
+         */
         public void setPos(PVector pos) {
             this.pos = pos;
         }
 
+        /**
+         * Edges.
+         */
         public void edges() {
-            if (pos.x > width+size) pos.x = -size;
-            if (pos.x < -size) pos.x = width+size;
-            if (pos.y < -size) pos.y = height+size;
-            if (pos.y > height+size) pos.y = -size;
+            if (pos.x > (width + size)) {
+                pos.x = -size;
+            }
+            if (pos.x < -size) {
+                pos.x = width+size;
+            }
+            if (pos.y < -size) {
+                pos.y = height+size;
+            }
+            if (pos.y > (height + size)) {
+                pos.y = -size;
+            }
         }
 
-        public boolean outOfBounds() {
-            return (pos.x < 0 || pos.x > width || pos.y < 0 || pos.y > height);
+        /**
+         * Out of bounds boolean.
+         *
+         * @return the boolean
+         */
+        boolean outOfBounds() {
+            return ((pos.x < 0) || (pos.x > width) || (pos.y < 0) || (pos.y > height));
         }
 
-        public boolean collideWithAsteriod(Asteroid a) {
+        /**
+         * Collide with asteriod boolean.
+         *
+         * @param a the a
+         * @return the boolean
+         */
+        boolean collideWithAsteriod(Asteroid a) {
             return (dist(pos.x, pos.y, a.pos.x, a.pos.y) < a.avgRadius);
         }
 
-        public void update() {
+        /**
+         * Update.
+         */
+        void update() {
             pos.add(vel);
         }
 
-        public void show() {
+        /**
+         * Show.
+         */
+        void show() {
             pushMatrix();
             translate(pos.x, pos.y);
             rotate(angle);
@@ -237,6 +409,10 @@ public class Asteroids extends PApplet {
             popMatrix();
         }
     }
+
+    /**
+     * The type Ship.
+     */
 //    class Explosions {
 //        PVector loc;
 //        float millis;
@@ -267,25 +443,79 @@ public class Asteroids extends PApplet {
 //        }
 //    }
     class Ship {
-        PVector pos, vel, acc;
+        /**
+         * The Pos.
+         */
+        PVector pos;
+        /**
+         * The Vel.
+         */
+        PVector vel;
+        /**
+         * The Acc.
+         */
+        PVector acc;
+        /**
+         * The Bullets.
+         */
         ArrayList<Bullet> bullets;
-        float space, angle, turnAngle, radius;
-        PShape ship, head;
+        /**
+         * The Space.
+         */
+        float space;
+        /**
+         * The Angle.
+         */
+        float angle;
+        /**
+         * The Turn angle.
+         */
+        float turnAngle;
+        /**
+         * The Radius.
+         */
+        float radius;
+        /**
+         * The Ship.
+         */
+        PShape ship;
+        /**
+         * The Head.
+         */
+        PShape head;
+        /**
+         * The Thrusters.
+         */
         PShape[] thrusters;
-        boolean slowDown, thrust;
+        /**
+         * The Slow down.
+         */
+        boolean slowDown;
+        /**
+         * The Thrust.
+         */
+        boolean thrust;
 
-        Ship(PVector loc) {
-            reset(loc);
+        /**
+         * Instantiates a new Ship.
+         *
+         */
+        Ship() {
+            reset();
         }
 
-        public void reset(PVector loc) {
-            pos = (loc==null) ? new PVector(width/2, height/2) : loc;
+        /**
+         * Reset.
+         *
+         */
+        void reset() {
+            pos = new PVector(width / 2f, height / 2f);
             vel = new PVector(0, 0);
             acc = new PVector(0, 0);
             space = 25;
             radius = space*.85f;
 
-            bullets = new ArrayList<Bullet>();
+            bullets = new ArrayList<>();
             ship = createShape(GROUP);
             head = createShape(TRIANGLE, -space, space*.75f, space, space*.75f, 0, -space*1.2f);
             thrusters = new PShape[2];
@@ -304,12 +534,20 @@ public class Asteroids extends PApplet {
             ship.addChild(thrusters[1]);
         }
 
-        public void applyForce(PVector force) {
+        /**
+         * Apply force.
+         *
+         * @param force the force
+         */
+        void applyForce(PVector force) {
             acc.add(force);
             acc.mult(.8f);
         }
 
-        public void update() {
+        /**
+         * Update.
+         */
+        void update() {
             vel.add(acc);
             vel.limit(16);
             pos.add(vel);
@@ -320,7 +558,10 @@ public class Asteroids extends PApplet {
             bulletCheck();
         }
 
-        public void shipAsteriodCollision() {
+        /**
+         * Ship asteriod collision.
+         */
+        void shipAsteriodCollision() {
             for (int a = 0; a < asteroids.size(); a++) {
                 Asteroid curr = asteroids.get(a);
                 if (hit(curr)) {
@@ -332,7 +573,10 @@ public class Asteroids extends PApplet {
             }
         }
 
-        public void bulletAsteriodCollision() {
+        /**
+         * Bullet asteriod collision.
+         */
+        void bulletAsteriodCollision() {
             for (int i = 0; i < bullets.size(); i++) {
                 Bullet curr = bullets.get(i);
                 for (int j = 0; j < asteroids.size(); j++) {
@@ -343,23 +587,35 @@ public class Asteroids extends PApplet {
                         j--;
                         bullets.remove(curr);
                         i--;
-//                        explosions.add(new Explosions(new PVector(a.pos.x, a.pos.y), a.maxRadius));
                         break;
                     }
                 }
             }
         }
 
-        public void duplicateAsteroids(Asteroid parent) {
+        /**
+         * Duplicate asteroids.
+         *
+         * @param parent the parent
+         */
+        void duplicateAsteroids(Asteroid parent) {
             if (parent.maxRadius > parent.threshold) {
                 float per = random(.4f, .6f);
-                float r1 = parent.maxRadius*per, r2 = parent.maxRadius*(1-per);
-                if (r1 > parent.threshold)  asteroids.add(new Asteroid(parent.pos.copy(), r1));
-                if (r2 > parent.threshold)  asteroids.add(new Asteroid(parent.pos.copy(), r2));
+                float r1 = parent.maxRadius*per;
+                float r2 = parent.maxRadius * (1 - per);
+                if (r1 > parent.threshold) {
+                    asteroids.add(new Asteroid(parent.pos.copy(), r1));
+                }
+                if (r2 > parent.threshold) {
+                    asteroids.add(new Asteroid(parent.pos.copy(), r2));
+                }
             }
         }
 
-        public void bulletCheck() {
+        /**
+         * Bullet check.
+         */
+        void bulletCheck() {
             for (int i = 0; i < bullets.size(); i++) {
                 Bullet curr = bullets.get(i);
                 if (curr.outOfBounds()) {
@@ -369,7 +625,10 @@ public class Asteroids extends PApplet {
             }
         }
 
-        public void show() {
+        /**
+         * Show.
+         */
+        void show() {
             for (Bullet b : bullets) {
                 // b.edges();
                 b.update();
@@ -382,22 +641,33 @@ public class Asteroids extends PApplet {
             popMatrix();
         }
 
-        public boolean hit(Asteroid a) {
-            return (dist(pos.x, pos.y, a.pos.x, a.pos.y) <= a.avgRadius+radius);
+        /**
+         * Hit boolean.
+         *
+         * @param a the a
+         * @return the boolean
+         */
+        boolean hit(Asteroid a) {
+            return (dist(pos.x, pos.y, a.pos.x, a.pos.y) <= (a.avgRadius + radius));
         }
 
 
-
-        public void addBullet() {
+        /**
+         * Add bullet.
+         */
+        void addBullet() {
             if (!isShooting) {
                 PVector position = new PVector(pos.x, pos.y);
                 bullets.add(new Bullet(position, angle));
             }
         }
 
-        public void thrust() {
+        /**
+         * Thrust.
+         */
+        void thrust() {
             if (thrust) {
-                applyForce(PVector.fromAngle(angle-PI/2));
+                applyForce(PVector.fromAngle(angle - (PI / 2)));
                 thrusters[0].setFill(color(0, 255, 0, 180));
                 thrusters[1].setFill(color(0, 255, 0, 180));
             } else {
@@ -406,27 +676,50 @@ public class Asteroids extends PApplet {
             }
         }
 
-        public void edges() {
-            if (pos.x > width+space) pos.x = -space;
-            if (pos.x < -space) pos.x = width+space;
-            if (pos.y < -space) pos.y = height+space;
-            if (pos.y > height+space) pos.y = -space;
+        /**
+         * Edges.
+         */
+        void edges() {
+            if (pos.x > (width + space)) {
+                pos.x = -space;
+            }
+            if (pos.x < -space) {
+                pos.x = width+space;
+            }
+            if (pos.y < -space) {
+                pos.y = height+space;
+            }
+            if (pos.y > (height + space)) {
+                pos.y = -space;
+            }
         }
 
 
-        public void setTurnAngle(float a) {
+        /**
+         * Sets turn angle.
+         *
+         * @param a the a
+         */
+        void setTurnAngle(float a) {
             turnAngle = a;
         }
 
-        public void turn() {
+        /**
+         * Turn.
+         */
+        void turn() {
             angle+=turnAngle;
         }
 
-        public void slowDown() {
+        /**
+         * Slow down.
+         */
+        void slowDown() {
             if (slowDown) {
                 vel.mult(.98f);
             }
         }
     }
+    @Override
     public void settings() { fullScreen(); }
 }

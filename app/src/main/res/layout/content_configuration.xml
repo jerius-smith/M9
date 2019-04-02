@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/content_configuration"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/player_config_scrn"
@@ -22,7 +21,8 @@
         android:layout_marginBottom="74dp"
         android:background="@null"
         android:scaleType="centerInside"
-        app:srcCompat="@drawable/start_bttn" />
+        app:srcCompat="@drawable/start_bttn"
+        android:contentDescription="TODO" />
 
     <Button
         android:id="@+id/load_game"
@@ -63,7 +63,8 @@
         android:hint="Enter name"
         android:inputType="textPersonName"
         android:textAlignment="center"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/difficulty_header"
@@ -128,7 +129,8 @@
         android:fontFamily="@font/inconsolata"
         android:text="Pilot: "
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="RtlHardcoded" />
 
     <EditText
         android:id="@+id/pilot_skills"
@@ -139,7 +141,9 @@
         android:layout_marginBottom="-55dp"
         android:inputType="number"
         android:maxLength="2"
-        android:text="0" />
+        android:text="0"
+        tools:ignore="LabelFor"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/fighter_header"
@@ -165,7 +169,8 @@
         android:layout_marginBottom="-48dp"
         android:inputType="number"
         android:maxLength="2"
-        android:text="0" />
+        android:text="0"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/trader_header"
@@ -191,10 +196,10 @@
         android:layout_marginBottom="-48dp"
         android:inputType="number"
         android:maxLength="2"
-        android:text="0" />
+        android:text="0"
+        android:importantForAutofill="no" />
 
     <TextView
-        android:id="@+id/engineer_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/engineer_skills"
@@ -217,7 +222,8 @@
         android:layout_marginBottom="-48dp"
         android:inputType="number"
         android:maxLength="2"
-        android:text="0" />
+        android:text="0"
+        android:importantForAutofill="no" />
 
 
 </RelativeLayout>

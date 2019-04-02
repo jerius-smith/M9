@@ -1,13 +1,12 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import com.google.gson.Gson;
-
 import java.util.Arrays;
 import java.util.Objects;
 
 /**
  * The type Player.
  */
+@SuppressWarnings("FeatureEnvy")
 public class Player {
 
     private String name;
@@ -39,10 +38,11 @@ public class Player {
      * @param preferredDifficulty the preferred difficulty
      * @param skillPoints         the skill points
      */
-    public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints, Planet location) {
+    public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints,
+                  Planet location) {
         this.name = name;
         this.preferredDifficulty = preferredDifficulty;
-        this.skills = skillPoints;
+        this.skills = skillPoints.clone();
         this.ship = new Gnat();
         this.credits = 1000;
         this.inventory = new Inventory();
@@ -82,7 +82,7 @@ public class Player {
      * @return the skills [ ]
      */
     public Skills[] getSkills() {
-        return skills;
+        return skills.clone();
     }
 
     /**
@@ -91,7 +91,7 @@ public class Player {
      * @param skills the skills
      */
     public void setSkills(Skills[] skills) {
-        this.skills = skills;
+        this.skills = skills.clone();
     }
 
     /**
@@ -158,16 +158,12 @@ public class Player {
 
     @Override
     public String toString() {
-        StringBuilder playerInfo = new StringBuilder();
-        playerInfo.append("\t\nPlayer: " + name)
-                .append("\nSelected Difficulty: " + preferredDifficulty)
-                .append("\nPilot points: " + skills[0].getPoints())
-                .append("\nFighter points: " + skills[1].getPoints())
-                .append("\nTrader points: " + skills[2].getPoints())
-                .append("\nEngineer points: " + skills[3].getPoints())
-                .append("\nCredits : " + credits).append("\nShip type: " + ship)
-                .append("\nLocation : " + location);
-        return playerInfo.toString();
+        String playerInfo = "\t\nPlayer: " + name + "\nSelected Difficulty: " + preferredDifficulty
+                            + "\nPilot points: " + skills[0].getPoints() + "\nFighter points: "
+                            + skills[1].getPoints() + "\nTrader points: " + skills[2].getPoints()
+                            + "\nEngineer points: " + skills[3].getPoints() + "\nCredits : "
+                            + credits + "\nShip type: " + ship + "\nLocation : " + location;
+        return playerInfo;
     }
 
     @Override
@@ -175,13 +171,13 @@ public class Player {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if ((o == null) || (getClass() != o.getClass())) {
             return false;
         }
         Player player = (Player) o;
-        return Double.compare(player.credits, credits) == 0 && Objects.equals(name, player.name)
-               && Arrays.equals(skills, player.skills)
-               && preferredDifficulty == player.preferredDifficulty && Objects
+        return (Double.compare(player.credits, credits) == 0) && Objects.equals(name, player.name)
+               && Arrays.equals(skills, player.skills) && (preferredDifficulty
+                                                           == player.preferredDifficulty) && Objects
                        .equals(ship, player.ship) && Objects.equals(inventory, player.inventory)
                && Objects.equals(location, player.location);
     }
@@ -189,13 +185,8 @@ public class Player {
     @Override
     public int hashCode() {
         int result = Objects.hash(name, preferredDifficulty, credits, ship, inventory, location);
-        result = 31 * result + Arrays.hashCode(skills);
+        result = (31 * result) + Arrays.hashCode(skills);
         return result;
-    }
-
-    public String toJSONString() {
-        String json = new Gson().toJson(this);
-        return json;
     }
 
 

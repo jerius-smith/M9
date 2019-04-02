@@ -1,7 +1,5 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import com.google.gson.Gson;
-
 import java.util.Random;
 
 import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
@@ -12,6 +10,10 @@ import static java.lang.Math.floor;
  * The type Planet.
  */
 public class Planet {
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
     private String name;
     private double xLoc;
@@ -92,7 +94,6 @@ public class Planet {
         yLoc = floor(new Random().nextDouble() * GameLogistics.MAX_HEIGHT);
         techLevel = TechLevel.values()[new Random().nextInt(TechLevel.numElements())];
         resource = Resource.values()[new Random().nextInt(Resource.numElements())];
-        politicalSystem = null;
         market = new Market(this);
     }
 
@@ -108,26 +109,20 @@ public class Planet {
             return false;
         } else {
             Planet that = (Planet) other;
-            return this.name.equals(that.name) && Double.compare(xLoc, that.xLoc) == 0
-                   && Double.compare(yLoc, that.yLoc) == 0;
+            return this.name.equals(that.name) && (Double.compare(xLoc, that.xLoc) == 0) && (
+                    Double.compare(yLoc, that.yLoc) == 0);
         }
     }
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder().
-                append("\n\t\t\tPlanet: " + name).
-                append(String.format("\n\t\t\tLocation: (%.0f, %.0f)", xLoc, yLoc)).
-                append("\n\t\t\tTech level: " + techLevel).
-                append("\n\t\t\tResource: " + resource).
-                append("\n\t\t\tSolar System: " + solarSystemCurrentlyIn);
-        return stringBuilder.toString();
+        String stringBuilder = "\n\t\t\tPlanet: " + name + String
+                .format("\n\t\t\tLocation: (%.0f, %.0f)", xLoc, yLoc) + "\n\t\t\tTech level: "
+                               + techLevel + "\n\t\t\tResource: " + resource
+                               + "\n\t\t\tSolar System: " + solarSystemCurrentlyIn;
+        return stringBuilder;
     }
 
-    public String toJSONString() {
-        String json = new Gson().toJson(this);
-        return json;
-    }
 
     public TechLevel getTechLevel() {
         return techLevel;

@@ -5,6 +5,7 @@ import edu.gatech.cs2340.spacetraders.model.Market;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Ship;
 
+@SuppressWarnings("FeatureEnvy")
 public class TransactionProcessor {
 
     // You cannot buy more goods than the cargo capacity
@@ -31,7 +32,7 @@ public class TransactionProcessor {
 
     // You cannot sell more goods than you own
     private static String validateSellingSpecificGood(Player player, Good toSell) {
-        if (player.getInventory().getStock(toSell) <= 0 || !validateSellingGoods(player)) {
+        if ((player.getInventory().getStock(toSell) <= 0) || !validateSellingGoods(player)) {
             return "You cannot sell more goods than you own\n";
         } else {
             return "";

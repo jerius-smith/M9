@@ -1,5 +1,6 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -28,11 +29,11 @@ public class Inventory {
             this.price = price;
         }
 
-        public GoodAttributes() {
+        GoodAttributes() {
             this(0, 0);
         }
 
-        public GoodAttributes(int stock, double price) {
+        GoodAttributes(int stock, double price) {
             this.stock = stock;
             this.price = price;
         }
@@ -42,11 +43,11 @@ public class Inventory {
             if (this == o) {
                 return true;
             }
-            if (o == null || getClass() != o.getClass()) {
+            if ((o == null) || (getClass() != o.getClass())) {
                 return false;
             }
             GoodAttributes that = (GoodAttributes) o;
-            return stock == that.stock && Double.compare(that.price, price) == 0;
+            return (stock == that.stock) && (Double.compare(that.price, price) == 0);
         }
 
         @Override
@@ -68,11 +69,11 @@ public class Inventory {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if ((o == null) || (getClass() != o.getClass())) {
             return false;
         }
         Inventory inventory1 = (Inventory) o;
-        return totalStock == inventory1.totalStock && Objects
+        return (totalStock == inventory1.totalStock) && Objects
                 .equals(inventory, inventory1.inventory);
     }
 
@@ -86,7 +87,7 @@ public class Inventory {
     }
 
     public void setStock(Good toChange, int stock) {
-        inventory.get(toChange).stock = stock;
+        Objects.requireNonNull(inventory.get(toChange)).stock = stock;
     }
 
     public void adjustTotalStock(int adjustedStock) {
@@ -94,19 +95,19 @@ public class Inventory {
     }
 
     public void setPrice(Good toChange, double price) {
-        inventory.get(toChange).price = price;
+        Objects.requireNonNull(inventory.get(toChange)).price = price;
     }
 
     public int getStock(Good toGet) {
-        return inventory.get(toGet).stock;
+        return Objects.requireNonNull(inventory.get(toGet)).stock;
     }
 
     public double getPrice(Good toGet) {
-        return inventory.get(toGet).price;
+        return Objects.requireNonNull(inventory.get(toGet)).price;
     }
 
     public Map<Good, GoodAttributes> getInventory() {
-        return inventory;
+        return Collections.unmodifiableMap(inventory);
     }
 
     public void setInventory(Map<Good, GoodAttributes> inventory) {

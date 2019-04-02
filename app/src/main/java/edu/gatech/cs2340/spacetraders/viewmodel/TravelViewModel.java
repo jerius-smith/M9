@@ -9,16 +9,11 @@ import android.widget.Toast;
 import java.io.FileNotFoundException;
 
 import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
-import edu.gatech.cs2340.spacetraders.entities.MarketActivityException;
 import edu.gatech.cs2340.spacetraders.entities.TravelException;
 import edu.gatech.cs2340.spacetraders.entities.TravelProcessor;
 import edu.gatech.cs2340.spacetraders.model.DataStore;
-import edu.gatech.cs2340.spacetraders.model.Good;
-import edu.gatech.cs2340.spacetraders.model.Inventory;
-import edu.gatech.cs2340.spacetraders.model.Market;
 import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
-import edu.gatech.cs2340.spacetraders.entities.TransactionProcessor;
 import edu.gatech.cs2340.spacetraders.model.Ship;
 
 /**
@@ -27,7 +22,6 @@ import edu.gatech.cs2340.spacetraders.model.Ship;
 public class TravelViewModel extends AndroidViewModel {
 
     private Player player;
-    private Market market;
     private Ship playerShip;
 
     /**
@@ -39,7 +33,6 @@ public class TravelViewModel extends AndroidViewModel {
         super(application);
         try {
             player = DataStore.getCurrentPlayer(getApplication());
-            market = player.getLocation().getPlanetsMarket();
             playerShip = player.getShip();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -47,16 +40,13 @@ public class TravelViewModel extends AndroidViewModel {
     }
 
     public String getPlayerLocation() {
-        return player.getLocation().getName();
-    }
-
-    public Ship getPlayerShip() {
-        return playerShip;
+        Planet planet = player.getLocation();
+        return planet.getName();
     }
 
     public int getShipFuel() {
         int actualFuel = playerShip.getFuelCapacity();
-        int mappedFuel = (int) GameLogistics.mapValues(actualFuel, 0, 80, 0, 100);
+        @SuppressWarnings("MagicNumber") int mappedFuel = (int) GameLogistics.mapValues(actualFuel, 0, 80, 0, 100);
         return mappedFuel;
     }
 

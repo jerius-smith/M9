@@ -30,7 +30,7 @@ public enum Difficulty {
      */
     String difficulty;
 
-    private Difficulty(String difficulty) {
+    Difficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 

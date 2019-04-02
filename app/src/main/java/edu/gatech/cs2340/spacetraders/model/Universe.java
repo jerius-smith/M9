@@ -1,7 +1,6 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import com.google.gson.Gson;
-
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,7 +9,7 @@ import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
 /**
  * The type Universe.
  */
-public class Universe {
+public final class Universe {
     private static final Universe ourInstance = new Universe();
 
     /**
@@ -22,7 +21,7 @@ public class Universe {
         return ourInstance;
     }
 
-    private Set<SolarSystem> solarSystems;
+    private final Set<SolarSystem> solarSystems;
 
     private Universe() {
         solarSystems = new HashSet<>();
@@ -32,13 +31,14 @@ public class Universe {
     }
 
     public Set<SolarSystem> getSolarSystems() {
-        return solarSystems;
+        return Collections.unmodifiableSet(solarSystems);
     }
 
     public SolarSystem getSolarSystemByName(String name) {
         for (SolarSystem curr : solarSystems) {
-            if (name.equals(curr.getName()))
+            if (name.equals(curr.getName())) {
                 return curr;
+            }
         }
         return null;
     }
@@ -47,21 +47,19 @@ public class Universe {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (SolarSystem curr : solarSystems) {
-            stringBuilder.append("\n\t" + curr.toString());
+            stringBuilder.append("\n\t").append(curr.toString());
         }
         return stringBuilder.toString();
     }
 
-    public String toJSONString() {
-        String json = new Gson().toJson(this);
-        return json;
-    }
 
     public SolarSystem getRandomSolarSystem() {
         SolarSystem toReturn = null;
         for (SolarSystem curr : solarSystems) {
-            if (Math.random() < .9)
+            //noinspection MagicNumber
+            if (Math.random() < .9) {
                 toReturn = curr;
+            }
         }
         return toReturn;
     }

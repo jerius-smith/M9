@@ -1,19 +1,9 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import android.content.Context;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
-
-import java.io.FileOutputStream;
-
-import edu.gatech.cs2340.spacetraders.viewmodel.ConfigurationViewModel;
-import edu.gatech.cs2340.spacetraders.views.ConfigurationActivity;
-
 /**
  * The type Model facade.
  */
-public class ModelFacade {
+public final class ModelFacade {
     private static final ModelFacade ourInstance = new ModelFacade();
 
     /**
@@ -26,7 +16,7 @@ public class ModelFacade {
     }
 
     private Player player;
-    private Universe universe;
+    private final Universe universe;
 
     private ModelFacade() {
         universe = Universe.getInstance();
@@ -39,7 +29,8 @@ public class ModelFacade {
      * @param prefDifficulty the pref difficulty
      * @param skillPoints    the skill points
      */
-    public void createPlayer(String name, Difficulty prefDifficulty, Skills[] skillPoints, Planet location) {
+    public void createPlayer(String name, Difficulty prefDifficulty, Skills[] skillPoints,
+                             Planet location) {
         if (player == null) {
             player = new Player(name, prefDifficulty, skillPoints, location);
         } else {
@@ -66,6 +57,8 @@ public class ModelFacade {
         return player;
     }
 
-    public Universe getUniverse() { return universe; }
+    public Universe getUniverse() {
+        return universe;
+    }
 
 }
