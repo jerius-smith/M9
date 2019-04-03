@@ -7,19 +7,19 @@ public enum Skills {
     /**
      * Pilot skills.
      */
-    PILOT("Pilot", 0),
+    PILOT("Pilot"),
     /**
      * Fighter skills.
      */
-    FIGHTER("Fighter", 0),
+    FIGHTER("Fighter"),
     /**
      * Trader skills.
      */
-    TRADER("Trader", 0),
+    TRADER("Trader"),
     /**
      * Engineer skills.
      */
-    ENGINEER("Engineer", 0);
+    ENGINEER("Engineer");
 
     private String skill;
     private int points;
@@ -29,9 +29,21 @@ public enum Skills {
      */
     public static final int MAX_POINTS = 16;
 
-    private Skills(String skill, int points) {
+    Skills(String skill) {
         this.skill = skill;
-        this.points = points;
+        this.points = 0;
+    }
+
+    public static int getTotalPoints() {
+        return totalPoints;
+    }
+
+    public static void setTotalPoints(int totalPoints) {
+        Skills.totalPoints = totalPoints;
+    }
+
+
+    Skills() {
     }
 
     /**
@@ -41,8 +53,9 @@ public enum Skills {
      */
     public static int totalPoints() {
         int sum = 0;
-        for (Skills curr : values())
+        for (Skills curr : values()) {
             sum += curr.points;
+        }
         return sum;
     }
 

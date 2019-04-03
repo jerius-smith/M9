@@ -1,12 +1,11 @@
 package edu.gatech.cs2340.spacetraders.entities;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * The type Game logistics.
  */
+@SuppressWarnings("ALL")
 public final class GameLogistics {
 
     /**
@@ -18,6 +17,9 @@ public final class GameLogistics {
      */
     public static final int MAX_HEIGHT = 500;
 
+    /**
+     * The constant MAX_DISTANCE.
+     */
     public static final int MAX_DISTANCE =
             (int) Math.sqrt(MAX_WIDTH * MAX_WIDTH + MAX_HEIGHT * MAX_HEIGHT);
     /**
@@ -35,7 +37,10 @@ public final class GameLogistics {
             new String[]{"Sombrero", "Cygnus", "Andromeda"};
 
 
-    // index 0 : weapons, 1 : gadget, 2 : cargo, 3 : fuel capacity
+    /**
+     * The constant MAX_CAPACITIES.
+     */
+// index 0 : weapons, 1 : gadget, 2 : cargo, 3 : fuel capacity
     public static final HashMap<String, Integer[]> MAX_CAPACITIES =
             new HashMap<String, Integer[]>() {
                 {
@@ -110,5 +115,20 @@ public final class GameLogistics {
             "Yojimbo",        // A film by Akira Kurosawa
             "Zalkon", "Zuul"            // From the first Ghostbusters movie
     };
+
+    /**
+     * Map values double.
+     *
+     * @param original the original
+     * @param omin     the omin
+     * @param omax     the omax
+     * @param nmin     the nmin
+     * @param nmax     the nmax
+     * @return the double
+     */
+    public static double mapValues(double original, double omin, double omax, double nmin,
+                                    double nmax) {
+        return nmin + (nmax - nmin) * ((original - omin) / (omax - omin));
+    }
 
 }

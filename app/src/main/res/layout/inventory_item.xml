@@ -6,7 +6,6 @@
     android:layout_weight="3">
 
     <TextView
-        android:id="@+id/good_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -17,7 +16,6 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/good_price"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -28,7 +26,6 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/market_stock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -39,7 +36,6 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/player_stock"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

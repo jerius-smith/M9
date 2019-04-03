@@ -45,18 +45,36 @@ public enum Good {
      */
     ROBOTS(5000, 6, -150, 100);
 
-    private final double BASE_PRICE;
-    private final int MTLP;
-    private final int IPL;
-    private final int varianceFactor;
+    public void setBASE_PRICE(double BASE_PRICE) {
+        this.BASE_PRICE = BASE_PRICE;
+    }
+
+    public void setMTLP(int MTLP) {
+        this.MTLP = MTLP;
+    }
+
+    public void setIPL(int IPL) {
+        this.IPL = IPL;
+    }
+
+    public void setVarianceFactor(int varianceFactor) {
+        this.varianceFactor = varianceFactor;
+    }
+
+    private double BASE_PRICE;
+    private int MTLP;
+    private int IPL;
+    private int varianceFactor;
 
     Good(double price, int MTLP, int IPL, int varianceFactor) {
         this.BASE_PRICE = price;
         this.MTLP = MTLP;
-        this.IPL  = IPL;
+        this.IPL = IPL;
         this.varianceFactor = varianceFactor;
     }
 
+    Good() {
+    }
 
     public double getBASE_PRICE() {
         return BASE_PRICE;
@@ -77,5 +95,6 @@ public enum Good {
     public String toString() {
         return name();
     }
+
 
 }

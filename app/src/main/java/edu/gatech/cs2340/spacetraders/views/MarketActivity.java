@@ -9,23 +9,21 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.model.Good;
-import edu.gatech.cs2340.spacetraders.model.Inventory;
-import edu.gatech.cs2340.spacetraders.viewmodel.ConfigurationViewModel;
 import edu.gatech.cs2340.spacetraders.viewmodel.MarketViewModel;
 
+@SuppressWarnings("FeatureEnvy")
 public class MarketActivity extends AppCompatActivity {
 
     private RecyclerView marketInventoryView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
 
-    MarketViewModel viewModel;
+    private MarketViewModel viewModel;
 
-    private ImageButton sellButton;
-    private ImageButton buyButton;
     private TextView playerCredits;
+    private TextView playerPlanet;
 
 
     @Override
@@ -36,42 +34,47 @@ public class MarketActivity extends AppCompatActivity {
         marketInventoryView = findViewById(R.id.market_inventory_view);
         marketInventoryView.setHasFixedSize(true);
 
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         marketInventoryView.setLayoutManager(layoutManager);
 
         viewModel = ViewModelProviders.of(this).get(MarketViewModel.class);
 
-        mAdapter = new InventoryAdapter(viewModel.getMarketInventory(),
-                viewModel.getPlayerInventory());
+        RecyclerView.Adapter mAdapter = new InventoryAdapter(viewModel.getMarketInventory(),
+                                                             viewModel.getPlayerInventory());
         marketInventoryView.setAdapter(mAdapter);
 
         playerCredits = findViewById(R.id.credits_text);
-        playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
+        playerPlanet = findViewById(R.id.location_text);
+        updatePlayerInfo();
 
-        sellButton = findViewById(R.id.sell_button);
-        buyButton = findViewById(R.id.buy_button);
+        ImageButton sellButton = findViewById(R.id.sell_button);
+        ImageButton buyButton = findViewById(R.id.buy_button);
 
         sellButton.setOnClickListener(view -> {
             InventoryAdapter adapter = (InventoryAdapter) marketInventoryView.getAdapter();
-            if (adapter.getSelectedPosition() >=0) {
+            if (Objects.requireNonNull(adapter).getSelectedPosition() >= 0) {
                 int pos = adapter.getSelectedPosition();
                 viewModel.sellItem(Good.values()[pos]);
                 adapter.notifyDataSetChanged();
-                playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
-                viewModel.savePlayer();
+                updatePlayerInfo();
             }
         });
 
         buyButton.setOnClickListener(view -> {
             InventoryAdapter adapter = (InventoryAdapter) marketInventoryView.getAdapter();
-            if (adapter.getSelectedPosition() >=0) {
+            if (Objects.requireNonNull(adapter).getSelectedPosition() >= 0) {
                 int pos = adapter.getSelectedPosition();
                 viewModel.buyItem(Good.values()[pos]);
                 adapter.notifyDataSetChanged();
-                playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
-                viewModel.savePlayer();
+                updatePlayerInfo();
             }
         });
+    }
+
+    private void updatePlayerInfo() {
+        playerCredits.setText(String.format("Credits: %.2f", viewModel.getPlayerCredits()));
+        playerPlanet.setText(String.format("Location: %s", viewModel.getPlayerLocation()));
+        viewModel.savePlayer();
     }
 
     @Override

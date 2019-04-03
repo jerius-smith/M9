@@ -1,21 +1,28 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
+@SuppressWarnings("FeatureEnvy")
 public class Market {
 
     private Inventory marketInventory;
 
     public Market(Planet planet) {
+        //noinspection MagicNumber
         marketInventory = createInventory(planet);
+    }
+
+    public void setMarketInventory(Inventory marketInventory) {
+        this.marketInventory = marketInventory;
+    }
+
+    public Market() {
     }
 
     private Inventory createInventory(Planet planet) {
         Inventory inventory = new Inventory();
         for (Good currentGood : Good.values()) {
-            int randStock = randomStock(currentGood, planet);
+            int randStock = randomStock(currentGood, planet, 50);
             double computedPrice = priceModel(currentGood, planet);
             if (computedPrice < 0) {
                 computedPrice = priceModel(currentGood, planet);
@@ -28,17 +35,18 @@ public class Market {
     }
 
 
-    private int randomStock(Good good, Planet planet) {
+    private int randomStock(Good good, Planet planet, int bound) {
         if (validateGood(good, planet)) {
-            return new Random().nextInt(50);
+            return new Random().nextInt(bound);
         }
         return 0;
     }
 
     private double priceModel(Good good, Planet planet) {
         if (validateGood(good, planet)) {
-            return good.getBASE_PRICE() + (Math.abs(good.getIPL()) * (planet.getTechLevel().ordinal() - good
-                    .getMTLP())) + computeVarianceFactor(good);
+            return good.getBASE_PRICE() + (Math.abs(good.getIPL()) * (
+                    planet.getTechLevel().ordinal() - good.getMTLP())) + computeVarianceFactor(
+                    good);
         }
         return 0;
     }

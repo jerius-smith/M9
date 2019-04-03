@@ -1,6 +1,7 @@
 package edu.gatech.cs2340.spacetraders.entities;
 
-class TravelException extends Exception {
+public class TravelException extends Exception {
     public TravelException(String exceptionMsg) {
+        super(exceptionMsg);
     }
 }

@@ -18,12 +18,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageButton startNewButton = findViewById(R.id.istart_new_button);
-        startNewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ConfigurationActivity.class);
-                startActivity(intent);
-            }
+        startNewButton.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ConfigurationActivity.class);
+            startActivity(intent);
         });
     }
 

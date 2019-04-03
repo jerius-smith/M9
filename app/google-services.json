@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "705495480529",
+    "firebase_url": "https://spacetraders-4397c.firebaseio.com",
+    "project_id": "spacetraders-4397c",
+    "storage_bucket": "spacetraders-4397c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705495480529:android:0eb4f7081dfc21ca",
+        "android_client_info": {
+          "package_name": "edu.gatech.cs2340.spacetraders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705495480529-g6k2ue3ljopkmggp6jltq7eaeosfvp37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.gatech.cs2340.spacetraders",
+            "certificate_hash": "e7c91dfd3be0cf06c34cd05c8bad2c234db383d5"
+          }
+        },
+        {
+          "client_id": "705495480529-ip3u29l3c7mjj0l3ment9rb87dqv1sq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKtIEbFGwKR4pAFVa3SiAEHVIHqUpNQ_4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705495480529-ip3u29l3c7mjj0l3ment9rb87dqv1sq3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

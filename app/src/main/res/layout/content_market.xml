@@ -46,7 +46,8 @@
         android:layout_marginBottom="10dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/sell_bttn" />
+        app:srcCompat="@drawable/sell_bttn"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/buy_button"
@@ -58,7 +59,8 @@
         android:layout_marginBottom="10dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/buy_bttn" />
+        app:srcCompat="@drawable/buy_bttn"
+        android:contentDescription="TODO" />
 
     <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -70,7 +72,6 @@
         android:paddingBottom="@dimen/screen_percentage_05">
 
         <TextView
-            android:id="@+id/good_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -80,7 +81,6 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/good_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -90,7 +90,6 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/market_stock"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -100,7 +99,6 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/player_stock"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

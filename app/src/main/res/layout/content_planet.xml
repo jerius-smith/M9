@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/star032"
-
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
     tools:context="edu.gatech.cs2340.spacetraders.views.PlanetActivity"
     tools:showIn="@layout/activity_planet">
 
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/star"
+        android:background="@drawable/star"
+        />
 
     <ImageView
-        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-300dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/red_planet" />
+        app:srcCompat="@drawable/red_planet"
+        android:contentDescription="TODO" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/shipImage"
         android:layout_width="208dp"
         android:layout_height="360dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
-        app:srcCompat="@drawable/gnat" />
+        app:srcCompat="@drawable/gnat"
+        tools:ignore="ContentDescription"
+        android:contentDescription="TODO" />
 
     <ImageButton
         android:id="@+id/market_button"
@@ -38,19 +45,21 @@
         android:layout_marginRight="30dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/market_bttn" />
+        app:srcCompat="@drawable/market_bttn"
+        android:contentDescription="TODO" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/travel_button"
         android:layout_width="91dp"
         android:layout_height="123dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="150dp"
+        android:layout_alignParentTop="true"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="150dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/travel_bttn" />
+        app:srcCompat="@drawable/travel_bttn"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/credits_text"
@@ -78,5 +87,31 @@
         android:text="Location: Vandor"
         android:textColor="@color/tan"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/fuel_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/inconsolata"
+        android:paddingBottom="15dp"
+        android:text="100"
+        android:textColor="@color/tan"
+        android:textSize="25sp" />
+
+    <com.mikhaellopez.circularfillableloaders.CircularFillableLoaders
+        android:id="@+id/fuel_level"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_centerInParent="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="295dp"
+        android:baselineAlignBottom="false"
+        android:duplicateParentState="false"
+        app:cfl_border="true"
+        app:cfl_border_width="5dp"
+        app:cfl_progress="0"
+        app:cfl_wave_amplitude="0.1"
+        app:cfl_wave_color="@color/tan" />
 
 </RelativeLayout>

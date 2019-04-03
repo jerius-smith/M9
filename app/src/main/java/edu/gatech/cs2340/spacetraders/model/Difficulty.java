@@ -30,8 +30,11 @@ public enum Difficulty {
      */
     String difficulty;
 
-    private Difficulty(String difficulty) {
+    Difficulty(String difficulty) {
         this.difficulty = difficulty;
+    }
+
+    Difficulty() {
     }
 
     @Override
@@ -39,4 +42,11 @@ public enum Difficulty {
         return this.difficulty;
     }
 
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
 }
