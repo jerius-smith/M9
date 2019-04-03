@@ -66,8 +66,6 @@ public class PlanetActivity extends AppCompatActivity {
         travelBtn.setOnClickListener(view -> {
             startActivityForResult(new Intent(getApplicationContext(), TravelActivity.class),
                                    PLANET_REQUEST);
-            //startActivity(new Intent(PlanetActivity.this, MiniGameActivity.class));
-            //testTraveling();
         });
 
         shipImage.setOnClickListener(view -> {
@@ -81,17 +79,15 @@ public class PlanetActivity extends AppCompatActivity {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-//            startActivity(new Intent(PlanetActivity.this, MiniGameActivity.class));
-            startActivity(new Intent(PlanetActivity.this, AttackActivity.class));
         });
     }
 
     private void travelTo(String planet, String solarSystem) {
-        String travelTag = "TRAVEL";
         Universe universe = Universe.getInstance();
         SolarSystem solar = universe.getSolarSystemByName(solarSystem);
         Planet toTravelTo = Objects.requireNonNull(solar).getPlanetByName(planet);
         travelViewModel.travelTo(toTravelTo);
+        travelViewModel.playerAttacked();
         updateTravelStatus();
     }
 
@@ -100,7 +96,8 @@ public class PlanetActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == PLANET_REQUEST) && (data != null)) {
             if (data.hasExtra(TravelActivity.CHOSEN_PLANET) && data
-                    .hasExtra(TravelActivity.CHOSEN_SOLAR_SYSTEM)) {
+                    .hasExtra(TravelActivity.CHOSEN_SOLAR_SYSTEM)
+            && data.hasExtra(TravelActivity.UPDATED_CREDITS)) {
                 String selectedPlanet = data.getStringExtra(TravelActivity.CHOSEN_PLANET);
                 String selectedSolarSystem =
                         data.getStringExtra(TravelActivity.CHOSEN_SOLAR_SYSTEM);
@@ -119,6 +116,7 @@ public class PlanetActivity extends AppCompatActivity {
     private void updateTravelStatus() {
         travelViewModel = ViewModelProviders.of(this).get(TravelViewModel.class);
         location.setText(String.format("Location: %s", travelViewModel.getPlayerLocation()));
+        playerCredits.setText(String.format("Credits: %.2f", travelViewModel.getPlayerCredits()));
         int mappedFuelLevel = travelViewModel.getShipFuel();
         fuel.setText(String.valueOf(mappedFuelLevel));
         fuel_level.setProgress(100 - travelViewModel.getShipFuel());

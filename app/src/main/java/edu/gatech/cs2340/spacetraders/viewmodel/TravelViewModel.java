@@ -15,6 +15,7 @@ import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Ship;
+import edu.gatech.cs2340.spacetraders.views.RandomEventActivity;
 
 /**
  * The type Travel view model.
@@ -55,10 +56,17 @@ public class TravelViewModel extends AndroidViewModel {
             TravelProcessor.validateTraveling(player, toTravelTo);
 
         } catch (TravelException e) {
-            Log.d("TRAVEL", "Exception: " + e.getMessage());
             Toast.makeText(getApplication(), e.getMessage(), Toast.LENGTH_LONG).show();
             playerShip.setFuelTooLow(true);
         }
+    }
+
+    public void playerAttacked() {
+        TravelProcessor.playerAttackedDuringTravel(player, RandomEventActivity.attacked);
+    }
+
+    public double getPlayerCredits() {
+        return player.getCredits();
     }
 
     public boolean isFuelTooLow() {

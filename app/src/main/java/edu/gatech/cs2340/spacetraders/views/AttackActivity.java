@@ -10,6 +10,8 @@ import edu.gatech.cs2340.spacetraders.R;
 
 public class AttackActivity extends AppCompatActivity {
 
+    public static int DECREASE_CREDITS_BY = (int) (Math.random() * 100);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

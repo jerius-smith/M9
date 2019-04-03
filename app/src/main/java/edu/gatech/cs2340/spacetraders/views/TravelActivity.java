@@ -1,6 +1,7 @@
 package edu.gatech.cs2340.spacetraders.views;
 
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +20,7 @@ import edu.gatech.cs2340.spacetraders.viewmodel.TravelViewModel;
 
 public class TravelActivity extends AppCompatActivity {
 
-    private TravelViewModel travelViewModel;
+    public static final String UPDATED_CREDITS = "UPDATED_CREDITS";
 
     public static final String CHOSEN_PLANET = "PLANET";
     public static final String CHOSEN_SOLAR_SYSTEM = "SOLAR_SYSTEM";
@@ -41,16 +42,16 @@ public class TravelActivity extends AppCompatActivity {
         Universe universe = Universe.getInstance();
         switch (view.getId()) {
             case R.id.solarsystem1:
-                showDestinations(universe.getSolarSystemByName(
-                        GameLogistics.SOLAR_SYSTEM_NAMES[0]));
+                showDestinations(
+                        universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[0]));
                 break;
             case R.id.solarsystem2:
-                showDestinations(universe.getSolarSystemByName(
-                        GameLogistics.SOLAR_SYSTEM_NAMES[1]));
+                showDestinations(
+                        universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[1]));
                 break;
             case R.id.solarsystem3:
-                showDestinations(universe.getSolarSystemByName(
-                        GameLogistics.SOLAR_SYSTEM_NAMES[2]));
+                showDestinations(
+                        universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[2]));
                 break;
             default:
                 showDestinations(universe.getRandomSolarSystem());
@@ -66,15 +67,24 @@ public class TravelActivity extends AppCompatActivity {
         String solarSystemName = solarSystem.getName();
         builder.setTitle("Select a planet from solar system: " + solarSystemName)
                 .setItems(planetNames, (dialog, which) -> {
+                    if (checkForRandomEvent()) {
+                        startActivity(new Intent(TravelActivity.this, RandomEventActivity.class));
+                    }
                     String selectedPlanet = planetNames[which];
                     Intent intent = new Intent();
                     intent.putExtra(CHOSEN_PLANET, selectedPlanet);
                     intent.putExtra(CHOSEN_SOLAR_SYSTEM, solarSystemName);
+                    intent.putExtra(UPDATED_CREDITS, RandomEventActivity.attacked);
                     setResult(PlanetActivity.PLANET_REQUEST, intent);
                     dialog.dismiss();
                     finish();
                 }).setCancelable(false);
         builder.show();
+    }
+
+    public boolean checkForRandomEvent() {
+        double rand = Math.random();
+        return rand < 0.9;
     }
 
 

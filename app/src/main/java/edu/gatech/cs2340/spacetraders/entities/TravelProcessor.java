@@ -5,6 +5,7 @@ import java.util.Objects;
 import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Ship;
+import edu.gatech.cs2340.spacetraders.views.AttackActivity;
 
 public class TravelProcessor {
 
@@ -36,6 +37,16 @@ public class TravelProcessor {
         double distanceX = from.getxLoc() - to.getxLoc();
         double distanceY = from.getyLoc() - to.getyLoc();
         return Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
+    }
+
+    public static void playerAttackedDuringTravel(Player player, boolean attacked) {
+        if (attacked) {
+            double newCredits = player.getCredits() - AttackActivity.DECREASE_CREDITS_BY;
+            if (newCredits < 0) {
+                newCredits = 0;
+            }
+            player.setCredits(newCredits);
+        }
     }
 
 

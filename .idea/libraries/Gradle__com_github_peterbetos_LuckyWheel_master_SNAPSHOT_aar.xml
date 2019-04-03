@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.peterbetos:LuckyWheel:master-SNAPSHOT@aar">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/LuckyWheel-master-SNAPSHOT.aar/3288c65a1cda3df3aa71e8277a15dece/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/LuckyWheel-master-SNAPSHOT.aar/3288c65a1cda3df3aa71e8277a15dece/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/LuckyWheel-master-SNAPSHOT.aar/3288c65a1cda3df3aa71e8277a15dece/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.peterbetos/LuckyWheel/master-SNAPSHOT/8cd3cf098bbd4c4d4abb01aa4070324812b9ec1c/LuckyWheel-master-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
