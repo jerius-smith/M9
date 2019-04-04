@@ -12,25 +12,45 @@ import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.model.Inventory;
 import edu.gatech.cs2340.spacetraders.R;
 
-@SuppressWarnings("FeatureEnvy")
+/**
+ * The type Inventory adapter.
+ */
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyViewHolder> {
     private final Inventory inventory;
     private final Inventory playerInventory;
     private int selectedPosition = -1;
 
-    // Provide a reference to the views for each data item
+    /**
+     * The type My view holder.
+     */
+// Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
+        /**
+         * The Table row.
+         */
+// each data item is just a string in this case
         final TableRow tableRow;
+
+        /**
+         * Instantiates a new My view holder.
+         *
+         * @param v the v
+         */
         MyViewHolder(TableRow v) {
             super(v);
             tableRow= v;
         }
     }
 
-    // Provide a suitable constructor (depends on the kind of dataset)
+    /**
+     * Instantiates a new Inventory adapter.
+     *
+     * @param inventory       the inventory
+     * @param playerInventory the player inventory
+     */
+// Provide a suitable constructor (depends on the kind of dataset)
     public InventoryAdapter(Inventory inventory, Inventory playerInventory) {
         this.inventory = inventory;
         this.playerInventory = playerInventory;
@@ -41,7 +61,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
     public InventoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                             int viewType) {
         // create a new view
-        TableRow v = (TableRow) LayoutInflater.from(parent.getContext())
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        TableRow v = (TableRow) inflater
                 .inflate(R.layout.inventory_item, parent, false);
 
         return new MyViewHolder(v);
@@ -78,6 +99,11 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.MyVi
 
     }
 
+    /**
+     * Gets selected position.
+     *
+     * @return the selected position
+     */
     public int getSelectedPosition() {
         return selectedPosition;
     }

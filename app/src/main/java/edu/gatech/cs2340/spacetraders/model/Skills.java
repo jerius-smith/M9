@@ -21,7 +21,7 @@ public enum Skills {
      */
     ENGINEER("Engineer");
 
-    private String skill;
+    private final String skill;
     private int points;
     private static int totalPoints;
     /**
@@ -34,17 +34,13 @@ public enum Skills {
         this.points = 0;
     }
 
-    public static int getTotalPoints() {
-        return totalPoints;
-    }
+//    public static int getTotalPoints() {
+//        return totalPoints;
+//    }
 
-    public static void setTotalPoints(int totalPoints) {
-        Skills.totalPoints = totalPoints;
-    }
-
-
-    Skills() {
-    }
+//    public static void setTotalPoints(int totalPoints) {
+//        Skills.totalPoints = totalPoints;
+//    }
 
     /**
      * Total points int.
@@ -59,23 +55,23 @@ public enum Skills {
         return sum;
     }
 
-    /**
-     * Gets skill.
-     *
-     * @return the skill
-     */
-    public String getSkill() {
-        return skill;
-    }
+//    /**
+//     * Gets skill.
+//     *
+//     * @return the skill
+//     */
+//    public String getSkill() {
+//        return skill;
+//    }
 
-    /**
-     * Sets skill.
-     *
-     * @param skill the skill
-     */
-    public void setSkill(String skill) {
-        this.skill = skill;
-    }
+//    /**
+//     * Sets skill.
+//     *
+//     * @param skill the skill
+//     */
+//    public void setSkill(String skill) {
+//        this.skill = skill;
+//    }
 
     /**
      * Gets points.

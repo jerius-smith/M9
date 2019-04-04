@@ -19,7 +19,6 @@ import edu.gatech.cs2340.spacetraders.model.Universe;
 /**
  * The type Configuration view model.
  */
-@SuppressWarnings("FeatureEnvy")
 public class ConfigurationViewModel extends AndroidViewModel {
 
     private final ModelFacade facade;
@@ -53,7 +52,6 @@ public class ConfigurationViewModel extends AndroidViewModel {
         } else {
             facade.createPlayer(name, prefDifficulty, skillPoints, getDefaultPlanet());
             Player player = facade.getPlayer();
-            DataStore dataStore = DataStore.getInstance();
             DataStore.createCurrentPlayerTxt(getApplication(), player);
             DataStore.newPlayerToJson(getApplication(), player);
             try {
@@ -67,13 +65,12 @@ public class ConfigurationViewModel extends AndroidViewModel {
     }
 
     private Planet getDefaultPlanet() {
-        Universe universe = facade.getUniverse();
-        SolarSystem rand = universe.getRandomSolarSystem();
-        return rand.getRandomPlanet();
+        return Universe.getRandomPlanet();
     }
 
 
     private void showToast(CharSequence message) {
-        Toast.makeText(getApplication(), message, Toast.LENGTH_LONG).show();
+        Toast toast = Toast.makeText(getApplication(), message, Toast.LENGTH_LONG);
+        toast.show();
     }
 }

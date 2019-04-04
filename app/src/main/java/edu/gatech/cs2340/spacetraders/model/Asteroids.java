@@ -155,7 +155,6 @@ public class Asteroids extends PApplet {
     /**
      * The type Asteroid.
      */
-    @SuppressWarnings("MagicNumber")
     class Asteroid {
         /**
          * The Pos.
@@ -340,32 +339,32 @@ public class Asteroids extends PApplet {
             angle = ang;
         }
 
-        /**
-         * Sets pos.
-         *
-         * @param pos the pos
-         */
-        public void setPos(PVector pos) {
-            this.pos = pos;
-        }
-
-        /**
-         * Edges.
-         */
-        public void edges() {
-            if (pos.x > (width + size)) {
-                pos.x = -size;
-            }
-            if (pos.x < -size) {
-                pos.x = width+size;
-            }
-            if (pos.y < -size) {
-                pos.y = height+size;
-            }
-            if (pos.y > (height + size)) {
-                pos.y = -size;
-            }
-        }
+//        /**
+//         * Sets pos.
+//         *
+//         * @param pos the pos
+//         */
+//        public void setPos(PVector pos) {
+//            this.pos = pos;
+//        }
+//
+//        /**
+//         * Edges.
+//         */
+//        public void edges() {
+//            if (pos.x > (width + size)) {
+//                pos.x = -size;
+//            }
+//            if (pos.x < -size) {
+//                pos.x = width+size;
+//            }
+//            if (pos.y < -size) {
+//                pos.y = height+size;
+//            }
+//            if (pos.y > (height + size)) {
+//                pos.y = -size;
+//            }
+//        }
 
         /**
          * Out of bounds boolean.

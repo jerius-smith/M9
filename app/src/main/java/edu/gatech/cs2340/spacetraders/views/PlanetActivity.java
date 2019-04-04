@@ -29,6 +29,9 @@ import edu.gatech.cs2340.spacetraders.viewmodel.TravelViewModel;
 
 public class PlanetActivity extends AppCompatActivity {
 
+//    public static final int INT = 60;
+    public static final int MILLISECONDS = 800;
+    public static final int MIN_FUEL_LEVEL = 60;
     private TextView playerCredits;
     private TextView location;
     private TextView fuel;
@@ -83,9 +86,8 @@ public class PlanetActivity extends AppCompatActivity {
     }
 
     private void travelTo(String planet, String solarSystem) {
-        Universe universe = Universe.getInstance();
-        SolarSystem solar = universe.getSolarSystemByName(solarSystem);
-        Planet toTravelTo = Objects.requireNonNull(solar).getPlanetByName(planet);
+        SolarSystem solar = Universe.getSolarSystemByName(solarSystem);
+        Planet toTravelTo = SolarSystem.getPlanetByName(solar,planet);
         travelViewModel.travelTo(toTravelTo);
         travelViewModel.playerAttacked();
         updateTravelStatus();
@@ -120,14 +122,14 @@ public class PlanetActivity extends AppCompatActivity {
         int mappedFuelLevel = travelViewModel.getShipFuel();
         fuel.setText(String.valueOf(mappedFuelLevel));
         fuel_level.setProgress(100 - travelViewModel.getShipFuel());
-        if (mappedFuelLevel >= 60) {
+        if (mappedFuelLevel >= MIN_FUEL_LEVEL) {
             fuel.setTextColor(Color.BLACK);
         } else if (travelViewModel.isFuelTooLow()) {
             fuel.setTextColor(Color.RED);
         } else {
             fuel.setTextColor(Color.YELLOW);
         }
-        fuel_level.setProgress(100 - travelViewModel.getShipFuel(), 800);
+        fuel_level.setProgress(100 - travelViewModel.getShipFuel(), MILLISECONDS);
         fuel.bringToFront();
         travelViewModel.savePlayer();
     }

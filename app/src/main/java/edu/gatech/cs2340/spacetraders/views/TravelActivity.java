@@ -9,7 +9,9 @@ import android.widget.ImageButton;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
@@ -24,6 +26,7 @@ public class TravelActivity extends AppCompatActivity {
 
     public static final String CHOSEN_PLANET = "PLANET";
     public static final String CHOSEN_SOLAR_SYSTEM = "SOLAR_SYSTEM";
+    public static final double MAX_RAND = 0.9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +42,21 @@ public class TravelActivity extends AppCompatActivity {
     }
 
     private void solarSystemClicked(View view) {
-        Universe universe = Universe.getInstance();
         switch (view.getId()) {
             case R.id.solarsystem1:
                 showDestinations(
-                        universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[0]));
+                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[0]));
                 break;
             case R.id.solarsystem2:
                 showDestinations(
-                        universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[1]));
+                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[1]));
                 break;
             case R.id.solarsystem3:
                 showDestinations(
-                        universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[2]));
+                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[2]));
                 break;
             default:
-                showDestinations(universe.getRandomSolarSystem());
+                showDestinations(Universe.getRandomSolarSystem());
                 break;
         }
     }
@@ -63,7 +65,9 @@ public class TravelActivity extends AppCompatActivity {
     private void showDestinations(SolarSystem solarSystem) {
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
         Set<Planet> planets = solarSystem.getPlanets();
-        String[] planetNames = planets.stream().map(Planet::getName).toArray(String[]::new);
+        Stream<Planet> planetStream = planets.stream();
+        Stream<String> planetMap = planetStream.map(Planet::getName);
+        String[] planetNames = planetMap.toArray(String[]::new);
         String solarSystemName = solarSystem.getName();
         builder.setTitle("Select a planet from solar system: " + solarSystemName)
                 .setItems(planetNames, (dialog, which) -> {
@@ -84,7 +88,7 @@ public class TravelActivity extends AppCompatActivity {
 
     public boolean checkForRandomEvent() {
         double rand = Math.random();
-        return rand < 0.9;
+        return rand < MAX_RAND;
     }
 
 

@@ -6,7 +6,6 @@ import java.util.Objects;
 /**
  * The type Player.
  */
-@SuppressWarnings("FeatureEnvy")
 public class Player {
 
     private String name;
@@ -23,13 +22,10 @@ public class Player {
 //    public Player() {
 //        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
 //    }
-    public Player() {
 
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
-    }
+//    public void setInventory(Inventory inventory) {
+//        this.inventory = inventory;
+//    }
 
     /**
      * Instantiates a new Player.
@@ -49,13 +45,29 @@ public class Player {
         this.location = location;
     }
 
-    public void updateStock(Good toUpdate) {
-        inventory.setStock(toUpdate, inventory.getStock(toUpdate) + 1);
-    }
+//    public void updateStock(Good toUpdate) {
+//        inventory.setStock(toUpdate, inventory.getStock(toUpdate) + 1);
+//    }
 
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public int getTotalStock() {
+        return inventory.getTotalStock();
+    }
+
+    public int getStock(Good toSell) {
+        return inventory.getStock(toSell);
+    }
+
+    public void setStock(Good toBuy,int stock) {
+        inventory.setStock(toBuy,stock);
+    }
+
+    public void adjustTotalStock(int stock) {
+        inventory.adjustTotalStock(stock);
     }
 
     /**
@@ -76,14 +88,14 @@ public class Player {
         this.name = name;
     }
 
-    /**
-     * Get skills skills [ ].
-     *
-     * @return the skills [ ]
-     */
-    public Skills[] getSkills() {
-        return skills.clone();
-    }
+//    /**
+//     * Get skills skills [ ].
+//     *
+//     * @return the skills [ ]
+//     */
+//    public Skills[] getSkills() {
+//        return skills.clone();
+//    }
 
     /**
      * Sets skills.
@@ -94,14 +106,14 @@ public class Player {
         this.skills = skills.clone();
     }
 
-    /**
-     * Gets preferred difficulty.
-     *
-     * @return the preferred difficulty
-     */
-    public Difficulty getPreferredDifficulty() {
-        return preferredDifficulty;
-    }
+//    /**
+//     * Gets preferred difficulty.
+//     *
+//     * @return the preferred difficulty
+//     */
+//    public Difficulty getPreferredDifficulty() {
+//        return preferredDifficulty;
+//    }
 
     /**
      * Sets preferred difficulty.
@@ -139,14 +151,22 @@ public class Player {
         return ship;
     }
 
-    /**
-     * Sets ship.
-     *
-     * @param ship the ship
-     */
-    public void setShip(Ship ship) {
-        this.ship = ship;
+    public int getShipFuelCapacity() {
+        return ship.getFuelCapacity();
     }
+
+    public void setShipFuelCapacity(int fuelCapacity) {
+        ship.setFuelCapacity(fuelCapacity);
+    }
+
+//    /**
+//     * Sets ship.
+//     *
+//     * @param ship the ship
+//     */
+//    public void setShip(Ship ship) {
+//        this.ship = ship;
+//    }
 
     public void setLocation(Planet planet) {
         location = planet;
@@ -156,14 +176,20 @@ public class Player {
         return location;
     }
 
+    public String getLocationName() { return location.getName(); }
+
+
+    public Market getPlanetsMarket() {
+        return location.getPlanetsMarket();
+    }
+
     @Override
     public String toString() {
-        String playerInfo = "\t\nPlayer: " + name + "\nSelected Difficulty: " + preferredDifficulty
+        return "\t\nPlayer: " + name + "\nSelected Difficulty: " + preferredDifficulty
                             + "\nPilot points: " + skills[0].getPoints() + "\nFighter points: "
                             + skills[1].getPoints() + "\nTrader points: " + skills[2].getPoints()
                             + "\nEngineer points: " + skills[3].getPoints() + "\nCredits : "
                             + credits + "\nShip type: " + ship + "\nLocation : " + location;
-        return playerInfo;
     }
 
     @Override

@@ -14,14 +14,13 @@ public class TravelProcessor {
         if (remainingFuel < 0) {
             throw new TravelException("Not enough fuel");
         } else {
-            player.getShip().setFuelCapacity(remainingFuel);
+            player.setShipFuelCapacity(remainingFuel);
             player.setLocation(travelTo);
         }
     }
 
     private static int getRemainingFuel(Player player, Planet travelTo) {
-        Ship currentShip = player.getShip();
-        return currentShip.getFuelCapacity() - computeFuelCost(player, travelTo);
+        return player.getShipFuelCapacity() - computeFuelCost(player, travelTo);
     }
 
     private static int computeFuelCost(Player player, Planet travelTo) {

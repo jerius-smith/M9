@@ -45,21 +45,41 @@ public enum Good {
      */
     ROBOTS(5000, 6, -150, 100);
 
-    public void setBASE_PRICE(double BASE_PRICE) {
-        this.BASE_PRICE = BASE_PRICE;
-    }
+//    /**
+//     * Sets base price.
+//     *
+//     * @param BASE_PRICE the base price
+//     */
+//    public void setBASE_PRICE(double BASE_PRICE) {
+//        this.BASE_PRICE = BASE_PRICE;
+//    }
 
-    public void setMTLP(int MTLP) {
-        this.MTLP = MTLP;
-    }
+//    /**
+//     * Sets mtlp.
+//     *
+//     * @param MTLP the mtlp
+//     */
+//    public void setMTLP(int MTLP) {
+//        this.MTLP = MTLP;
+//    }
 
-    public void setIPL(int IPL) {
-        this.IPL = IPL;
-    }
-
-    public void setVarianceFactor(int varianceFactor) {
-        this.varianceFactor = varianceFactor;
-    }
+//    /**
+//     * Sets ipl.
+//     *
+//     * @param IPL the ipl
+//     */
+//    public void setIPL(int IPL) {
+//        this.IPL = IPL;
+//    }
+//
+//    /**
+//     * Sets variance factor.
+//     *
+//     * @param varianceFactor the variance factor
+//     */
+//    public void setVarianceFactor(int varianceFactor) {
+//        this.varianceFactor = varianceFactor;
+//    }
 
     private double BASE_PRICE;
     private int MTLP;
@@ -73,21 +93,38 @@ public enum Good {
         this.varianceFactor = varianceFactor;
     }
 
-    Good() {
-    }
-
+    /**
+     * Gets base price.
+     *
+     * @return the base price
+     */
     public double getBASE_PRICE() {
         return BASE_PRICE;
     }
 
+    /**
+     * Gets mtlp.
+     *
+     * @return the mtlp
+     */
     public int getMTLP() {
         return MTLP;
     }
 
+    /**
+     * Gets ipl.
+     *
+     * @return the ipl
+     */
     public int getIPL() {
         return IPL;
     }
 
+    /**
+     * Gets variance factor.
+     *
+     * @return the variance factor
+     */
     public int getVarianceFactor() {
         return varianceFactor;
     }

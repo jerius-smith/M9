@@ -57,15 +57,22 @@ public enum Resource {
      */
     WARLIKE("Warlike");
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
-    }
-
-    Resource() {
     }
 
     private String name;
@@ -81,6 +88,7 @@ public enum Resource {
 
     /**
      * Gets the number of elements
+     *
      * @return the number of elements in the Resource enum
      */
     public static int numElements() {

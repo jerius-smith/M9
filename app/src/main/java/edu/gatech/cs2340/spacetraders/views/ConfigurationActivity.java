@@ -1,6 +1,7 @@
 package edu.gatech.cs2340.spacetraders.views;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
@@ -29,10 +30,10 @@ import edu.gatech.cs2340.spacetraders.viewmodel.ConfigurationViewModel;
 /**
  * The type Configuration activity.
  */
-@SuppressWarnings("FeatureEnvy")
 public class ConfigurationActivity extends AppCompatActivity {
 
 
+    public static final int DURATION = 5000;
     private TextView points;
     private EditText nameInput;
 
@@ -101,8 +102,10 @@ public class ConfigurationActivity extends AppCompatActivity {
 
         setupPlayer.setOnClickListener(view -> {
             updatePoints();
-            viewModel = ViewModelProviders.of(this).get(ConfigurationViewModel.class);
-            String name = nameInput.getText().toString();
+            ViewModelProvider vmProvide = ViewModelProviders.of(this);
+            viewModel = vmProvide.get(ConfigurationViewModel.class);
+            CharSequence nameText = nameInput.getText();
+            String name = nameText.toString();
             Difficulty difficulty = (Difficulty) difficultySpinner.getSelectedItem();
             boolean isValid = viewModel.isValidPlayer(name, difficulty, skills);
 
@@ -125,19 +128,22 @@ public class ConfigurationActivity extends AppCompatActivity {
         String[] selectFrom = DataStore.getSavedPlayerNames(context);
         CFAlertDialog.Builder builder = new CFAlertDialog.Builder(this);
         if (selectFrom.length > 0) {
-            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
-                    .setTitle("Load Game")
-                    .setMessage("Select the game state").setItems(selectFrom, (dialog, index) -> {
+            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+            builder.setTitle("Load Game");
+            builder.setMessage("Select the game state");
+            builder.setItems(selectFrom, (dialog, index) -> {
                     dialog.dismiss();
                     DataStore.setCurrentPlayerText(context, selectFrom[index]);
                     launchWelcomeScreen(selectFrom[index]);
-                    }).setTextGravity(Gravity.CENTER_HORIZONTAL).setIcon(R.drawable.gnat)
-                    .setCancelable(false)
-                    .addButton("Cancel", Color.WHITE, Color.RED,
+                    });
+            builder.setTextGravity(Gravity.CENTER_HORIZONTAL);
+            builder.setIcon(R.drawable.gnat);
+            builder.setCancelable(false);
+            builder.addButton("Cancel", Color.WHITE, Color.RED,
                                CFAlertDialog.CFAlertActionStyle.NEGATIVE,
                                CFAlertDialog.CFAlertActionAlignment.CENTER,
-                               (dialog, which) -> dialog.dismiss())
-                    .addButton("Delete All", Color.WHITE, Color.RED,
+                               (dialog, which) -> dialog.dismiss());
+            builder.addButton("Delete All", Color.WHITE, Color.RED,
                                CFAlertDialog.CFAlertActionStyle.POSITIVE,
                                CFAlertDialog.CFAlertActionAlignment.CENTER,
                                (dialog, which) -> {
@@ -145,16 +151,16 @@ public class ConfigurationActivity extends AppCompatActivity {
                                 dialog.dismiss();
                                });
         } else {
-            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT)
-                    .setTitle("Error Loading Save Data")
-                    .setMessage("No previous game saves to load.")
-                    .addButton("OK", Color.WHITE,
+            builder.setDialogStyle(CFAlertDialog.CFAlertStyle.ALERT);
+            builder.setTitle("Error Loading Save Data");
+            builder.setMessage("No previous game saves to load.");
+            builder.addButton("OK", Color.WHITE,
                                ContextCompat.getColor(context, R.color.light_turq),
                                CFAlertDialog.CFAlertActionStyle.NEGATIVE,
                                CFAlertDialog.CFAlertActionAlignment.CENTER,
-                               (dialog, index) -> dialog.dismiss())
-                    .setCancelable(true)
-                    .setAutoDismissAfter(5000);
+                               (dialog, index) -> dialog.dismiss());
+            builder.setCancelable(true);
+            builder.setAutoDismissAfter(DURATION);
         }
         builder.show();
     }
@@ -164,10 +170,12 @@ public class ConfigurationActivity extends AppCompatActivity {
         int sum = 0;
 
         for (int i = 0; i < skills.length; i++) {
-            String currentPoints = skillsArr[i].getText().toString();
+            CharSequence skillText =skillsArr[i].getText();
+            String currentPoints = skillText.toString();
             if (currentPoints.isEmpty()) {
                 skillsArr[i].setText("0");
-                currentPoints = skillsArr[i].getText().toString();
+                skillText =skillsArr[i].getText();
+                currentPoints = skillText.toString();
             }
             skills[i].setPoints(Integer.parseInt(currentPoints));
             sum += skills[i].getPoints();
@@ -177,8 +185,9 @@ public class ConfigurationActivity extends AppCompatActivity {
             points.setText(Integer.toString(Skills.MAX_POINTS - sum));
         } else {
             points.setText(Integer.toString(Skills.MAX_POINTS - sum));
-            Toast.makeText(getApplicationContext(), "You've used more points than available.",
-                           Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(getApplicationContext(), "You've used more points than available.",
+                           Toast.LENGTH_LONG);
+            toast.show();
         }
 
     }

@@ -18,7 +18,7 @@ import edu.gatech.cs2340.spacetraders.R;
 
 public class RandomEventActivity extends AppCompatActivity {
 
-    public static boolean attacked = false;
+    public static boolean attacked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

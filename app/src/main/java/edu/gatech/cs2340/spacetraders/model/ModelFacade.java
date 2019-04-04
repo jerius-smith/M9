@@ -28,6 +28,7 @@ public final class ModelFacade {
      * @param name           the name
      * @param prefDifficulty the pref difficulty
      * @param skillPoints    the skill points
+     * @param location       the location
      */
     public void createPlayer(String name, Difficulty prefDifficulty, Skills[] skillPoints,
                              Planet location) {
@@ -43,9 +44,14 @@ public final class ModelFacade {
 //        Log.d("UNIVERSE", "\n" + universe.toString());
     }
 
-    public void setUpdatedPlayer(Player player) {
-        this.player = player;
-    }
+//    /**
+//     * Sets updated player.
+//     *
+//     * @param player the player
+//     */
+//    public void setUpdatedPlayer(Player player) {
+//        this.player = player;
+//    }
 
 
     /**
@@ -57,6 +63,11 @@ public final class ModelFacade {
         return player;
     }
 
+    /**
+     * Gets universe.
+     *
+     * @return the universe
+     */
     public Universe getUniverse() {
         return universe;
     }

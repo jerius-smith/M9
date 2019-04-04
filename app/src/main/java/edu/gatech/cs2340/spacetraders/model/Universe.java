@@ -30,12 +30,24 @@ public final class Universe {
         }
     }
 
+    /**
+     * Gets solar systems.
+     *
+     * @return the solar systems
+     */
     public Set<SolarSystem> getSolarSystems() {
         return Collections.unmodifiableSet(solarSystems);
     }
 
-    public SolarSystem getSolarSystemByName(String name) {
-        for (SolarSystem curr : solarSystems) {
+    /**
+     * Gets solar system by name.
+     *
+     * @param name the name
+     * @return the solar system by name
+     */
+    public static SolarSystem getSolarSystemByName(String name) {
+        Universe universe = getInstance();
+        for (SolarSystem curr : universe.solarSystems) {
             if (name.equals(curr.getName())) {
                 return curr;
             }
@@ -53,15 +65,30 @@ public final class Universe {
     }
 
 
-    public SolarSystem getRandomSolarSystem() {
+    /**
+     * Gets random solar system.
+     *
+     * @return the random solar system
+     */
+    public static SolarSystem getRandomSolarSystem() {
         SolarSystem toReturn = null;
-        for (SolarSystem curr : solarSystems) {
-            //noinspection MagicNumber
+        Universe uni = getInstance();
+        for (SolarSystem curr : uni.solarSystems) {
             if (Math.random() < .9) {
                 toReturn = curr;
             }
         }
         return toReturn;
+    }
+
+    /**
+     * Gets random planet.
+     *
+     * @return the random planet
+     */
+    public static Planet getRandomPlanet() {
+        SolarSystem solar = getRandomSolarSystem();
+        return solar.getRandomPlanet();
     }
 
 }
