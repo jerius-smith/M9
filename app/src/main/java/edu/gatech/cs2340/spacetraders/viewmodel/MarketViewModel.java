@@ -12,7 +12,6 @@ import edu.gatech.cs2340.spacetraders.model.DataStore;
 import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.model.Inventory;
 import edu.gatech.cs2340.spacetraders.model.Market;
-import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.entities.TransactionProcessor;
 

@@ -4,7 +4,6 @@ import java.util.Objects;
 
 import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
-import edu.gatech.cs2340.spacetraders.model.Ship;
 import edu.gatech.cs2340.spacetraders.views.AttackActivity;
 
 public class TravelProcessor {

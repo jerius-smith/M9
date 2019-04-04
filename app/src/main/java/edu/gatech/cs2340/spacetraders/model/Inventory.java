@@ -1,6 +1,5 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

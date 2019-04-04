@@ -1,7 +1,6 @@
 package edu.gatech.cs2340.spacetraders.views;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.ImageButton;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -18,7 +16,6 @@ import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
 import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.SolarSystem;
 import edu.gatech.cs2340.spacetraders.model.Universe;
-import edu.gatech.cs2340.spacetraders.viewmodel.TravelViewModel;
 
 public class TravelActivity extends AppCompatActivity {
 

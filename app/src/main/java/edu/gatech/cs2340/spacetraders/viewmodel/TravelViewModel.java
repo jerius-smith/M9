@@ -3,7 +3,6 @@ package edu.gatech.cs2340.spacetraders.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;

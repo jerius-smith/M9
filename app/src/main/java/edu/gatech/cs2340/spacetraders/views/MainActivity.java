@@ -3,7 +3,6 @@ package edu.gatech.cs2340.spacetraders.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageButton;
 
 import edu.gatech.cs2340.spacetraders.R;
