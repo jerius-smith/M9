@@ -15,7 +15,6 @@ import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.viewmodel.MarketViewModel;
 
-@SuppressWarnings("FeatureEnvy")
 public class MarketActivity extends AppCompatActivity {
 
     private RecyclerView marketInventoryView;

@@ -1,16 +1,16 @@
 package edu.gatech.cs2340.spacetraders.entities;
 
 import edu.gatech.cs2340.spacetraders.model.Good;
+import edu.gatech.cs2340.spacetraders.model.Inventory;
 import edu.gatech.cs2340.spacetraders.model.Market;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Ship;
 
-@SuppressWarnings("FeatureEnvy")
 public class TransactionProcessor {
 
     // You cannot buy more goods than the cargo capacity
     private static String validateCargoCapacity(Player player, Ship toValidate) {
-        if (player.getInventory().getTotalStock() >= toValidate.getCargoCapacity()) {
+        if (player.getTotalStock() >= toValidate.getCargoCapacity()) {
             return "You cannot buy more goods than the cargo capacity\n";
         } else {
             return "";
@@ -27,12 +27,12 @@ public class TransactionProcessor {
     }
 
     private static boolean validateSellingGoods(Player player) {
-        return player.getInventory().getTotalStock() > 0;
+        return player.getTotalStock() > 0;
     }
 
     // You cannot sell more goods than you own
     private static String validateSellingSpecificGood(Player player, Good toSell) {
-        if ((player.getInventory().getStock(toSell) <= 0) || !validateSellingGoods(player)) {
+        if ((player.getStock(toSell) <= 0) || !validateSellingGoods(player)) {
             return "You cannot sell more goods than you own\n";
         } else {
             return "";
@@ -42,7 +42,7 @@ public class TransactionProcessor {
     // Checks whether the market has enough of a good the player is trying to
     // buy or sell
     private static String validateMarketCapacity(Market market, Good toCheck) {
-        if (market.getMarketInventory().getStock(toCheck) <= 0) {
+        if (market.getStock(toCheck) <= 0) {
             return "Cannot buy item because market does not have enough\n";
         } else {
             return "";
@@ -60,14 +60,13 @@ public class TransactionProcessor {
             throw new MarketActivityException(result);
         } else {
             player.setCredits(player.getCredits() - goodPrice);
-            int currPlayerStockOfGood = player.getInventory().getStock(toBuy);
-            player.getInventory().setStock(toBuy, currPlayerStockOfGood + 1);
-            player.getInventory().adjustTotalStock(player.getInventory().getTotalStock() + 1);
+            int currPlayerStockOfGood = player.getStock(toBuy);
+            player.setStock(toBuy, currPlayerStockOfGood + 1);
+            player.adjustTotalStock(player.getTotalStock() + 1);
 
-            int currMarketStockOfGood = market.getMarketInventory().getStock(toBuy);
-            market.getMarketInventory().setStock(toBuy, currMarketStockOfGood - 1);
-            market.getMarketInventory()
-                    .adjustTotalStock(market.getMarketInventory().getTotalStock() + 1);
+            int currMarketStockOfGood = market.getStock(toBuy);
+            market.setStock(toBuy, currMarketStockOfGood - 1);
+           market.adjustTotalStock(market.getTotalStock() + 1);
         }
     }
 
@@ -81,14 +80,13 @@ public class TransactionProcessor {
         } else {
             double goodPrice = market.getPriceOfGood(toSell);
             player.setCredits(player.getCredits() + goodPrice);
-            int currPlayerStockOfGood = player.getInventory().getStock(toSell);
-            player.getInventory().setStock(toSell, currPlayerStockOfGood - 1);
-            player.getInventory().adjustTotalStock(player.getInventory().getTotalStock() - 1);
+            int currPlayerStockOfGood = player.getStock(toSell);
+            player.setStock(toSell, currPlayerStockOfGood - 1);
+            player.adjustTotalStock(player.getTotalStock() - 1);
 
-            int currMarketStockOfGood = market.getMarketInventory().getStock(toSell);
-            market.getMarketInventory().setStock(toSell, currMarketStockOfGood + 1);
-            market.getMarketInventory()
-                    .adjustTotalStock(market.getMarketInventory().getTotalStock() - 1);
+            int currMarketStockOfGood = market.getStock(toSell);
+            market.setStock(toSell, currMarketStockOfGood + 1);
+            market.adjustTotalStock(market.getTotalStock() - 1);
         }
     }
 

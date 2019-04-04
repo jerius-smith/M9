@@ -34,19 +34,16 @@ public enum Difficulty {
         this.difficulty = difficulty;
     }
 
-    Difficulty() {
-    }
-
     @Override
     public String toString() {
         return this.difficulty;
     }
 
-    public String getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
+//    public String getDifficulty() {
+//        return difficulty;
+//    }
+//
+//    public void setDifficulty(String difficulty) {
+//        this.difficulty = difficulty;
+//    }
 }

@@ -18,7 +18,7 @@ public class SolarSystem {
     private final String name;
     private final double xLoc;
     private final double yLoc;
-    private Set<Planet> planets;
+    private final Set<Planet> planets;
     private final Set<Mercenary> mercenaries;
     private static final int NUM_PLANETS = ((int) (Math.random() * 7)) + 4;
 
@@ -31,8 +31,9 @@ public class SolarSystem {
         this.name = name;
         planets = new HashSet<>();
         for (int i = 0; i < NUM_PLANETS; i++) {
-            Planet planet = new Planet(GameLogistics.PLANET_NAMES[new Random()
-                    .nextInt(GameLogistics.PLANET_NAMES.length)]);
+            Random rand = new Random();
+            int randInt = rand.nextInt(GameLogistics.PLANET_NAMES.length);
+            Planet planet = new Planet(GameLogistics.PLANET_NAMES[randInt]);
             planet.setSolarSystemCurrentlyIn(name);
             planets.add(planet);
         }
@@ -42,8 +43,9 @@ public class SolarSystem {
             mercenaries.add(new Mercenary());
         }
 
-        xLoc = floor(new Random().nextDouble() * GameLogistics.MAX_WIDTH);
-        yLoc = floor(new Random().nextDouble() * GameLogistics.MAX_HEIGHT);
+        Random rand = new Random();
+        xLoc = floor(rand.nextDouble() * GameLogistics.MAX_WIDTH);
+        yLoc = floor(rand.nextDouble() * GameLogistics.MAX_HEIGHT);
     }
 
     /**
@@ -56,12 +58,14 @@ public class SolarSystem {
     }
 
     public Planet getRandomPlanet() {
-        int randIndex = new Random().nextInt(planets.size());
+        Random rand = new Random();
+        int randIndex = rand.nextInt(planets.size());
         return (Planet) Objects.requireNonNull(planets.toArray())[randIndex];
     }
 
-    public Planet getPlanetByName(String planetName) {
-        for (Planet current : planets) {
+    public static Planet getPlanetByName(SolarSystem solar, String planetName) {
+        solar = Objects.requireNonNull(solar);
+        for (Planet current : solar.getPlanets()) {
             if (planetName.equals(current.getName())) {
                 return current;
             }
@@ -69,21 +73,24 @@ public class SolarSystem {
         return null;
     }
 
-    /**
-     * Sets planets.
-     *
-     * @param planets the planets
-     */
-    public void setPlanets(Set<Planet> planets) {
-        this.planets = planets;
-    }
+//    /**
+//     * Sets planets.
+//     *
+//     * @param planets the planets
+//     */
+//    public void setPlanets(Set<Planet> planets) {
+//        this.planets = planets;
+//    }
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder().append("\nSolar System: ").append(name).
-                append(String.format("\nLocation: (%.0f, %.0f)", xLoc, yLoc));
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("\nSolar System: ");
+        stringBuilder.append(name);
+        stringBuilder.append(String.format("\nLocation: (%.0f, %.0f)", xLoc, yLoc));
         for (Planet curr : planets) {
-            stringBuilder.append("\n\t").append(curr.toString());
+            stringBuilder.append("\n\t");
+            stringBuilder.append(curr.toString());
         }
         return stringBuilder.toString();
     }
@@ -101,9 +108,9 @@ public class SolarSystem {
                && Objects.equals(mercenaries, that.mercenaries);
     }
 
-    public static int getNumPlanets() {
-        return NUM_PLANETS;
-    }
+//    public static int getNumPlanets() {
+//        return NUM_PLANETS;
+//    }
 
     public String getName() {
         return name;

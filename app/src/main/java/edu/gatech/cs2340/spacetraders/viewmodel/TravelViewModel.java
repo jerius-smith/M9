@@ -22,6 +22,10 @@ import edu.gatech.cs2340.spacetraders.views.RandomEventActivity;
  */
 public class TravelViewModel extends AndroidViewModel {
 
+    /**
+     * The constant OMAX.
+     */
+    public static final int OMAX = 80;
     private Player player;
     private Ship playerShip;
 
@@ -40,17 +44,30 @@ public class TravelViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * Gets player location.
+     *
+     * @return the player location
+     */
     public String getPlayerLocation() {
-        Planet planet = player.getLocation();
-        return planet.getName();
+        return player.getLocationName();
     }
 
+    /**
+     * Gets ship fuel.
+     *
+     * @return the ship fuel
+     */
     public int getShipFuel() {
         int actualFuel = playerShip.getFuelCapacity();
-        @SuppressWarnings("MagicNumber") int mappedFuel = (int) GameLogistics.mapValues(actualFuel, 0, 80, 0, 100);
-        return mappedFuel;
+        return (int) GameLogistics.mapValues(actualFuel, 0, OMAX, 0, 100);
     }
 
+    /**
+     * Travel to.
+     *
+     * @param toTravelTo the to travel to
+     */
     public void travelTo(Planet toTravelTo) {
         try {
             TravelProcessor.validateTraveling(player, toTravelTo);
@@ -61,19 +78,35 @@ public class TravelViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * Player attacked.
+     */
     public void playerAttacked() {
         TravelProcessor.playerAttackedDuringTravel(player, RandomEventActivity.attacked);
     }
 
+    /**
+     * Gets player credits.
+     *
+     * @return the player credits
+     */
     public double getPlayerCredits() {
         return player.getCredits();
     }
 
+    /**
+     * Is fuel too low boolean.
+     *
+     * @return the boolean
+     */
     public boolean isFuelTooLow() {
         return playerShip.isFuelTooLow();
     }
 
 
+    /**
+     * Save player.
+     */
     public void savePlayer() {
         try {
             DataStore.playerToJson(getApplication(), player);

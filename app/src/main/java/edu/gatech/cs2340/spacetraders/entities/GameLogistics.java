@@ -5,7 +5,6 @@ import java.util.HashMap;
 /**
  * The type Game logistics.
  */
-@SuppressWarnings("ALL")
 public final class GameLogistics {
 
     /**
@@ -21,7 +20,7 @@ public final class GameLogistics {
      * The constant MAX_DISTANCE.
      */
     public static final int MAX_DISTANCE =
-            (int) Math.sqrt(MAX_WIDTH * MAX_WIDTH + MAX_HEIGHT * MAX_HEIGHT);
+            (int) Math.sqrt((MAX_WIDTH * MAX_WIDTH) + (MAX_HEIGHT * MAX_HEIGHT));
     /**
      * The constant MAX_MERCENARIES.
      */
@@ -128,7 +127,7 @@ public final class GameLogistics {
      */
     public static double mapValues(double original, double omin, double omax, double nmin,
                                     double nmax) {
-        return nmin + (nmax - nmin) * ((original - omin) / (omax - omin));
+        return nmin + ((nmax - nmin) * ((original - omin) / (omax - omin)));
     }
 
 }

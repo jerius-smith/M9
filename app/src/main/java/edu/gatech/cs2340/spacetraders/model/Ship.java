@@ -11,36 +11,44 @@ import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
  */
 public class Ship {
 
-    private String name;
-    private int cargoCapacity;
-    private int gadgetCapacity;
-    private Collection<Weapons> weapons;
+    private final String name;
+    private final int cargoCapacity;
+    private final int gadgetCapacity;
+//    private Collection<Weapons> weapons;
     private int fuelCapacity;
     private boolean fuelTooLow;
 
+    /**
+     * Is fuel too low boolean.
+     *
+     * @return the boolean
+     */
     public boolean isFuelTooLow() {
         return fuelTooLow;
     }
 
-    public Collection<Weapons> getWeapons() {
-        return Collections.unmodifiableCollection(weapons);
-    }
+//    public Collection<Weapons> getWeapons() {
+//        return Collections.unmodifiableCollection(weapons);
+//    }
 
-    public void setWeapons(Collection<Weapons> weapons) {
-        this.weapons = weapons;
-    }
+//    public void setWeapons(Collection<Weapons> weapons) {
+//        this.weapons = weapons;
+//    }
 
-    public void setCargoCapacity(int cargoCapacity) {
-        this.cargoCapacity = cargoCapacity;
-    }
+//    public void setCargoCapacity(int cargoCapacity) {
+//        this.cargoCapacity = cargoCapacity;
+//    }
 
-    public void setGadgetCapacity(int gadgetCapacity) {
-        this.gadgetCapacity = gadgetCapacity;
-    }
+//    public void setGadgetCapacity(int gadgetCapacity) {
+//        this.gadgetCapacity = gadgetCapacity;
+//    }
 
-    Ship() {
-    }
 
+    /**
+     * Sets fuel too low.
+     *
+     * @param fuelTooLow the fuel too low
+     */
     public void setFuelTooLow(boolean fuelTooLow) {
         this.fuelTooLow = fuelTooLow;
     }
@@ -58,42 +66,52 @@ public class Ship {
         this.fuelTooLow = false;
     }
 
-    public void addWeapon(Weapons weapon) {
-        if (weapons.size() < cargoCapacity) {
-            weapons.add(weapon);
-        }
-    }
+//    public void addWeapon(Weapons weapon) {
+//        if (weapons.size() < cargoCapacity) {
+//            weapons.add(weapon);
+//        }
+//    }
 
     /**
      * Gets name.
      *
      * @return the name
      */
-    public String getName() {
-        return name;
-    }
+//    public String getName() {
+//        return name;
+//    }
 
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+//    /**
+//     * Sets name.
+//     *
+//     * @param name the name
+//     */
+//    public void setName(String name) {
+//        this.name = name;
+//    }
 
     public int getCargoCapacity() {
         return cargoCapacity;
     }
 
-    public int getGadgetCapacity() {
-        return gadgetCapacity;
-    }
+//    public int getGadgetCapacity() {
+//        return gadgetCapacity;
+//    }
 
+    /**
+     * Gets fuel capacity.
+     *
+     * @return the fuel capacity
+     */
     public int getFuelCapacity() {
         return fuelCapacity;
     }
 
+    /**
+     * Sets fuel capacity.
+     *
+     * @param newFuelCapacity the new fuel capacity
+     */
     public void setFuelCapacity(int newFuelCapacity) {
         this.fuelCapacity = newFuelCapacity;
     }

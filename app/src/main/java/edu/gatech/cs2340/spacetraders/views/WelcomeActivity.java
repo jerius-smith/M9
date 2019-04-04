@@ -15,11 +15,6 @@ import edu.gatech.cs2340.spacetraders.R;
 public class WelcomeActivity extends AppCompatActivity {
 
     // AnimationDrawable starsAnimation;
-    /**
-     * The Welcome text.
-     */
-    private TextView welcomeText;
-    private ImageButton continueBttn;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,11 +23,14 @@ public class WelcomeActivity extends AppCompatActivity {
 
         String playerName = getIntent().getStringExtra("PLAYER_NAME");
 
-        RelativeLayout relativeLayout = findViewById(R.id.content_welcome);
+//        RelativeLayout relativeLayout = findViewById(R.id.content_welcome);
 
         //starsAnimation = (AnimationDrawable) relativeLayout.getBackground();
-        welcomeText = findViewById(R.id.welcome_text);
-        continueBttn = findViewById(R.id.continue_button);
+        /**
+         * The Welcome text.
+         */
+        TextView welcomeText = findViewById(R.id.welcome_text);
+        ImageButton continueBttn = findViewById(R.id.continue_button);
 
         String welcomeMessage = String.format(
                 "\"Welcome %s! \n We're excited you have " + "decided to begin your \n"

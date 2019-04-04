@@ -33,21 +33,35 @@ public class MarketViewModel extends AndroidViewModel {
         super(application);
         try {
             player = DataStore.getCurrentPlayer(getApplication());
-            Planet planet = player.getLocation();
-            market = planet.getPlanetsMarket();
+            market = player.getPlanetsMarket();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Gets market inventory.
+     *
+     * @return the market inventory
+     */
     public Inventory getMarketInventory() {
         return market.getMarketInventory();
     }
 
+    /**
+     * Gets player inventory.
+     *
+     * @return the player inventory
+     */
     public Inventory getPlayerInventory() {
         return player.getInventory();
     }
 
+    /**
+     * Sell item.
+     *
+     * @param good the good
+     */
     public void sellItem(Good good) {
         try {
             TransactionProcessor.sellItem(player, good, market);
@@ -56,6 +70,11 @@ public class MarketViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * Buy item.
+     *
+     * @param good the good
+     */
     public void buyItem(Good good) {
         try {
             TransactionProcessor.buyItem(player, good, market);
@@ -64,13 +83,25 @@ public class MarketViewModel extends AndroidViewModel {
         }
     }
 
+    /**
+     * Gets player credits.
+     *
+     * @return the player credits
+     */
     public double getPlayerCredits() { return player.getCredits(); }
 
+    /**
+     * Gets player location.
+     *
+     * @return the player location
+     */
     public String getPlayerLocation() {
-        Planet planet = player.getLocation();
-        return planet.getName();
+        return player.getLocationName();
     }
 
+    /**
+     * Save player.
+     */
     public void savePlayer() {
         try {
             DataStore.playerToJson(getApplication(), player);
