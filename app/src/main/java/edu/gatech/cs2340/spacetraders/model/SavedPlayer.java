@@ -88,7 +88,7 @@ public class SavedPlayer {
      * @param playerJsonName the player json name
      */
     public void setPlayerJsonName(String playerJsonName) {
-        playerJsonName = playerJsonName;
+        this.playerJsonName = playerJsonName;
     }
 
 //    public String getUniverseJsonName() {

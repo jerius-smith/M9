@@ -40,7 +40,7 @@ public class TravelProcessor {
 
     public static void playerAttackedDuringTravel(Player player, boolean attacked) {
         if (attacked) {
-            double newCredits = player.getCredits() - AttackActivity.DECREASE_CREDITS_BY;
+            double newCredits = player.getCredits() - AttackActivity.getDecreaseCredits();
             if (newCredits < 0) {
                 newCredits = 0;
             }

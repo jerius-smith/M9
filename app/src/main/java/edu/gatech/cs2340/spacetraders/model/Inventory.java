@@ -9,13 +9,13 @@ import java.util.Objects;
  * The type Inventory.
  */
 public class Inventory {
-    private Map<Good, GoodAttributes> inventory;
+    private final Map<Good, GoodAttributes> inventory;
     private int totalStock;
 
     /**
      * The type Good attributes.
      */
-    public class GoodAttributes {
+    private class GoodAttributes {
         private int stock;
         private double price;
 

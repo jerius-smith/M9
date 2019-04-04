@@ -28,7 +28,7 @@ public enum Difficulty {
     /**
      * The Difficulty.
      */
-    String difficulty;
+    final String difficulty;
 
     Difficulty(String difficulty) {
         this.difficulty = difficulty;

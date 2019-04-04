@@ -26,7 +26,7 @@ public class TravelActivity extends AppCompatActivity {
 
     public static final String CHOSEN_PLANET = "PLANET";
     public static final String CHOSEN_SOLAR_SYSTEM = "SOLAR_SYSTEM";
-    public static final double MAX_RAND = 0.9;
+    private static final double MAX_RAND = 0.9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +78,7 @@ public class TravelActivity extends AppCompatActivity {
                     Intent intent = new Intent();
                     intent.putExtra(CHOSEN_PLANET, selectedPlanet);
                     intent.putExtra(CHOSEN_SOLAR_SYSTEM, solarSystemName);
-                    intent.putExtra(UPDATED_CREDITS, RandomEventActivity.attacked);
+                    intent.putExtra(UPDATED_CREDITS, RandomEventActivity.getAttacked());
                     setResult(PlanetActivity.PLANET_REQUEST, intent);
                     dialog.dismiss();
                     finish();
@@ -86,7 +86,7 @@ public class TravelActivity extends AppCompatActivity {
         builder.show();
     }
 
-    public boolean checkForRandomEvent() {
+    private boolean checkForRandomEvent() {
         double rand = Math.random();
         return rand < MAX_RAND;
     }

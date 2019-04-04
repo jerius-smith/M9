@@ -33,7 +33,7 @@ import edu.gatech.cs2340.spacetraders.viewmodel.ConfigurationViewModel;
 public class ConfigurationActivity extends AppCompatActivity {
 
 
-    public static final int DURATION = 5000;
+    private static final int DURATION = 5000;
     private TextView points;
     private EditText nameInput;
 

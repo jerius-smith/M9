@@ -81,10 +81,10 @@ public enum Good {
 //        this.varianceFactor = varianceFactor;
 //    }
 
-    private double BASE_PRICE;
-    private int MTLP;
-    private int IPL;
-    private int varianceFactor;
+    private final double BASE_PRICE;
+    private final int MTLP;
+    private final int IPL;
+    private final int varianceFactor;
 
     Good(double price, int MTLP, int IPL, int varianceFactor) {
         this.BASE_PRICE = price;
