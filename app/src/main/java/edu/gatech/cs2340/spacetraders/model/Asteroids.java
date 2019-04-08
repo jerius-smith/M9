@@ -306,7 +306,7 @@ public class Asteroids extends PApplet {
         /**
          * The Pos.
          */
-        PVector pos;
+        final PVector pos;
         /**
          * The Vel.
          */

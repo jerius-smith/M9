@@ -29,7 +29,7 @@ import java.util.stream.Stream;
  * The type Data store.
  */
 public class DataStore {
-    private static final DataStore instance = new DataStore();
+//    private static final DataStore instance = new DataStore();
 
 //    /**
 //     * Gets instance.
@@ -47,7 +47,7 @@ public class DataStore {
     /**
      * The Saved player map.
      */
-    public static Map<String, SavedPlayer> savedPlayerMap;
+    private static Map<String, SavedPlayer> savedPlayerMap;
 
     /**
      * Json to player player.
@@ -57,7 +57,7 @@ public class DataStore {
      * @return the player
      * @throws FileNotFoundException the file not found exception
      */
-    public static Player jsonToPlayer(Context context, String fileName)
+    private static Player jsonToPlayer(Context context, String fileName)
             throws FileNotFoundException {
         Gson gson = new Gson();
         File file = context.getFilesDir();
@@ -189,7 +189,7 @@ public class DataStore {
      * @return the current player txt
      * @throws FileNotFoundException the file not found exception
      */
-    public static String getCurrentPlayerTxt(Context context) throws FileNotFoundException {
+    private static String getCurrentPlayerTxt(Context context) throws FileNotFoundException {
         File file = context.getFilesDir();
         Scanner sc =
                 new Scanner(new File(file.getAbsolutePath() + "/" + "/current_player.txt"));
@@ -286,8 +286,11 @@ public class DataStore {
         });
 
         Optional<SavedPlayer> firstSaved = savedPlayerString.findFirst();
-        SavedPlayer player = firstSaved.get();
-        return player.getCurrentPlayerText();
+        if (firstSaved.isPresent()) {
+            SavedPlayer player = firstSaved.get();
+            return player.getCurrentPlayerText();
+        }
+        return "Not found";
     }
 
     /**

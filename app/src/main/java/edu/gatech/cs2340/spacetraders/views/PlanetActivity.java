@@ -30,8 +30,8 @@ import edu.gatech.cs2340.spacetraders.viewmodel.TravelViewModel;
 public class PlanetActivity extends AppCompatActivity {
 
 //    public static final int INT = 60;
-    public static final int MILLISECONDS = 800;
-    public static final int MIN_FUEL_LEVEL = 60;
+    private static final int MILLISECONDS = 800;
+    private static final int MIN_FUEL_LEVEL = 60;
     private TextView playerCredits;
     private TextView location;
     private TextView fuel;

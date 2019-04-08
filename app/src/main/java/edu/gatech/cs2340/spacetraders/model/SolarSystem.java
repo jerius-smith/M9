@@ -64,8 +64,8 @@ public class SolarSystem {
     }
 
     public static Planet getPlanetByName(SolarSystem solar, String planetName) {
-        solar = Objects.requireNonNull(solar);
-        for (Planet current : solar.getPlanets()) {
+        SolarSystem solarSys = Objects.requireNonNull(solar);
+        for (Planet current : solarSys.getPlanets()) {
             if (planetName.equals(current.getName())) {
                 return current;
             }

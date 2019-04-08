@@ -1,7 +1,5 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Objects;
 
 import edu.gatech.cs2340.spacetraders.entities.GameLogistics;

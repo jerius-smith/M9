@@ -1,6 +1,5 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -9,13 +8,13 @@ import java.util.Objects;
  * The type Inventory.
  */
 public class Inventory {
-    private Map<Good, GoodAttributes> inventory;
+    private final Map<Good, GoodAttributes> inventory;
     private int totalStock;
 
     /**
      * The type Good attributes.
      */
-    public class GoodAttributes {
+    private class GoodAttributes {
         private int stock;
         private double price;
 

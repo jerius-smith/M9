@@ -10,12 +10,12 @@ public class Market {
     /**
      * The constant DOUBLE.
      */
-    public static final double DOUBLE = 100.0;
+    private static final double DOUBLE = 100.0;
     /**
      * The constant BOUND.
      */
-    public static final int BOUND = 50;
-    private Inventory marketInventory;
+    private static final int BOUND = 50;
+    private final Inventory marketInventory;
 
     /**
      * Instantiates a new Market.

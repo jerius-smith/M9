@@ -3,7 +3,6 @@ package edu.gatech.cs2340.spacetraders.viewmodel;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
@@ -25,7 +24,7 @@ public class TravelViewModel extends AndroidViewModel {
     /**
      * The constant OMAX.
      */
-    public static final int OMAX = 80;
+    private static final int OMAX = 80;
     private Player player;
     private Ship playerShip;
 
@@ -82,7 +81,7 @@ public class TravelViewModel extends AndroidViewModel {
      * Player attacked.
      */
     public void playerAttacked() {
-        TravelProcessor.playerAttackedDuringTravel(player, RandomEventActivity.attacked);
+        TravelProcessor.playerAttackedDuringTravel(player, RandomEventActivity.getAttacked());
     }
 
     /**
