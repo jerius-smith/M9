@@ -54,13 +54,12 @@ public class Ship {
     /**
      * Instantiates a new Ship.
      *
-     * @param name the name
      */
-    Ship(String name) {
-        this.name = name;
-        this.cargoCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get(name))[2];
-        this.gadgetCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get(name))[1];
-        this.fuelCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get(name))[3];
+    Ship() {
+        this.name = "Gnat";
+        this.cargoCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get("Gnat"))[2];
+        this.gadgetCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get("Gnat"))[1];
+        this.fuelCapacity = Objects.requireNonNull(GameLogistics.MAX_CAPACITIES.get("Gnat"))[3];
         this.fuelTooLow = false;
     }
 

@@ -3,6 +3,7 @@ package edu.gatech.cs2340.spacetraders.model;
 import java.util.Arrays;
 import java.util.Objects;
 
+
 /**
  * The type Player.
  */
@@ -12,14 +13,11 @@ public class Player {
     private Skills[] skills;
     private Difficulty preferredDifficulty;
     private double credits;
-    private Ship ship;
-    private Inventory inventory;
+    private final Ship ship;
+    private final Inventory inventory;
     private Planet location;
 
-    /**
-     * Instantiates a new Player.
-     */
-//    public Player() {
+    //    public Player() {
 //        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
 //    }
 
@@ -185,11 +183,12 @@ public class Player {
 
     @Override
     public String toString() {
-        return "\t\nPlayer: " + name + "\nSelected Difficulty: " + preferredDifficulty
-                            + "\nPilot points: " + skills[0].getPoints() + "\nFighter points: "
-                            + skills[1].getPoints() + "\nTrader points: " + skills[2].getPoints()
-                            + "\nEngineer points: " + skills[3].getPoints() + "\nCredits : "
-                            + credits + "\nShip type: " + ship + "\nLocation : " + location;
+//        return "\t\nPlayer: " + name + "\nSelected Difficulty: " + preferredDifficulty
+//                            + "\nPilot points: " + skills[0].getPoints() + "\nFighter points: "
+//                            + skills[1].getPoints() + "\nTrader points: " + skills[2].getPoints()
+//                            + "\nEngineer points: " + skills[3].getPoints() + "\nCredits : "
+//                            + credits + "\nShip type: " + ship + "\nLocation : " + location;
+        return name;
     }
 
     @Override

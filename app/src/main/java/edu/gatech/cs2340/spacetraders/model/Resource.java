@@ -1,5 +1,6 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+
 /**
  * The enum Resource.
  */
@@ -57,20 +58,24 @@ public enum Resource {
      */
     WARLIKE("Warlike");
 
-    /**
-     * Gets name.
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets name.
-     *
-     * @param name the name
-     */
+// --Commented out by Inspection START (4/8/2019 2:10 PM):
+//    /**
+//     * Gets name.
+//     *
+//     * @return the name
+// --Commented out by Inspection START (4/8/2019 2:10 PM):
+////     */
+////    public String getName() {
+////        return name;
+////    }
+//// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
+//
+//    /**
+// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
+//     * Sets name.
+//     *
+//     * @param name the name
+//     */
     public void setName(String name) {
         this.name = name;
     }

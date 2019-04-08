@@ -23,7 +23,7 @@ public enum Skills {
 
     private final String skill;
     private int points;
-    private static int totalPoints;
+    // --Commented out by Inspection (4/8/2019 2:10 PM):private static int totalPoints;
     /**
      * The constant MAX_POINTS.
      */

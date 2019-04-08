@@ -18,58 +18,68 @@ public class Inventory {
         private int stock;
         private double price;
 
-        /**
-         * Gets stock.
-         *
-         * @return the stock
-         */
-        public int getStock() {
-            return stock;
-        }
+// --Commented out by Inspection START (4/8/2019 2:10 PM):
+//        /**
+//         * Gets stock.
+//         *
+//         * @return the stock
+//         */
+// --Commented out by Inspection START (4/8/2019 2:10 PM):
+////        public int getStock() {
+////            return stock;
+////        }
+//// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
+//
+//        /**
+//         * Sets stock.
+//         *
+// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
 
-        /**
-         * Sets stock.
-         *
-         * @param stock the stock
-         */
-        public void setStock(int stock) {
-            this.stock = stock;
-        }
+// --Commented out by Inspection START (4/8/2019 2:10 PM):
+//        public void setStock(int stock) {
+//            this.stock = stock;
+//        }
+// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
 
-        /**
-         * Gets price.
-         *
-         * @return the price
-         */
-        public double getPrice() {
-            return price;
-        }
+// --Commented out by Inspection START (4/8/2019 2:10 PM):
+//// --Commented out by Inspection START (4/8/2019 2:10 PM):
+////        /**
+////         * Gets price.
+////         *
+////         * @return the price
+////         */
+////        public double getPrice() {
+////            return price;
+// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
+//        }
+// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
 
-        /**
-         * Sets price.
-         *
-         * @param price the price
-         */
-        public void setPrice(double price) {
-            this.price = price;
-        }
+// --Commented out by Inspection START (4/8/2019 2:10 PM):
+//        /**
+//         * Sets price.
+//         *
+//         * @param price the price
+//         */
+//        public void setPrice(double price) {
+//            this.price = price;
+//        }
+// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
 
         /**
          * Instantiates a new Good attributes.
          */
         GoodAttributes() {
-            this(0, 0);
+            this(0);
         }
 
         /**
          * Instantiates a new Good attributes.
+         *  @param stock the stock
          *
-         * @param stock the stock
-         * @param price the price
          */
-        GoodAttributes(int stock, double price) {
+        GoodAttributes(int stock) {
             this.stock = stock;
-            this.price = price;
+            this.price = (double) 0;
         }
 
         @Override

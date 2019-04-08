@@ -10,10 +10,6 @@ import static java.lang.Math.floor;
  * The type Planet.
  */
 public class Planet {
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
 
     private final String name;
     private final double xLoc;

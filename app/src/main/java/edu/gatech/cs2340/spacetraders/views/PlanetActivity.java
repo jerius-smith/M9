@@ -27,6 +27,7 @@ import edu.gatech.cs2340.spacetraders.model.Universe;
 import edu.gatech.cs2340.spacetraders.viewmodel.MarketViewModel;
 import edu.gatech.cs2340.spacetraders.viewmodel.TravelViewModel;
 
+@SuppressWarnings("ALL")
 public class PlanetActivity extends AppCompatActivity {
 
 //    public static final int INT = 60;

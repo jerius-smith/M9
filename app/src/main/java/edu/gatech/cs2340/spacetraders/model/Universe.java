@@ -1,6 +1,5 @@
 package edu.gatech.cs2340.spacetraders.model;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,6 +8,7 @@ import edu.gatech.cs2340.spacetraders.entities.GameLogistics;
 /**
  * The type Universe.
  */
+@SuppressWarnings("MagicNumber")
 public final class Universe {
     private static final Universe ourInstance = new Universe();
 
@@ -30,14 +30,16 @@ public final class Universe {
         }
     }
 
-    /**
-     * Gets solar systems.
-     *
-     * @return the solar systems
-     */
-    public Set<SolarSystem> getSolarSystems() {
-        return Collections.unmodifiableSet(solarSystems);
-    }
+// --Commented out by Inspection START (4/8/2019 2:10 PM):
+//    /**
+//     * Gets solar systems.
+//     *
+//     * @return the solar systems
+//     */
+//    public Set<SolarSystem> getSolarSystems() {
+//        return Collections.unmodifiableSet(solarSystems);
+//    }
+// --Commented out by Inspection STOP (4/8/2019 2:10 PM)
 
     /**
      * Gets solar system by name.
@@ -74,7 +76,8 @@ public final class Universe {
         SolarSystem toReturn = null;
         Universe uni = getInstance();
         for (SolarSystem curr : uni.solarSystems) {
-            if (Math.random() < .9) {
+            double v = .9;
+            if (Math.random() < v) {
                 toReturn = curr;
             }
         }

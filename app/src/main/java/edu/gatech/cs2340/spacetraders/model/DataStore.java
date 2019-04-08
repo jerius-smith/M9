@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,13 +64,13 @@ public class DataStore {
         File file = context.getFilesDir();
         Scanner sc =
                 new Scanner(new File(file.getAbsolutePath() + "/" + fileName));
-        String jsonFile = "";
+        StringBuilder jsonFile = new StringBuilder();
 
         while (sc.hasNext()) {
-            jsonFile += sc.next();
+            jsonFile.append(sc.next());
         }
 
-        return gson.fromJson(jsonFile, Player.class);
+        return gson.fromJson(jsonFile.toString(), Player.class);
     }
 
 //    public static Universe jsonToUniverse(Context context, String fileName)
@@ -224,10 +225,11 @@ public class DataStore {
             String keyName = fileName.substring(0, fileName.indexOf("_universe.json"));
             SavedPlayer playerToEdit = savedPlayerMap.get(keyName);
             String universeJsonContent = readJson(context, currentFile.getName());
+            assert playerToEdit != null;
             playerToEdit.setUniverseJsonContent(universeJsonContent);
             playerToEdit.setUniverseJsonName(fileName);
         }
-        return savedPlayerMap;
+        return Collections.unmodifiableMap(savedPlayerMap);
     }
 
     private static String readJson(Context context, String filename) {

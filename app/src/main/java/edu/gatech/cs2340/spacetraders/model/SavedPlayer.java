@@ -1,5 +1,6 @@
 package edu.gatech.cs2340.spacetraders.model;
 
+
 /**
  * The type Saved player.
  */
@@ -7,10 +8,6 @@ public class SavedPlayer {
 
     private final String name;
     private String currentPlayerText;
-    private String universeJsonName;
-    private String playerJsonContent;
-    private String universeJsonContent;
-    private String playerJsonName;
 
 //    public String getPlayerJsonContent() {
 //        return playerJsonContent;
@@ -22,7 +19,6 @@ public class SavedPlayer {
      * @param playerJsonContent the player json content
      */
     public void setPlayerJsonContent(String playerJsonContent) {
-        this.playerJsonContent = playerJsonContent;
     }
 
 //    public String getUniverseJsonContent() {
@@ -35,7 +31,6 @@ public class SavedPlayer {
      * @param universeJsonContent the universe json content
      */
     public void setUniverseJsonContent(String universeJsonContent) {
-        this.universeJsonContent = universeJsonContent;
     }
 
     /**
@@ -88,7 +83,6 @@ public class SavedPlayer {
      * @param playerJsonName the player json name
      */
     public void setPlayerJsonName(String playerJsonName) {
-        this.playerJsonName = playerJsonName;
     }
 
 //    public String getUniverseJsonName() {
@@ -101,7 +95,6 @@ public class SavedPlayer {
      * @param universeJsonName the universe json name
      */
     public void setUniverseJsonName(String universeJsonName) {
-        this.universeJsonName = universeJsonName;
     }
 
     public String toString() {

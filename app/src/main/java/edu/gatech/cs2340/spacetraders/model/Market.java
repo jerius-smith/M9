@@ -38,7 +38,7 @@ public class Market {
     private Inventory createInventory(Planet planet) {
         Inventory inventory = new Inventory();
         for (Good currentGood : Good.values()) {
-            int randStock = randomStock(currentGood, planet, BOUND);
+            int randStock = randomStock(currentGood, planet);
             double computedPrice = priceModel(currentGood, planet);
             if (computedPrice < 0) {
                 computedPrice = priceModel(currentGood, planet);
@@ -51,10 +51,10 @@ public class Market {
     }
 
 
-    private int randomStock(Good good, Planet planet, int bound) {
+    private int randomStock(Good good, Planet planet) {
         if (validateGood(good, planet)) {
             Random rand = new Random();
-            return rand.nextInt(bound);
+            return rand.nextInt(Market.BOUND);
         }
         return 0;
     }

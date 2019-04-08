@@ -16,6 +16,7 @@ import java.util.Random;
 
 import edu.gatech.cs2340.spacetraders.R;
 
+@SuppressWarnings("ALL")
 public class RandomEventActivity extends AppCompatActivity {
 
     private static boolean attacked;

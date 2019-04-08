@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 
 import com.crowdfire.cfalertdialog.CFAlertDialog;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -41,16 +42,16 @@ public class TravelActivity extends AppCompatActivity {
     private void solarSystemClicked(View view) {
         switch (view.getId()) {
             case R.id.solarsystem1:
-                showDestinations(
-                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[0]));
+                showDestinations(Objects.requireNonNull(
+                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[0])));
                 break;
             case R.id.solarsystem2:
-                showDestinations(
-                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[1]));
+                showDestinations(Objects.requireNonNull(
+                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[1])));
                 break;
             case R.id.solarsystem3:
-                showDestinations(
-                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[2]));
+                showDestinations(Objects.requireNonNull(
+                        Universe.getSolarSystemByName(GameLogistics.SOLAR_SYSTEM_NAMES[2])));
                 break;
             default:
                 showDestinations(Universe.getRandomSolarSystem());

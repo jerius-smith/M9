@@ -184,7 +184,8 @@ public class ConfigurationActivity extends AppCompatActivity {
             points.setText(Integer.toString(Skills.MAX_POINTS - sum));
         } else {
             points.setText(Integer.toString(Skills.MAX_POINTS - sum));
-            Toast toast = Toast.makeText(getApplicationContext(), "You've used more points than available.",
+            Toast toast = Toast.makeText(getApplicationContext(),
+                                         "You've used more points than available.",
                            Toast.LENGTH_LONG);
             toast.show();
         }
