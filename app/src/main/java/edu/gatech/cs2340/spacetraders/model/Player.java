@@ -16,16 +16,6 @@ public class Player {
     private Inventory inventory;
     private Planet location;
 
-    /**
-     * Instantiates a new Player.
-     */
-//    public Player() {
-//        this("", Difficulty.BEGINNER, Skills.values(), new Planet("Vandor"));
-//    }
-
-//    public void setInventory(Inventory inventory) {
-//        this.inventory = inventory;
-//    }
 
     /**
      * Instantiates a new Player.
@@ -33,6 +23,7 @@ public class Player {
      * @param name                the name
      * @param preferredDifficulty the preferred difficulty
      * @param skillPoints         the skill points
+     * @param location            the planet the player is on
      */
     public Player(String name, Difficulty preferredDifficulty, Skills[] skillPoints,
                   Planet location) {
@@ -50,22 +41,49 @@ public class Player {
 //    }
 
 
+    /**
+     * Gets inventory.
+     *
+     * @return the inventory
+     */
     public Inventory getInventory() {
         return inventory;
     }
 
+    /**
+     * Gets total stock.
+     *
+     * @return the total stock
+     */
     public int getTotalStock() {
         return inventory.getTotalStock();
     }
 
+    /**
+     * Gets stock.
+     *
+     * @param toSell the to sell
+     * @return the stock
+     */
     public int getStock(Good toSell) {
         return inventory.getStock(toSell);
     }
 
+    /**
+     * Sets stock.
+     *
+     * @param toBuy the to buy
+     * @param stock the stock
+     */
     public void setStock(Good toBuy,int stock) {
         inventory.setStock(toBuy,stock);
     }
 
+    /**
+     * Adjust total stock.
+     *
+     * @param stock the stock
+     */
     public void adjustTotalStock(int stock) {
         inventory.adjustTotalStock(stock);
     }
@@ -151,10 +169,20 @@ public class Player {
         return ship;
     }
 
+    /**
+     * Gets ship fuel capacity.
+     *
+     * @return the ship fuel capacity
+     */
     public int getShipFuelCapacity() {
         return ship.getFuelCapacity();
     }
 
+    /**
+     * Sets ship fuel capacity.
+     *
+     * @param fuelCapacity the fuel capacity
+     */
     public void setShipFuelCapacity(int fuelCapacity) {
         ship.setFuelCapacity(fuelCapacity);
     }
@@ -168,17 +196,37 @@ public class Player {
 //        this.ship = ship;
 //    }
 
+    /**
+     * Sets location.
+     *
+     * @param planet the planet
+     */
     public void setLocation(Planet planet) {
         location = planet;
     }
 
+    /**
+     * Gets location.
+     *
+     * @return the location
+     */
     public Planet getLocation() {
         return location;
     }
 
+    /**
+     * Gets location name.
+     *
+     * @return the location name
+     */
     public String getLocationName() { return location.getName(); }
 
 
+    /**
+     * Gets planets market.
+     *
+     * @return the planets market
+     */
     public Market getPlanetsMarket() {
         return location.getPlanetsMarket();
     }

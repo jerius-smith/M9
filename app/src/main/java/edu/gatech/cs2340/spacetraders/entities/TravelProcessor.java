@@ -6,8 +6,18 @@ import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.views.AttackActivity;
 
+/**
+ * The type Travel processor.
+ */
 public class TravelProcessor {
 
+    /**
+     * Validate traveling.
+     *
+     * @param player   the player
+     * @param travelTo the travel to
+     * @throws TravelException the travel exception
+     */
     public static void validateTraveling(Player player, Planet travelTo) throws TravelException {
         int remainingFuel = getRemainingFuel(player, travelTo);
         if (remainingFuel < 0) {
@@ -37,6 +47,12 @@ public class TravelProcessor {
         return Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
     }
 
+    /**
+     * Player attacked during travel.
+     *
+     * @param player   the player
+     * @param attacked the attacked
+     */
     public static void playerAttackedDuringTravel(Player player, boolean attacked) {
         if (attacked) {
             double newCredits = player.getCredits() - AttackActivity.getDecreaseCredits();

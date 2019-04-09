@@ -16,10 +16,18 @@ import java.util.Random;
 
 import edu.gatech.cs2340.spacetraders.R;
 
+/**
+ * The type Random event activity.
+ */
 public class RandomEventActivity extends AppCompatActivity {
 
     private static boolean attacked;
 
+    /**
+     * Gets attacked.
+     *
+     * @return the attacked
+     */
     public static boolean getAttacked() {
         return attacked;
     }

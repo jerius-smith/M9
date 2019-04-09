@@ -15,6 +15,9 @@ import edu.gatech.cs2340.spacetraders.R;
 import edu.gatech.cs2340.spacetraders.model.Good;
 import edu.gatech.cs2340.spacetraders.viewmodel.MarketViewModel;
 
+/**
+ * The type Market activity.
+ */
 public class MarketActivity extends AppCompatActivity {
 
     private RecyclerView marketInventoryView;

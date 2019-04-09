@@ -27,6 +27,9 @@ import edu.gatech.cs2340.spacetraders.model.Universe;
 import edu.gatech.cs2340.spacetraders.viewmodel.MarketViewModel;
 import edu.gatech.cs2340.spacetraders.viewmodel.TravelViewModel;
 
+/**
+ * The type Planet activity.
+ */
 public class PlanetActivity extends AppCompatActivity {
 
 //    public static final int INT = 60;
@@ -39,6 +42,9 @@ public class PlanetActivity extends AppCompatActivity {
 
     private TravelViewModel travelViewModel;
 
+    /**
+     * The constant PLANET_REQUEST.
+     */
     public static final int PLANET_REQUEST = 1;
 
     private FirebaseDatabase database;

@@ -25,9 +25,7 @@ public class WelcomeActivity extends AppCompatActivity {
 //        RelativeLayout relativeLayout = findViewById(R.id.content_welcome);
 
         //starsAnimation = (AnimationDrawable) relativeLayout.getBackground();
-        /**
-         * The Welcome text.
-         */
+
         TextView welcomeText = findViewById(R.id.welcome_text);
         ImageButton continueBttn = findViewById(R.id.continue_button);
 

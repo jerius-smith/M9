@@ -11,6 +11,9 @@ import processing.android.PFragment;
 import processing.android.CompatUtils;
 import processing.core.PApplet;
 
+/**
+ * The type Mini game activity.
+ */
 public class MiniGameActivity extends AppCompatActivity {
     private PApplet sketch;
 

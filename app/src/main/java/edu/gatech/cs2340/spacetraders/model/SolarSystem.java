@@ -57,12 +57,24 @@ public class SolarSystem {
         return Collections.unmodifiableSet(planets);
     }
 
+    /**
+     * Gets random planet.
+     *
+     * @return the random planet
+     */
     public Planet getRandomPlanet() {
         Random rand = new Random();
         int randIndex = rand.nextInt(planets.size());
         return (Planet) Objects.requireNonNull(planets.toArray())[randIndex];
     }
 
+    /**
+     * Gets planet by name.
+     *
+     * @param solar      the solar
+     * @param planetName the planet name
+     * @return the planet by name
+     */
     public static Planet getPlanetByName(SolarSystem solar, String planetName) {
         SolarSystem solarSys = Objects.requireNonNull(solar);
         for (Planet current : solarSys.getPlanets()) {
@@ -112,6 +124,11 @@ public class SolarSystem {
 //        return NUM_PLANETS;
 //    }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }

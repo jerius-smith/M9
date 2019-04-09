@@ -17,11 +17,23 @@ import edu.gatech.cs2340.spacetraders.model.Planet;
 import edu.gatech.cs2340.spacetraders.model.SolarSystem;
 import edu.gatech.cs2340.spacetraders.model.Universe;
 
+/**
+ * The type Travel activity.
+ */
 public class TravelActivity extends AppCompatActivity {
 
+    /**
+     * The constant UPDATED_CREDITS.
+     */
     public static final String UPDATED_CREDITS = "UPDATED_CREDITS";
 
+    /**
+     * The constant CHOSEN_PLANET.
+     */
     public static final String CHOSEN_PLANET = "PLANET";
+    /**
+     * The constant CHOSEN_SOLAR_SYSTEM.
+     */
     public static final String CHOSEN_SOLAR_SYSTEM = "SOLAR_SYSTEM";
     private static final double MAX_RAND = 0.9;
 

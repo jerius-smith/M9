@@ -5,6 +5,9 @@ import edu.gatech.cs2340.spacetraders.model.Market;
 import edu.gatech.cs2340.spacetraders.model.Player;
 import edu.gatech.cs2340.spacetraders.model.Ship;
 
+/**
+ * The type Transaction processor.
+ */
 public class TransactionProcessor {
 
     // You cannot buy more goods than the cargo capacity
@@ -48,6 +51,14 @@ public class TransactionProcessor {
         }
     }
 
+    /**
+     * Buy item.
+     *
+     * @param player the player
+     * @param toBuy  the to buy
+     * @param market the market
+     * @throws MarketActivityException the market activity exception
+     */
     public static void buyItem(Player player, Good toBuy, Market market)
             throws MarketActivityException {
         double goodPrice = market.getPriceOfGood(toBuy);
@@ -70,7 +81,14 @@ public class TransactionProcessor {
     }
 
 
-
+    /**
+     * Sell item.
+     *
+     * @param player the player
+     * @param toSell the to sell
+     * @param market the market
+     * @throws MarketActivityException the market activity exception
+     */
     public static void sellItem(Player player, Good toSell, Market market)
             throws MarketActivityException {
         String result = validateSellingSpecificGood(player, toSell);
