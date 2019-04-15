@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import edu.gatech.cs2340.spacetraders.model.Asteroids;
+import edu.gatech.cs2340.spacetraders.model.SimonSays;
 import processing.android.PFragment;
 import processing.android.CompatUtils;
 import processing.core.PApplet;
@@ -21,7 +22,16 @@ public class MiniGameActivity extends AppCompatActivity {
         frame.setId(CompatUtils.getUniqueViewId());
         setContentView(frame, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                                                          ViewGroup.LayoutParams.MATCH_PARENT));
-        sketch = new Asteroids();
+
+        String choice = getIntent().getStringExtra("GAME");
+
+        if (choice != null) {
+            if (choice.equals("ASTERIODS")) {
+                sketch = new Asteroids();
+            } else {
+                sketch = new SimonSays();
+            }
+        }
         sketch.setExternal(true);
         PFragment fragment = new PFragment(sketch);
         fragment.setView(frame, this);

@@ -6,4 +6,6 @@
     <color name="light_turq">#91bcaa</color>
     <color name="tan">#f4ebba</color>
     <color name="light_green">#95d4ab</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>

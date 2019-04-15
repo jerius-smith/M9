@@ -21,8 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-300dp"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/red_planet"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/red_planet" />
 
     <ImageView
         android:id="@+id/shipImage"
@@ -32,8 +31,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="80dp"
         app:srcCompat="@drawable/gnat"
-        tools:ignore="ContentDescription"
-        android:contentDescription="TODO" />
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/market_button"
@@ -45,8 +43,7 @@
         android:layout_marginRight="30dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/market_bttn"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/market_bttn" />
 
     <ImageButton
         android:id="@+id/travel_button"
@@ -58,8 +55,7 @@
         android:layout_marginTop="150dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/travel_bttn"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/travel_bttn" />
 
     <TextView
         android:id="@+id/credits_text"
@@ -70,7 +66,7 @@
         android:layout_marginTop="@dimen/screen_percentage_10"
         android:layout_marginRight="@dimen/screen_percentage_10"
         android:fontFamily="@font/inconsolata"
-        android:text="Credits: 1000"
+        android:text="@string/credits_1000"
         android:textColor="@color/tan"
         android:textSize="20sp" />
 
@@ -84,7 +80,7 @@
         android:layout_marginLeft="@dimen/screen_percentage_10"
         android:layout_marginTop="@dimen/screen_percentage_10"
         android:fontFamily="@font/inconsolata"
-        android:text="Location: Vandor"
+        android:text="@string/location_vandor"
         android:textColor="@color/tan"
         android:textSize="20sp" />
 
@@ -95,7 +91,7 @@
         android:layout_centerInParent="true"
         android:fontFamily="@font/inconsolata"
         android:paddingBottom="15dp"
-        android:text="100"
+        android:text="@string/_100"
         android:textColor="@color/tan"
         android:textSize="25sp" />
 

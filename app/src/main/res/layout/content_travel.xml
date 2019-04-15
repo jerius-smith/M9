@@ -19,8 +19,7 @@
         android:layout_height="300dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/solarsystem1"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/solarsystem1" />
 
     <ImageButton
         android:id="@+id/solarsystem2"
@@ -32,8 +31,7 @@
         android:layout_marginBottom="250dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/solarsystem2"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/solarsystem2" />
 
     <ImageButton
         android:id="@+id/solarsystem3"
@@ -44,7 +42,6 @@
         android:layout_marginTop="200dp"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/solarsystem3"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/solarsystem3" />
 
 </RelativeLayout>

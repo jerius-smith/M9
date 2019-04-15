@@ -3,6 +3,7 @@ package edu.gatech.cs2340.spacetraders.views;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Color;
+import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -37,6 +39,8 @@ public class PlanetActivity extends AppCompatActivity {
     private TextView location;
     private TextView fuel;
     private CircularFillableLoaders fuel_level;
+
+    private TextToSpeech speech;
 
     private TravelViewModel travelViewModel;
 
@@ -127,6 +131,7 @@ public class PlanetActivity extends AppCompatActivity {
             fuel.setTextColor(Color.BLACK);
         } else if (travelViewModel.isFuelTooLow()) {
             fuel.setTextColor(Color.RED);
+            speak("Not enough fuel to travel");
         } else {
             fuel.setTextColor(Color.YELLOW);
         }
@@ -148,5 +153,16 @@ public class PlanetActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    public void speak(String text) {
+        speech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                speech.setLanguage(Locale.getDefault());
+                speech.setPitch(1);
+                speech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
     }
 }

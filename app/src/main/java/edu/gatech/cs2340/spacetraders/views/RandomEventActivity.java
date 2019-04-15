@@ -40,11 +40,15 @@ public class RandomEventActivity extends AppCompatActivity {
         wheelItems.add(new WheelItem(Color.BLACK, BitmapFactory
                 .decodeResource(getResources(), R.drawable.red_planet)));
 
+        wheelItems.add(new WheelItem(Color.rgb(0f, .3f, .8f), BitmapFactory
+                .decodeResource(getResources(), R.drawable.siren)));
+
         LuckyWheel eventWheel = findViewById(R.id.eventwheel);
         eventWheel.addWheelItems(wheelItems);
 
         Random random = new Random();
-        int randIndex = random.nextInt(wheelItems.size()) + 1;
+//        int randIndex = random.nextInt(wheelItems.size()) + 1;
+        int randIndex = 4;
         eventWheel.rotateWheelTo(randIndex);
 
         eventWheel.setLuckyWheelReachTheTarget(() -> {
@@ -57,9 +61,13 @@ public class RandomEventActivity extends AppCompatActivity {
                                Toast.LENGTH_LONG).show();
                 startActivity(new Intent(RandomEventActivity.this, AttackActivity.class));
                 attacked = true;
-            } else {
+            } else if (randIndex == 3) {
                 Toast.makeText(getApplicationContext(), "ADVENTURE TIME", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(RandomEventActivity.this, MiniGameActivity.class));
+                startActivity(new Intent(RandomEventActivity.this, MiniGameActivity.class).putExtra("GAME", "ASTERIOD"));
+                attacked = false;
+            } else if (randIndex == 4) {
+                Toast.makeText(getApplicationContext(), "SIMON SAYS", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(RandomEventActivity.this, MiniGameActivity.class).putExtra("GAME", "SIMON"));
                 attacked = false;
             }
             finish();

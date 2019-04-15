@@ -18,7 +18,7 @@
         android:layout_marginTop="@dimen/screen_percentage_10"
         android:layout_marginRight="@dimen/screen_percentage_10"
         android:fontFamily="@font/inconsolata"
-        android:text="Credits: 1000"
+        android:text="@string/credits_1000"
         android:textColor="@color/tan"
         android:textSize="20sp" />
 
@@ -32,7 +32,7 @@
         android:layout_marginLeft="@dimen/screen_percentage_10"
         android:layout_marginTop="@dimen/screen_percentage_10"
         android:fontFamily="@font/inconsolata"
-        android:text="Location: Vandor"
+        android:text="@string/location_vandor"
         android:textColor="@color/tan"
         android:textSize="20sp" />
 
@@ -47,7 +47,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/sell_bttn"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo" />
 
     <ImageButton
         android:id="@+id/buy_button"
@@ -60,7 +60,7 @@
         android:background="@null"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/buy_bttn"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo" />
 
     <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/inconsolata"
-            android:text="Item"
+            android:text="@string/item"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/inconsolata"
-            android:text="Price"
+            android:text="@string/price"
             android:textAlignment="center"
             android:textSize="16sp" />
 
@@ -94,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/inconsolata"
-            android:text="Market Inventory"
+            android:text="@string/market_inventory"
             android:textAlignment="center"
             android:textSize="16sp" />
 
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/inconsolata"
-            android:text="Your Inventory"
+            android:text="@string/your_inventory"
             android:textAlignment="center"
             android:textSize="16sp" />
     </TableRow>

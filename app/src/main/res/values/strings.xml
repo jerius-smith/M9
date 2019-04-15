@@ -2,4 +2,29 @@
     <string name="app_name">SpaceTraders</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_random_event">RandomEventActivity</string>
+    <string name="load">Load</string>
+    <string name="name">Name:</string>
+    <string name="enter_name">Enter name</string>
+    <string name="difficulty">Difficulty:</string>
+    <string name="skill_points">Skill Points:</string>
+    <string name="_16">16</string>
+    <string name="pilot">Pilot:</string>
+    <string name="fighter">Fighter:</string>
+    <string name="trader">Trader:</string>
+    <string name="engineer">Engineer:</string>
+    <string name="todo">TODO</string>
+    <string name="credits_1000">Credits: 1000</string>
+    <string name="location_vandor">Location: Vandor</string>
+    <string name="item">Item</string>
+    <string name="price">Price</string>
+    <string name="market_inventory">Market Inventory</string>
+    <string name="your_inventory">Your Inventory</string>
+    <string name="_100">100</string>
+    <string name="welcome">Welcome!</string>
+    <string name="textview">TextView</string>
+    <string name="_0">0</string>
+
+    <string name="title_activity_police">PoliceActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

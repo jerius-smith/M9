@@ -1,10 +1,15 @@
 package edu.gatech.cs2340.spacetraders.views;
 
 import android.content.Intent;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Locale;
 
 import edu.gatech.cs2340.spacetraders.R;
 
@@ -14,12 +19,12 @@ import edu.gatech.cs2340.spacetraders.R;
 public class WelcomeActivity extends AppCompatActivity {
 
     // AnimationDrawable starsAnimation;
+    private TextToSpeech welcomeSpeech;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_welcome);
-
         String playerName = getIntent().getStringExtra("PLAYER_NAME");
 
 //        RelativeLayout relativeLayout = findViewById(R.id.content_welcome);
@@ -33,6 +38,19 @@ public class WelcomeActivity extends AppCompatActivity {
                 + " journey through the Space " + "Trader Universe!\"", playerName);
         welcomeText.setText(welcomeMessage);
 
+
+        welcomeSpeech = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                welcomeSpeech.setLanguage(Locale.ENGLISH);
+                welcomeSpeech.setPitch(1);
+
+                welcomeSpeech.speak(welcomeMessage, TextToSpeech.QUEUE_FLUSH, null);
+            }
+        });
+
+
+
         //starsAnimation.start();
 
         continueBttn.setOnClickListener(view -> {
@@ -40,6 +58,14 @@ public class WelcomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
        // testTraveling();
+    }
+
+    public void onDestroy() {
+        if (welcomeSpeech != null) {
+            welcomeSpeech.stop();
+            welcomeSpeech.shutdown();
+        }
+        super.onDestroy();
     }
 
 }

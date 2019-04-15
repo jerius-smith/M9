@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:fontFamily="@font/inconsolata"
-        android:text="Welcome!"
+        android:text="@string/welcome"
         android:textAlignment="center"
         android:textColor="@color/tan"
         android:textSize="24sp" />
@@ -34,6 +34,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="74dp"
         android:background="@null"
-        app:srcCompat="@drawable/continue_bttn"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/continue_bttn" />
 </RelativeLayout>
